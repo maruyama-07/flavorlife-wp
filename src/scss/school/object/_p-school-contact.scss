@@ -1,0 +1,245 @@
+@use '../foundation/tools' as *;
+
+.p-school-contact-section {
+  width: 100vw;
+  margin: prem(40) calc(50% - 50vw);
+  background: #F5F3EF;
+  padding: prem(56) prem(30) prem(72);
+}
+.p-school-contact-section__inner {
+  max-width: prem(1120);
+  margin: 0 auto;
+}
+.p-school-contact-section__lead {
+  font-size: prem(18);
+  margin-bottom: prem(40);
+}
+
+.p-school-contact {
+  max-width: prem(1120);
+  margin: 0 auto;
+}
+
+.p-school-contact__row {
+  display: grid;
+  grid-template-columns: prem(250) 1fr;
+  gap: prem(28) prem(30);
+  align-items: center;
+  margin-bottom: prem(20);
+}
+
+.p-school-contact__label-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: prem(12);
+}
+
+.p-school-contact__label {
+  margin: 0;
+  font-size: prem(18);
+  line-height: 1.4;
+  font-weight: 500;
+  color: #3f3f3f;
+}
+
+.p-school-contact__badge {
+  flex-shrink: 0;
+  min-width: prem(52);
+  text-align: center;
+  color: #fff;
+  font-size: prem(12);
+  line-height: 1;
+  font-weight: 700;
+  border-radius: prem(4);
+  padding: prem(6) prem(10);
+}
+
+.p-school-contact__badge--required {
+  background: #9f1d00;
+}
+
+.p-school-contact__badge--optional {
+  background: #57a8d8;
+}
+
+.p-school-contact__field {
+  .wpcf7-form-control-wrap {
+    display: block;
+  }
+}
+
+.p-school-contact__input,
+.p-school-contact__textarea {
+  width: 100%;
+  border: 1px solid #9d9d9d;
+  border-radius: 0;
+  background: #fff;
+  font-size: prem(16);
+  line-height: 1.6;
+  color: #1a1a1a;
+  padding: prem(10) prem(14);
+  appearance: none;
+}
+
+.p-school-contact__input {
+  height: prem(50);
+}
+
+.p-school-contact__textarea {
+  min-height: prem(300);
+  resize: vertical;
+}
+
+.p-school-contact__row--theme .p-school-contact__field {
+  // padding-top: prem(3);
+}
+
+/* Contact Form 7 radio */
+.p-school-contact__radio {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: prem(8);
+  row-gap: prem(12);
+  margin: 0;
+
+  .wpcf7-list-item {
+    margin: 0;
+    label {
+      cursor: pointer;
+    }
+  }
+
+  .wpcf7-list-item-label {
+    font-size: prem(14);
+    line-height: 1.4;
+    color: #3f3f3f;
+    vertical-align: middle;
+  }
+
+  input[type='radio'] {
+    width: prem(18);
+    height: prem(18);
+    margin-right: prem(8);
+    vertical-align: middle;
+    margin: 0 prem(2);
+  }
+}
+
+.p-school-contact__agree {
+  margin-top: prem(28);
+  text-align: center;
+  font-size: prem(16);
+  line-height: 1.5;
+  color: #3f3f3f;
+
+  .wpcf7-list-item {
+    margin: 0;
+  }
+
+  input[type='checkbox'] {
+    width: prem(16);
+    height: prem(16);
+    margin-right: prem(8);
+    vertical-align: middle;
+  }
+}
+
+.p-school-contact__submit {
+  margin-top: prem(28);
+  text-align: center;
+}
+
+.p-school-contact__submit-btn {
+  width: min(100%, prem(280));
+  height: prem(40);
+  border: 0;
+  border-radius: prem(10);
+  background: #002f28;
+  color: #fff;
+  font-size: prem(18);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.p-school-contact {
+  .wpcf7-not-valid-tip {
+    font-size: prem(12);
+    margin-top: prem(6);
+  }
+
+  .wpcf7-response-output {
+    margin: prem(20) 0 0;
+    font-size: prem(14);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-contact__row {
+    grid-template-columns: 1fr;
+    gap: prem(10);
+    margin-bottom: prem(16);
+  }
+
+  .p-school-contact__label {
+    font-size: prem(20);
+  }
+
+  .p-school-contact__badge {
+    min-width: prem(46);
+    font-size: prem(11);
+    padding: prem(5) prem(8);
+  }
+
+  .p-school-contact__input {
+    height: prem(44);
+    font-size: prem(14);
+  }
+
+  .p-school-contact__textarea {
+    min-height: prem(180);
+    font-size: prem(14);
+  }
+
+  .p-school-contact__radio {
+    column-gap: prem(12);
+    row-gap: prem(10);
+
+    .wpcf7-list-item-label {
+      font-size: prem(14);
+    }
+
+    input[type='radio'] {
+      width: prem(16);
+      height: prem(16);
+      margin-top: 0;
+    }
+  }
+
+  .p-school-contact__agree {
+    margin-top: prem(20);
+    font-size: prem(14);
+
+    input[type='checkbox'] {
+      width: prem(14);
+      height: prem(14);
+    }
+  }
+
+  .p-school-contact__submit {
+    margin-top: prem(20);
+  }
+
+  .p-school-contact__submit-btn {
+    width: min(100%, prem(240));
+    height: prem(50);
+    font-size: prem(24);
+  }
+}

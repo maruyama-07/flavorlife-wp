@@ -7,16 +7,17 @@
 }
 
 .l-site--school .page-content {
-  padding: prem(32) prem(24);
+  padding: prem(32) prem(24) prem(100);
 }
 
 .l-site--school .l-inner {
-  max-width: 1540px;
+  max-width: 1240px;
   margin: 0 auto;
 }
 
 @media screen and (max-width: 768px) {
   .l-site--school main {
     padding-top: prem(80);
+    padding-bottom: prem(30);
   }
 }

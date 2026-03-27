@@ -33,8 +33,7 @@
   width: 50%;
   overflow: hidden;
 
-  picture,
-  img {
+  picture {
     display: block;
     width: 100%;
     height: 100%;
@@ -42,13 +41,34 @@
   }
 
   img {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 }
 
+// page-hero-image.js: .img-load に .loaded（MV と同じ opacity + scale）
+.p-school-subpage-hero .img-effect .img-load.loaded img,
+.p-school-subpage-hero .img-effect.img-load.loaded img {
+  opacity: 1;
+  scale: 1;
+}
+
+.p-school-subpage-hero .img-effect .img-load img,
+.p-school-subpage-hero .img-effect.img-load img {
+  transition-property: opacity, scale;
+  transition-duration: 1.35s;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: 0.4s;
+  opacity: 0;
+  scale: 1.25;
+  min-height: 1px;
+}
+
 .p-school-subpage-hero.is-no-thumb {
   .p-school-subpage-hero__inner {
-    min-height: prem(180);
+    height: prem(240);
   }
 
   .p-school-subpage-hero__title-wrap {
@@ -86,15 +106,18 @@
   }
 
   .p-school-subpage-hero__title {
-    font-size: 5vw;
+    font-size: 5.3vw;
     line-height: 1.2;
   }
 
   .p-school-subpage-hero.is-no-thumb {
+    .p-school-subpage-hero__inner {
+      height: prem(160);
+    }
     .p-school-subpage-hero__title-wrap {
       width: 100%;
       margin: 0;
-      min-height: prem(160);
+      height: 100%;
     }
   }
 }

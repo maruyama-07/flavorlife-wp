@@ -19,8 +19,8 @@ $has_thumb = !empty($thumb_pc);
       <h1 class="p-school-subpage-hero__title"><?php echo esc_html($title); ?></h1>
     </div>
     <?php if ($has_thumb) : ?>
-      <div class="p-school-subpage-hero__media">
-        <picture>
+      <div class="p-school-subpage-hero__media img-effect">
+        <picture class="img-load">
           <?php if (!empty($thumb_sp) && $thumb_sp !== $thumb_pc) : ?>
             <source media="(max-width: 767px)" srcset="<?php echo esc_url($thumb_sp); ?>">
           <?php endif; ?>

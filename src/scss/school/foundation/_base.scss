@@ -75,6 +75,13 @@ a {
   color: #000;
 }
 
+// 本文ブロックのみ。フッター等の p は各コンポーネントで指定。
+// ※エディタの span style="font-size: …" はインラインで優先されるが、
+//   12pt は多くの環境で 16px 前後となり、下記 1rem と見た目がほぼ同じになりやすい。
+body.school-section .page-content p {
+  font-size: prem(16);
+}
+
 // ACFテキスト内の {sp} / {{sp}} 用（スマホ時のみ改行）
 .u-br-sp {
   display: none;
