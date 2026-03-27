@@ -1,0 +1,57 @@
+@use '../../foundation' as *;
+
+/**
+ * ステップフロー（1→2→3 の流れ）
+ * 緑丸に番号、右にテキスト
+ */
+.c-step-flow__item {
+    display: flex;
+    align-items: flex-start;
+    gap: prem(20);
+    margin-bottom: prem(25);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.c-step-flow__num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: prem(40);
+    height: prem(40);
+    border-radius: 50%;
+    background: #0f2b0f;
+    color: #fff;
+    font-size: prem(18);
+    font-weight: 600;
+}
+
+.c-step-flow__text {
+    flex: 1;
+    font-size: prem(16);
+    line-height: 1.8;
+    p {
+        margin-bottom: 0 !important;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .c-step-flow__item {
+        gap: prem(15);
+    }
+    .c-step-flow__num  {
+        font-size: prem(16);
+        // width: prem(30);
+        // height: prem(30);
+    }
+    .c-step-flow__text {
+        font-size: prem(15);
+    }
+}

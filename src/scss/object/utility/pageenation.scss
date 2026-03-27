@@ -1,0 +1,71 @@
+@use '../../foundation' as *;
+
+.pagination{
+  width: 100%;
+  @include mq('md'){
+  }
+}
+
+.nav-links ul{
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links ul li a,
+.nav-links ul li span{
+  color: $color-theme;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: prem(16);
+  @include mq('md') {
+    font-size: prem(24);
+  }
+}
+
+.nav-links ul li span.current{
+  color: $color-black;
+}
+
+.nav-links ul li{
+  position: relative;
+  margin: 0 prem(5);
+  @include mq('md') {
+    margin: 0 prem(10);
+  }
+}
+
+.nav-links ul li a,
+.nav-links ul li span {
+  display: block;
+  width: 100%;
+  padding: prem(5);
+  @include mq('md') {
+    padding: prem(10);
+  }
+}
+
+.nav-links ul li .nav-links ul .dots{
+  padding-right: 0;
+  padding-left: 0;
+}
+
+
+// .nav-links ul li a.prev,
+// .nav-links ul li a.next {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   border-right: 1px solid $color-theme;
+//   border-top: 1px solid $color-theme;
+//   width: prem(20);
+//   height: prem(20);
+// }
+
+// .nav-links ul li a.next {
+//   transform: translate(-50%, -50%) rotate(45deg);
+// }
+
+// .nav-links ul li a.prev {
+//   transform: translate(-50%, -50%) rotate(-135deg);
+// }

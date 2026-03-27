@@ -1,0 +1,22 @@
+@use '../foundation' as *;
+
+.l-inner {
+  width: 100%;
+  padding-right: prem(15);
+  padding-left: prem(15) ;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 950px;
+
+  @include mq('md') {
+    padding-right: $padding-pc;
+    padding-left: $padding-pc;
+    // max-width: $inner + strip-unit($padding-pc) * 2;
+  }
+}
+
+@media screen and (min-width:1500px) {
+  .l-inner {
+    // max-width: 1400px;
+  }
+}

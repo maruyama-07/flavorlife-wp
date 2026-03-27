@@ -1,0 +1,50 @@
+@use '../../foundation' as *;
+
+.p-index {
+    // クラスが付いていないpタグのみにマージンを適用
+    p:not([class]) {
+        margin-bottom: prem(25);
+    }
+    // img:not([class]) { 
+    //     margin: prem(25) auto;
+    // }
+    /* 配置に応じてマージンを変更（WordPress の alignleft/alignright/aligncenter） */
+    img.alignleft {
+        float: left;
+        margin: 0 1em prem(60) 0;
+    }
+    /* 画像の直後の要素で改行し、テキストを画像の下に表示 */
+    .wp-content-figure + * {
+        clear: left;
+    }
+    img.alignright {
+        float: right;
+        margin: 0 0 prem(60) 1em;
+    }
+    .wp-content-figure:has(img.alignright) + * {
+        clear: right;
+    }
+    img.aligncenter,
+    img.alignnone,
+    img:not([class*="align"]) {
+        margin: 0 auto;
+    }
+    h1,h2 {
+        font-size: clamp(2.188rem, 1.016rem + 2.344vw, 3.125rem);
+    }
+}
+@media screen and (max-width:768px) {
+    .p-index {
+        img.alignleft {
+            margin: 0 1em prem(20) 0;
+        }
+        img.alignright {
+            margin: 0 0 prem(20) 1em;
+        }
+        img.aligncenter,
+        img.alignnone,
+        img:not([class*="align"]) {
+            margin: 0 auto prem(20);
+        }
+    }
+}

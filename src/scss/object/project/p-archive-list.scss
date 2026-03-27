@@ -1,0 +1,149 @@
+@use '../../foundation' as *;
+
+/**
+ * News/Blog アーカイブ一覧
+ * スマホ基準、PCでは100%幅
+ */
+.p-archive-list {
+    padding: prem(60) 0;
+}
+
+.p-archive-list__inner {
+    width: 100%;
+    padding: 0 prem(15);
+    margin: 0 auto;
+
+    @include mq('md') {
+        padding: 0 $padding-pc;
+        max-width: none; // PCで100%幅
+    }
+}
+
+// ヘッダー
+.p-archive-list__header {
+    text-align: center;
+    margin-bottom: prem(40);
+}
+
+.p-archive-list__title {
+    font-size: prem(36);
+    font-weight: 500;
+    margin: 0 0 prem(8);
+    color: #000;
+    letter-spacing: 0.05em;
+
+    @include mq('md') {
+        font-size: prem(48);
+    }
+}
+
+.p-archive-list__subtitle {
+    font-size: prem(14);
+    color: #808080;
+    margin: 0;
+    font-weight: normal;
+}
+// リスト
+.p-archive-list__items {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1140px;
+}
+
+.p-archive-list__item {
+    border-top: 1px solid #e0e0e0;
+
+    &:last-child {
+        border-bottom: 1px solid #e0e0e0;
+    }
+}
+
+.p-archive-list__link {
+    display: flex;
+    align-items: center;
+    gap: prem(20);
+    padding: prem(20) 0;
+    text-decoration: none;
+    color: #000;
+    transition: opacity 0.3s;
+
+    &:hover {
+        opacity: 0.8;
+
+        .p-archive-list__arrow svg circle {
+            fill: #0f2b0f;
+        }
+    }
+}
+
+// サムネイル
+.p-archive-list__thumbnail {
+    width: prem(80);
+    height: prem(80);
+    flex-shrink: 0;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    @include mq('md') {
+        width: prem(100);
+        height: prem(100);
+    }
+}
+
+// コンテンツ（日付・タイトル）
+.p-archive-list__content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: prem(4);
+}
+
+.p-archive-list__date {
+    font-size: prem(12);
+}
+
+.p-archive-list__item-title {
+    font-size: prem(16);
+    font-weight: normal;
+    margin: 0;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    @include mq('md') {
+        font-size: prem(18);
+    }
+}
+
+// 矢印アイコン
+.p-archive-list__arrow {
+    flex-shrink: 0;
+
+    svg {
+        display: block;
+    }
+}
+
+// 空状態
+.p-archive-list__empty {
+    text-align: center;
+    padding: prem(60) prem(20);
+    color: #999;
+    font-size: prem(14);
+}
+
+// ページネーション
+.p-archive-list .l-pager {
+    margin-top: prem(40);
+}

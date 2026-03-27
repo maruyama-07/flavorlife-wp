@@ -1,0 +1,89 @@
+@use '../../foundation' as *;
+
+.p-top-works {
+  padding-bottom: prem(50);
+}
+.p-top-works__inner {
+  margin: 5% 5% 0 5%;
+}
+
+.p-top-works .splide {
+
+}
+
+.p-top-works .splide__slide {
+  display: block;
+  width: 100%;
+}
+
+.p-top-works .splide__slide a {
+  display: block;
+  aspect-ratio: 600 / 400;
+}
+
+.p-top-works .splide__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p-top-works .splide__pagination {
+  bottom: -2em;
+}
+
+.p-top-works .splide__pagination__page.is-active {
+  background-color: blue;
+}
+
+// swiper用
+.p-top-works .swiper {
+  padding-bottom: 20px;
+}
+
+.p-top-works .swiper-slide {
+  display: block;
+  width: 100%;
+  aspect-ratio: 600 / 300;
+}
+
+.p-top-works .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p-top-works .swiper-pagination {
+  bottom: 0;
+}
+
+.p-top-works .swiper-button-prev,
+.p-top-works .swiper-button-next {
+  text-rendering: initial;
+}
+
+//　slick用
+.p-top-works .slick-track {
+  display: block;
+  width: 100%;
+}
+
+.p-top-works .slick-slide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0 5px;
+}
+
+.p-top-works .slick-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 600 / 300;
+  object-fit: cover;
+}
+.p-top-works .slick-next,
+.p-top-works .slick-prev {
+  background: gray;
+}

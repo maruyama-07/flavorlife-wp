@@ -1,0 +1,332 @@
+@use '../../foundation' as *;
+
+/**
+ * モバイルナビオープン時はbodyスクロール防止
+ */
+body.is-mobile-nav-open {
+    overflow: hidden;
+}
+
+/**
+ * モバイルナビゲーションオーバーレイ
+ * 濃い緑背景・白テキスト・カラムレイアウト
+ */
+.p-mobile-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: #0f2b0f;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+
+    &.is-open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__inner {
+        padding: prem(80) prem(30) prem(40);
+    }
+
+    &__menu {
+        margin-bottom: prem(40);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition-delay: 0s;
+    }
+
+    &.is-open &__menu {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.1s;
+    }
+
+    &__columns {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: prem(24) prem(40);
+        max-width: 1200px;
+        margin: 0 auto;
+
+        @media screen and (min-width: 769px) {
+            grid-template-columns: repeat(5, 1fr);
+        }
+    }
+
+    &__column {
+        &:not(:has(.p-mobile-nav__children)) .p-mobile-nav__line {
+            display: none;
+        }
+        /* parent-rowにborderを移したため非表示 */
+        &:has(.p-mobile-nav__parent-row) .p-mobile-nav__line {
+            display: none;
+        }
+
+        // News+Contactカラム：2枚目画像の距離感
+        &--news-contact {
+            .p-mobile-nav__parent {
+            }
+            .p-mobile-nav__line {
+            }
+            .p-mobile-nav__children {
+                margin-bottom: prem(60);
+            }
+            .p-mobile-nav__children:last-of-type {
+                margin-bottom: 0;
+            }
+            .p-mobile-nav__parent-row:last-of-type {
+                margin-top: prem(60);
+            }
+            .p-mobile-nav__child-link {
+            }
+        }
+    }
+
+    &__parent-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: prem(8);
+        border-bottom: 1px solid #586b58;
+        margin-bottom: prem(16);
+
+        @media screen and (max-width: 768px) {
+            border-bottom: none;
+            border-top: 1px solid #586b58;
+        }
+    }
+
+    &__parent {
+        display: block;
+        color: #fff;
+        font-size: prem(16);
+        font-weight: 500;
+        text-decoration: none;
+        padding-bottom: prem(16);
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &--toggle {
+            width: fit-content;
+        }
+    }
+
+    &__toggle {
+        flex-shrink: 0;
+        width: prem(24);
+        height: prem(24);
+        padding: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__toggle-icon {
+        position: relative;
+        width: prem(12);
+        height: prem(12);
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background: #fff;
+        }
+        &::before {
+            width: prem(12);
+            height: prem(1);
+            transform: translate(-50%, -50%);
+        }
+        &::after {
+            width: prem(1);
+            height: prem(12);
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease;
+        }
+    }
+
+    /* アコーディオン開いた時：マイナス表示（縦線を90度回転して横線に重ねる） */
+    &__parent-row.is-open &__toggle-icon::after {
+        transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    &__parent-sub {
+        display: block;
+        color: #fff;
+        font-size: prem(14);
+        font-weight: 400;
+        margin-bottom: prem(12);
+        text-decoration: none;
+        opacity: 0.9;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &__line {
+        border: none;
+        border-top: 1px solid #586b58;
+        margin: 0 0 prem(15);
+    }
+
+    &__children {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.23s ease, opacity 0.23s ease;
+
+        &.is-open {
+            max-height: prem(700);
+            opacity: 1;
+            transition: max-height 0.4s ease, opacity 0.35s ease;
+        }
+    }
+
+    /* PC時：アコーディオン無効、常に子表示 */
+    @media screen and (min-width: 769px) {
+        &__column--has-children &__children {
+            max-height: none;
+            overflow: visible;
+            opacity: 1;
+        }
+        &__column--has-children &__parent-row {
+            cursor: default;
+        }
+        &__column--has-children &__toggle {
+            display: none;
+        }
+    }
+
+    /* スマホ時：アコーディオン有効、初期は子非表示 */
+    @media screen and (max-width: 768px) {
+        &__column--has-children &__children {
+            max-height: 0;
+            opacity: 0;
+        }
+        &__column--has-children &__children.is-open {
+            max-height: prem(800);
+            opacity: 1;
+        }
+    }
+
+    &__child {
+        margin-bottom: prem(15);
+    }
+
+    &__child-link {
+        color: #fff;
+        font-size: prem(14);
+        text-decoration: none;
+        opacity: 0.9;
+        padding: prem(7) 0;
+
+        &:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+    }
+
+    &__cta {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: prem(30);
+        max-width: 1200px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition-delay: 0s;
+
+        @media screen and (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &.is-open &__cta {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    &__cta-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: prem(120);
+        color: #fff;
+        font-size: prem(14);
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    &__cta-image {
+        display: block;
+        margin-bottom: prem(8);
+
+        img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+    }
+
+    &__cta-text {
+        display: block;
+    }
+
+    &__cta-sub {
+        display: block;
+        font-size: prem(12);
+        font-weight: 400;
+        margin-top: prem(4);
+        opacity: 0.9;
+    }
+}
+.p-mobile-nav__parent-row {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 769px) {
+    .p-mobile-nav {
+        // display: none;
+    }
+    .p-mobile-nav__column--news-contact .p-mobile-nav__children {
+        margin-bottom: 0;
+    }
+    .p-mobile-nav__inner {
+        padding: prem(100) prem(30) prem(20);
+    }
+    .p-mobile-nav__parent {
+        padding: prem(25) 0;
+    }
+    .p-mobile-nav__parent-row {
+        margin-bottom: 0;
+    }
+    .p-mobile-nav__columns {
+        gap: 0;
+    }
+    .p-mobile-nav__column--news-contact .p-mobile-nav__parent-row:last-of-type {
+        margin-top: 0;
+    }
+    body.is-mobile-nav-open .l-header__hamburger {
+        right: prem(30);
+    }
+}

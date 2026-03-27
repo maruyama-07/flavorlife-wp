@@ -1,0 +1,26 @@
+# git対象としないファイル、フォルダを記載する
+
+gulp/node_modules
+node_modules/
+.sass-cache/
+
+# SCSS個別コンパイル成果物（gulpでstyle.cssにまとめて出力するため不要）
+src/scss/**/*.css
+src/scss/**/*.css.map
+src/scss/**/*.min.css
+src/scss/**/*.min.css.map
+gulp/package-lock.json
+.vscode/
+# Mac
+.DS_Store
+__MACOSX
+thumbs.db
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/

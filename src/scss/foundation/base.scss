@@ -1,0 +1,134 @@
+@use 'variables' as *;
+@use 'mixin' as *;
+@use 'functions' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: prem(60); // ページ内リンク: ヘッダー高さ分のオフセット（SP）
+  @include mq('md') {
+    scroll-padding-top: prem(100); // PC
+  }
+  @if $break-flg == 0 {
+    // 375px以下
+    @media (max-width: 375px) {
+      font-size: vw(375, strip-unit($base-font-size));
+    }
+
+    // 375px〜767px
+    font-size: $base-font-size;
+
+    // 768px〜inner
+    @include mq("md") {
+      font-size: vw(strip-unit($inner), strip-unit($base-font-size));
+    }
+
+    //inner以上
+    @media (min-width: $inner) {
+      font-size: $base-font-size;
+    }
+  }@else{
+    //inner以上
+    font-size: $base-font-size;
+
+    // 768px〜inner
+    @media (max-width: $inner) {
+      font-size: vw(strip-unit($inner), strip-unit($base-font-size));
+    }
+
+    // 375px〜767px
+    @include mq("md") {
+    font-size: $base-font-size;
+    }
+
+    // 375px以下
+    @media (max-width: 375px) {
+      font-size: vw(375, strip-unit($base-font-size));
+    }
+  }
+}
+
+
+
+body {
+  font-family: "Noto Serif", serif;
+  font-weight: $regular;
+  color: $color-black;
+}
+main {
+  overflow: hidden;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s;
+}
+h1,h2,h3 {
+  font-family: "Noto Serif", serif;
+  font-weight: inherit;
+  line-height: 1.3;
+  // font-size: clamp(2.188rem, 1.016rem + 2.344vw, 3.125rem);
+  
+  &:not([class]){
+    margin-bottom: prem(15);
+  }
+}
+hr {
+  color: rgba($color: #e4e4e4, $alpha: 0.35);
+  margin: prem(50) 0 ;
+  opacity: 0.35;
+}
+h3 {
+  font-size: prem(26);
+  font-weight: 500;
+  margin-bottom: prem(35);
+}
+p {
+  font-family: "Noto Serif JP", serif;
+}
+
+p:not([class]) {
+  margin-bottom: prem(25);
+}
+.is-sp {
+  display: none;
+}
+.is-pc {
+  display: block;
+}
+
+@media screen and (max-width:768px) {
+  .is-sp {
+    display: block;
+  }
+  .is-pc {
+    display: none;
+  }
+  h2 {
+    font-size: prem(40);
+  }
+  h3 {
+    font-size: prem(21);
+  }
+  p:not([class]) {
+    margin-bottom: prem(15);
+  }
+  hr {
+    margin: prem(30) 0 ;
+  }
+}
+
+a:hover {
+  @if $break-flg ==0 {
+    @include mq("md") {
+      opacity: 0.8;
+    }
+  }
+  @else {
+    opacity: 0.8;
+    @include mq("md") {
+      opacity: 1;
+    }
+  }
+}

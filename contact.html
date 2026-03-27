@@ -1,0 +1,107 @@
+<div class="p-contact__contents">
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-company">御社名<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [text* your-company id:your-company class:p-contact__item-text]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-name">ご担当社名<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [text* your-name id:your-name class:p-contact__item-text]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-name-furigana">ご担当社名（フリガナ）<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [text* your-name-furigana id:your-name-furigana class:p-contact__item-text]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-email">メールアドレス<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item c-contact-item">
+        [email* your-email id:your-email class:p-contact__item-email]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-tel">電話番号<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [tel* your-tel id:your-tel class:p-contact__item-tel]
+      </dd>
+    </dl>
+    <div class="p-contact__wrap">
+        <dl class="p-contact__content">
+            <dt class="p-contact__head">
+                <label for="your-postcode">〒<span class="p-contact__required">*</span></label>
+            </dt>
+            <dd class="p-contact__item">
+            [text* your-postcode id:your-postcode class:p-contact__item-text placeholder "郵便番号"]
+            </dd>
+        </dl>
+        <dl class="p-contact__content">
+            <dt class="p-contact__head">
+                <label for="your-pref">都道府県<span class="p-contact__required">*</span></label>
+            </dt>
+            <dd class="p-contact__item">
+                [select your-pref default:1 class:p-contact__item-select "選択してください。""北海道" "青森県" "岩手県" "宮城県" "秋田県" "山形県" "福島県" "茨城県" "栃木県" "群馬県" "埼玉県" "千葉県" "東京都" "神奈川県" "新潟県" "富山県" "石川県" "福井県" "山梨県" "長野県" "岐阜県" "静岡県" "愛知県" "三重県" "滋賀県" "京都府" "大阪府" "兵庫県" "奈良県" "和歌山県" "鳥取県" "島根県" "岡山県" "広島県" "山口県" "徳島県" "香川県" "愛媛県" "高知県" "福岡県" "佐賀県" "長崎県" "熊本県" "大分県" "宮崎県" "鹿児島県" "沖縄県"]
+            </dd>
+        </dl>
+    </div>
+    <dl class="p-contact__content">
+        <dt class="p-contact__head">
+            <label for="your-name-furigana">市区町村番地<span class="p-contact__required">*</span></label>
+        </dt>
+        <dd class="p-contact__item">
+            [text* your-address id:your-address class:p-contact__item-text]
+        </dd>
+    </dl>
+    <dl class="p-contact__content">
+        <dt class="p-contact__head">
+            <label for="your-building">マンション/ビル名</label>
+        </dt>
+        <dd class="p-contact__item">
+            [text your-building id:your-building class:p-contact__item-text]
+        </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-inquiry-type">資料請求・お問合せ内容<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [select* your-inquiry-type id:your-inquiry-type class:p-contact__item-select include_blank "カタログ請求" "商品について" "業務お取引について" "PR・メディア掲載について" "その他"]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-message">お問合せの方は内容を具体的にお聞かせください。</label>
+      </dt>
+      <dd class="p-contact__item">
+        [textarea your-message id:your-message class:p-contact__item-textarea maxlength:500]
+      </dd>
+    </dl>
+    <div class="p-contact__policy">
+      <div class="p-contact__item">
+        <p class="p-contact__policy__head">個人情報の取扱への同意<span class="p-contact__required">*</span></p>
+          <a href="/privacy-policy/" target="_blank" rel="noreferrer noopener" class="p-contact__policy-link">個人情報の取扱はこちら</a>
+        <span class="p-contact__item-checkbox">
+          [acceptance acceptance-505]同意する[/acceptance]
+        </span>
+      </div>
+    </div>
+    <div class="p-contact__btn-wrap">
+      <div class="p-contact__btn">
+        [submit class:c-custom-button p-contact__btn-submit"確認する"]
+        [multistep multistep-501 first_step "/contact-confirm"]
+      </div>
+    </div>
+  </div>

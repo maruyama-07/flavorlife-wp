@@ -1,0 +1,73 @@
+@use '../../foundation' as *;
+
+.p-top-gallery__inner {
+  margin: 5% 5% 0 5%;
+}
+
+.p-top-gallery .splide {
+
+}
+
+.p-top-gallery .splide__slide {
+  display: block;
+  width: 100%;
+  aspect-ratio: 600 / 300;
+}
+
+.p-top-gallery .splide__slide picture {
+  height: inherit;
+  height: 100%;
+}
+
+.p-top-gallery .splide__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p-top-gallery .swiper {
+
+}
+
+.p-top-gallery .swiper-slide {
+  display: block;
+  width: 100%;
+  aspect-ratio: 600 / 300;
+}
+
+.p-top-gallery .swiper-slide picture {
+  height: inherit;
+  height: 100%;
+}
+
+.p-top-gallery .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.p-top-gallery .slick-track {
+  display: block;
+  width: 100%;
+}
+
+.p-top-gallery .slick-slide {
+  display: block;
+  width: 100%;
+  aspect-ratio: 600 / 300;
+  margin: 0 5px;
+}
+
+.p-top-gallery .slick-slide picture {
+  height: inherit;
+  height: 100%;
+}
+
+.p-top-gallery .slick-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

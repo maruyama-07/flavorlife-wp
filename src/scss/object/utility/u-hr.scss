@@ -1,0 +1,11 @@
+@use '../../foundation' as *;
+
+/**
+ * hr の間隔を詰めるユーティリティ
+ * ブロックエディタの「グループ」に「追加のCSSクラス」で u-hr-compact を付与して使用
+ */
+.u-hr-compact {
+    hr {
+        margin: prem(20) 0;
+    }
+}

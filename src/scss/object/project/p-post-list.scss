@@ -1,0 +1,45 @@
+@use '../../foundation' as *;
+
+.p-post-list {
+  position: relative;
+}
+
+.p-post-list__wrap {
+  margin: prem(32) 0;
+
+}
+
+.p-post-list__title {
+  font-size: prem(48);
+  color: $color-theme;
+}
+
+.p-post-list__items {
+  display: grid;
+  gap: prem(50);
+  margin-top: prem(16);
+  // grid-template-columns: repeat(2, 1fr);
+  @include mq('md') {
+    row-gap: prem(40);
+    column-gap: prem(20);
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.p-post-list__cards {
+  margin-top: prem(48);
+  @include mq('md') {
+    margin-top: prem(100);
+  }
+}
+
+.p-post-list__btn {
+  margin-top: prem(20);
+  text-align: center;
+  @include mq('md') {
+    margin: prem(28) auto 0;
+    width: 100%;
+    max-width: calc(prem(980) + $padding-pc * 2);
+    padding: 0 prem(10);
+  }
+}

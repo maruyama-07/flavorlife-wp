@@ -1,0 +1,109 @@
+@use '../../foundation' as *;
+
+.c-custom-button-wrap {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.c-custom-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #0f2b0f;
+    border: 1px solid #0f2b0f;
+    color: #fff;
+    padding: prem(18) prem(50);
+    border-radius: prem(30);
+    text-decoration: none;
+    font-size: prem(16);
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+    min-width: 220px;
+    text-decoration: none !important;
+    // font-family: "Noto Sans JP", sans-serif;
+    
+    svg {
+        width: prem(7);
+        margin-top: prem(2);
+    }
+    
+    &:hover {
+        background: #fff;
+        color: #0f2b0f;
+        opacity: 1;
+        transition: background 0.3s, color 0.3s;
+        svg polyline{
+            stroke: #0f2b0f;
+            transition: fill 0.3s, stroke 0.3s;
+        }
+    }
+}
+.c-custom-button__arrow {
+    font-size: prem(20);
+    transition: transform 0.3s;
+    line-height: 1;
+}
+
+// ボタンの白バージョン（Recruit用）
+.c-custom-button--white {
+    background: #fff;
+    color: #0f2b0f;
+    border: 1px solid #fff;
+    
+    &:hover {
+        background: #0f2b0f;
+        color: #fff;
+        opacity: 1;
+        transition: background 0.3s, color 0.3s;
+        svg polyline{
+            color: #fff;
+            stroke: #fff;
+            transition: fill 0.3s, stroke 0.3s;
+        }
+        .c-custom-button__arrow {
+            color: #fff;
+        }
+    }
+    
+    .c-custom-button__arrow {
+        color: #0f2b0f;
+    }
+}
+
+// ボタンの黒枠バージョン（白背景セクション用）
+.c-custom-button--black {
+    background: transparent;
+    color: #000;
+    border: 1px solid #000;
+
+    &:hover {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+        opacity: 1;
+        .c-custom-button__arrow {
+            color: #fff;
+        }
+        path { stroke: #fff; }
+    }
+    .c-custom-button__arrow path { stroke: currentColor; }
+}
+
+    .c-custom-button-wrap {
+        margin: 30px 0;
+    }
+    
+    .c-custom-button {
+        padding: 15px 40px;
+        font-size: prem(14);
+        min-width: 240px;
+    }
+
+@media screen and (max-width: 768px) {
+    .c-custom-button {
+        width: 100%;
+        padding: prem(12) prem(20);
+        max-width: 250px;
+    }
+}

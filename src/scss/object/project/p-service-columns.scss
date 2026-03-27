@@ -1,0 +1,62 @@
+@use '../../foundation' as *;
+
+/**
+ * サービス2カラム
+ * 画像＋テキストの2カラムレイアウト。各カラムにリンク設定可能
+ */
+.p-service-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: prem(40);
+    margin: prem(60) 0;
+}
+
+.p-service-columns__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.p-service-columns__link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s;
+
+    &:hover {
+        opacity: 0.85;
+    }
+}
+
+.p-service-columns__image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+}
+
+.p-service-columns__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.p-service-columns__text {
+    margin: prem(16) 0 0;
+    font-size: prem(16);
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+    .p-service-columns {
+        grid-template-columns: 1fr;
+        gap: prem(30);
+        margin: prem(40) 0;
+    }
+
+    .p-service-columns__text {
+        margin-top: prem(12);
+        font-size: prem(14);
+    }
+}

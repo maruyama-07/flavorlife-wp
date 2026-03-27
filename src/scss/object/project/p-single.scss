@@ -1,0 +1,7 @@
+@use '../../foundation' as *;
+
+@media screen and (max-width: 768px) {
+    .p-single p{
+        font-size: prem(14);
+    }
+}

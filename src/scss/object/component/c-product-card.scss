@@ -1,0 +1,81 @@
+@use '../../foundation' as *;
+
+/**
+ * 商品カード
+ * 角丸枠・画像100px固定・左に画像・右にテキスト
+ */
+.c-product-card {
+    display: flex;
+    align-items: center;
+    gap: prem(20);
+    padding: prem(20);
+    border-radius: prem(16);
+    margin-bottom: prem(20);
+    border: prem(2) solid #1a1a1a;
+
+    &:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    &--gold {
+        border: 2px solid #e7a314;
+    }
+
+    &--purple {
+        border: 2px solid #684e9d;
+    }
+
+    &__image {
+        flex-shrink: 0;
+        width: prem(120);
+        height: prem(120);
+        overflow: hidden;
+        border-radius: prem(4);
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        margin-bottom: 0 !important;
+        img {
+            margin-bottom: 0 !important;
+        }
+    }
+    &__body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__title {
+        font-size: prem(21);
+        font-weight: 600;
+        margin: 0 0 prem(10);
+        line-height: 1.5;
+    }
+
+    &__text {
+        line-height: 1.8;
+        p {
+            margin: 0 0 prem(8);
+            &:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .c-product-card {
+        padding: prem(20) prem(15);
+    }
+    .c-product-card__image {
+        width: prem(100);
+        height: prem(100);
+    }
+    .c-product-card__title {
+        font-size: prem(18);
+    }
+}

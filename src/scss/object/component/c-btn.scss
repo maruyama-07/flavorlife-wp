@@ -1,0 +1,78 @@
+@use '../../foundation' as *;
+
+.c-btn {
+  display: inline-block;
+  min-width: 200px;
+  padding: 10px 20px;
+  color: $color-white;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: $color-theme;
+  border: 1px solid $color-theme;
+  transition: 0.3s;
+}
+
+.c-btn::after {
+  content: '';
+  display: inline-block;
+  margin-left: 16px;
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid $color-white;
+  border-right: 1px solid $color-white;
+  transform: rotate(45deg);
+  transition: 0.3s;
+}
+
+.c-btn:hover {
+  text-decoration: none;
+  background-color: $color-white;
+  color: $color-theme;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.c-btn:hover::after {
+  border-top: 1px solid $color-theme;
+  border-right: 1px solid $color-theme;
+  transform: translateX(5px) rotate(45deg);
+}
+
+.c-btn-arrow {
+
+}
+.c-btn-arrow {
+  // color: #0f2b0f;
+  transition: transform 0.3s;
+}
+.c-btn-arrow svg circle {
+  transition: fill 0.3s;
+}
+.c-btn-arrow svg path {
+  transition: stroke 0.3s;
+}
+
+.c-btn-arrow:hover .c-btn-arrow svg circle {
+  fill: #fff;
+  transition: fill 0.3s;
+}
+.c-btn-arrow:hover .c-btn-arrow path {
+  stroke: #0f2b0f;
+  transition: stroke 0.3s;
+}
+
+
+a:hover {
+  .c-btn-arrow {
+      svg {
+          circle {
+              fill: #fff;
+              transition: fill 0.3s;
+          }
+      }
+      path {
+          stroke: #0f2b0f;
+          transition: stroke 0.3s;
+      }
+  }
+}

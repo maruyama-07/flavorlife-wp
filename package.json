@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "gulp": "cd gulp && npx gulp",
+    "sass:school": "cd gulp && npx gulp stylesSchool",
+    "sass:main": "cd gulp && npx gulp styles",
+    "build:css": "cd gulp && npx gulp styles stylesSchool"
+  }
+}

@@ -1,0 +1,185 @@
+@use '../../foundation' as *;
+
+.p-recruit {
+    h2 {
+        font-size: prem(32);
+    }
+}
+// 求人詳細ページ
+.page-template--recruit {
+    .page-content {
+        padding-top: prem(40);
+    }
+}
+
+// 求人詳細ヘッダー（営業職など）※PC基準
+.p-recruit-header {
+    padding: prem(70) 0 0;
+    text-align: center;
+}
+
+.p-recruit-header__parent-title {
+    font-size: prem(48);
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 prem(12) 0;
+}
+
+.p-recruit-header__parent-subtitle {
+    font-size: prem(16);
+    margin: 0 0 prem(32) 0;
+}
+
+.p-recruit-header__line {
+    border: none;
+    border-top: 3px solid #0f2b0f;
+    margin: 0 auto prem(22);
+    max-width: prem(400);
+    opacity: 1;
+}
+
+.p-recruit-header__title {
+    font-size: clamp(1.25rem, -0.875rem + 4vw, 2.125rem);
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 prem(12) 0;
+}
+
+.p-recruit-header__subtitle {
+    font-size: prem(16);
+    color: #1a1a1a;
+    margin: 0 0 prem(26) 0;
+}
+
+// 求人一覧ページのヘッダー（親・サムネイルなし時）
+.p-recruit-list-header {
+    padding: prem(80) 0 prem(40);
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.p-recruit-list-header__title {
+    font-size: prem(48);
+    font-weight: normal;
+    margin: 0 0 prem(15) 0;
+    letter-spacing: 0.05em;
+}
+
+.p-recruit-list-header__subtitle {
+    font-size: prem(14);
+    font-weight: 300;
+    margin: 0;
+}
+
+// 求人一覧
+.p-recruit-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: prem(75);
+}
+
+.p-recruit-list__item {
+}
+
+.p-recruit-list__link {
+    display: flex;
+    align-items: center;
+    gap: prem(20);
+    padding: prem(24) 0;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s;
+    border-bottom: 1px solid #e4e4e4;
+    position: relative;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.p-recruit-list__item:first-child .p-recruit-list__link {
+    border-top: 1px solid #e4e4e4;
+}
+
+.p-recruit-list__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: prem(48);
+    height: prem(48);
+    min-width: prem(48);
+    background: #0f2b0f;
+    color: #fff;
+    font-size: prem(24);
+    font-style: italic;
+    font-weight: 500;
+}
+
+.p-recruit-list__title {
+    font-size: prem(18);
+    font-weight: 600;
+    text-align: left;
+    max-width: 400px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+.p-recruit-list__tag {
+    font-size: prem(14);
+}
+
+.p-recruit-list__arrow {
+    align-items: center;
+    justify-content: center;
+    width: prem(25);
+    height: prem(25);
+    min-width: prem(20);
+    border-radius: 50%;
+    color: #fff;
+    font-size: prem(12);
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+
+    &::after {
+        content: '>';
+        display: block;
+    }
+}
+
+// SP時
+@media screen and (max-width: 768px) {
+    .p-recruit-header {
+        padding: prem(60) 0 prem(0);
+    }
+
+    .p-recruit-header__parent-title,
+    .p-recruit-header__title {
+        font-size: prem(28);
+    }
+
+    .p-recruit-header__parent-subtitle,
+    .p-recruit-header__subtitle {
+        font-size: prem(14);
+    }
+
+    .p-recruit-header__line {
+        max-width: prem(200);
+        margin-bottom: prem(20);
+    }
+
+    .p-recruit-list-header {
+        padding: prem(60) 0 prem(30);
+    }
+
+    .p-recruit-list-header__title {
+        font-size: prem(32);
+    }
+
+    .p-recruit-list-header__subtitle {
+        font-size: prem(12);
+    }
+}

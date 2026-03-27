@@ -1,0 +1,15 @@
+@use '../../foundation' as *;
+
+.p-pager-list{
+  display: flex;
+  justify-content:space-between;
+}
+
+.p-pager-list__btn a {
+  display: inline-block;
+  padding: 10px 20px;
+  color: $color-theme;
+  // border-radius: 10px;
+  border: 1px solid $color-theme;
+
+}

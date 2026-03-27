@@ -1,0 +1,66 @@
+@use '../../foundation' as *;
+
+// インタビュープロフィール ※PC基準
+.p-interview-profile {
+    padding: prem(60) 0;
+    text-align: center;
+}
+
+.p-interview-profile__image {
+    width: prem(250);
+    height: prem(250);
+    margin: 0 auto prem(24);
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.p-interview-profile__title {
+    font-size: prem(12);
+    margin: 0 0 prem(12);
+}
+
+.p-interview-profile__name-ja {
+    font-size: prem(32);
+    font-weight: 600;
+    margin: 0 0 prem(8);
+}
+
+.p-interview-profile__name-en {
+    font-size: prem(12);
+    color: #666;
+    letter-spacing: 0.15em;
+    margin: 0 0 prem(30);
+}
+
+.p-interview-profile__certifications {
+    margin: 0;
+    padding-bottom: prem(4);
+    display: inline-block;
+}
+
+// SP時
+@media screen and (max-width: 768px) {
+    .p-interview-profile {
+        padding: prem(40) 0;
+    }
+
+    .p-interview-profile__image {
+        width: prem(160);
+        height: prem(160);
+        margin-bottom: prem(20);
+    }
+
+    .p-interview-profile__name-ja {
+        font-size: prem(26);
+    }
+
+    .p-interview-profile__name-en {
+        font-size: prem(12);
+    }
+}

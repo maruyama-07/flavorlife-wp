@@ -1,0 +1,204 @@
+@use '../../foundation' as *;
+
+.p-top-shop {
+    padding: prem(80) 0;
+}
+
+.p-top-shop__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+// ヘッダー
+.p-top-shop__header {
+    text-align: center;
+    margin-bottom: prem(20);
+}
+
+.p-top-shop__title {
+    font-size: prem(48);
+    font-weight: normal;
+    margin: 0 0 10px 0;
+    color: #000;
+    letter-spacing: 0.05em;
+}
+
+.p-top-shop__subtitle {
+    font-size: prem(14);
+    color: #000;
+    margin: 0;
+    font-weight: normal;
+}
+
+// キャッチコピー
+.p-top-shop__catchcopy {
+    text-align: center;
+    font-size: prem(26);
+    margin: 0 0 prem(50) 0;
+}
+
+// コンテンツエリア
+.p-top-shop__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: prem(80);
+}
+
+// 左側：店舗リスト
+.p-top-shop__stores {
+    display: flex;
+    flex-direction: column;
+    .p-top-shop__store-item:last-of-type {
+        border-bottom: 1px solid #e4e4e4;
+    }
+}
+
+.p-top-shop__store-item {
+}
+.p-top-shop__store-link {
+    display: flex;
+    align-items: center;
+    gap: prem(20);
+    padding: prem(20) 0;
+    border-top: 1px solid #e4e4e4;
+    transition: all 0.3s;
+}
+
+.p-top-shop__store-image {
+    width: prem(100);
+    height: prem(100);
+    flex-shrink: 0;
+    overflow: hidden;
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.p-top-shop__store-info {
+    flex: 1;
+}
+
+.p-top-shop__store-name {
+    font-size: prem(20);
+    font-weight: 500;
+    margin: 0 0 5px 0;
+    color: #000;
+}
+
+.p-top-shop__store-location {
+    font-size: prem(14);
+    color: #666;
+    margin: 0;
+}
+
+.c-btn-arrow {
+    flex-shrink: 0;
+    color: #000;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+        transform: translateX(5px);
+    }
+}
+
+// 右側：オンラインショップ
+.p-top-shop__online {
+    position: relative;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.p-top-shop__online-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.p-top-shop__online-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.p-top-shop__online-title {
+    font-size: prem(36);
+    font-weight: 500;
+    color: #fff;
+    margin: 0 0 prem(30) 0;
+    letter-spacing: 0.05em;
+}
+
+// レスポンシブ
+@media screen and (max-width: 768px) {
+    .p-top-shop {
+        padding: 60px 0;
+    }
+    
+    .p-top-shop__title {
+        font-size: prem(36);
+    }
+    
+    .p-top-shop__subtitle {
+        font-size: prem(12);
+    }
+    
+    .p-top-shop__catchcopy {
+        font-size: prem(14);
+        margin-bottom: 30px;
+    }
+    
+    .p-top-shop__content {
+        grid-template-columns: 1fr;
+        gap: prem(50);
+    }
+    
+    .p-top-shop__store-link {
+        gap: 15px;
+        
+    }
+    
+    .p-top-shop__store-image {
+        width: prem(110);
+        height: prem(110);
+    }
+    
+    .p-top-shop__store-name {
+        font-size: prem(18);
+    }
+    
+    .p-top-shop__store-location {
+        font-size: prem(12);
+    }
+    
+    .p-top-shop__online {
+        
+    }
+    
+    .p-top-shop__online-title {
+        font-size: prem(28);
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .p-top-shop__catchcopy {
+        font-size: prem(13);
+    }
+}

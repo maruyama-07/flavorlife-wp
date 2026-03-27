@@ -1,0 +1,356 @@
+@charset "UTF-8";
+/*
+ * 参考
+ * https: //github.com/Andy-set-studio/modern-css-reset/blob/master/src/reset.css
+*/
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+*::before,
+*::after {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/*****************************************
+ * 数値から単位を取り除く
+ * 参考
+ * https: //css-tricks.com/snippets/sass/
+******************************************/
+/*****************************************
+ * px→remの計算
+ * 参考
+ * https: //webdou.net/sass-rem/
+ * Sassではmath.div関数の使用が推奨のため、スラッシュ(/)演算子から変更
+******************************************/
+/*****************************************
+ * vwの計算
+ * 参考
+ * https://webdou.net/sass-vw/
+ * Sassではmath.div関数の使用が推奨のため、スラッシュ(/)演算子から変更
+******************************************/
+html {
+  font-size: 16px;
+}
+@media (max-width: 375px) {
+  html {
+    font-size: 4.2666666667vw;
+  }
+}
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 1.3333333333vw;
+  }
+}
+@media (min-width: 1200px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+main {
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s;
+}
+
+h1, h2 {
+  font-weight: inherit;
+  line-height: 1.3;
+  font-size: clamp(2.188rem, 1.016rem + 2.344vw, 3.125rem);
+}
+h1:not([class]), h2:not([class]) {
+  margin-bottom: 0.9375rem;
+}
+
+h3 {
+  font-size: 1.625rem;
+  font-weight: 500;
+  margin-bottom: 2.1875rem;
+}
+
+p:not([class]) {
+  margin-bottom: 1.5625rem;
+}
+
+.is-sp {
+  display: none;
+}
+
+.is-pc {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .is-sp {
+    display: block;
+  }
+  .is-pc {
+    display: none;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
+  h3 {
+    font-size: 1.3125rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  a:hover {
+    opacity: 0.8;
+  }
+}
+
+.p-top-news {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.p-top-news__inner {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.p-top-news__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.p-top-news__heading {
+  text-align: center;
+  flex: 1;
+}
+
+.p-top-news__title {
+  font-size: 3rem;
+  font-weight: normal;
+  margin: 0 0 8px 0;
+  color: #000;
+  letter-spacing: 0.05em;
+}
+
+.p-top-news__subtitle {
+  font-size: 0.875rem;
+  color: #808080;
+  margin: 0;
+  font-weight: normal;
+}
+
+.p-top-news__more {
+  background: #0f2b0f;
+  color: #fff;
+  padding: 0.25rem 1.5rem;
+  border-radius: 1.25rem;
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: all 0.3s;
+  flex-shrink: 0;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  border: 1px solid #0f2b0f;
+}
+.p-top-news__more:hover {
+  color: #0f2b0f;
+  background: #fff;
+  opacity: 1;
+}
+
+.p {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.p-top-news__item {
+  border-top: 1px solid #e0e0e0;
+}
+.p-top-news__item:last-child {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.p-top-news__link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px 0;
+  text-decoration: none;
+  color: #000;
+  transition: background 0.3s;
+}
+.p-top-news__link:hover .p-top-news__arrow .p-top-news__arrow svg circle {
+  fill: #0f2b0f;
+}
+.p-top-news__link:hover .p-top-news__arrow .p-top-news__arrow path {
+  stroke: #fff;
+}
+
+.p-top-news__thumbnail {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.p-top-news__thumbnail img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+
+.p-top-news__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.p-top-news__date {
+  display: block;
+  font-size: 0.75rem;
+  color: #808080;
+}
+
+.p-top-news__item-title {
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 0;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.p-top-news__empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  font-size: 0.875rem;
+}
+
+@media screen and (max-width: 768px) {
+  .p-top-news {
+    padding: 60px 0;
+  }
+  .p-top-news__header {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .p-top-news__title {
+    font-size: 2.25rem;
+  }
+  .p-top-news__subtitle {
+    font-size: 0.75rem;
+  }
+  .p-top-news__more {
+    padding: 6px 20px;
+    font-size: 0.8125rem;
+  }
+  .p-top-news__link {
+    gap: 15px;
+    padding: 20px 0;
+  }
+  .p-top-news__thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+  .p-top-news__date {
+    font-size: 0.75rem;
+  }
+  .p-top-news__item-title {
+    font-size: 0.875rem;
+  }
+}

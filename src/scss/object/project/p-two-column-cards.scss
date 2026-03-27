@@ -1,0 +1,60 @@
+@use '../../foundation' as *;
+
+/**
+ * 2カラムカード
+ * 画像＋テキスト＋c-custom-button の2カラムレイアウト
+ */
+.p-two-column-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: prem(40);
+    margin: prem(60) 0;
+}
+
+.p-two-column-cards__item {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.p-two-column-cards__image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+}
+
+.p-two-column-cards__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.p-two-column-cards__text {
+    margin: prem(2) 0 prem(24);
+    font-size: prem(20);
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.p-two-column-cards .c-custom-button-wrap {
+    margin-top: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .p-two-column-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: prem(16);
+        margin: prem(40) 0;
+        .c-custom-button {
+            min-width: auto;
+            font-size: prem(13);
+            padding: prem(9) prem(15);
+        }
+    }
+
+    .p-two-column-cards__text {
+        margin: prem(12) 0 prem(20);
+        font-size: prem(14);
+    }
+}

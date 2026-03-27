@@ -1,0 +1,144 @@
+@use '../../foundation' as *;
+
+/**
+ * 画像＋テキストの2カラムコンポーネント
+ * 白背景・黒テキスト。ショートコードで使い回し可。
+ * --reversed: PC時のみテキスト左・画像右（SPは常に画像上・テキスト下）
+ */
+.c-image-text {
+    position: relative;
+    padding: 0;
+}
+
+.c-image-text__container {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+}
+
+.c-image-text__image {
+    width: 100%;
+    position: relative;
+
+    &::before {
+        content: '';
+        padding-top: 92%;
+        display: block;
+        max-height: 650px;
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.c-image-text__content {
+    background: #fff;
+    padding: prem(60) prem(50);
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+}
+
+.c-image-text__title {
+    font-size: prem(40);
+    font-weight: normal;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.05em;
+    color: #000;
+}
+
+.c-image-text__subtitle {
+    font-size: prem(14);
+    margin: 0 0 prem(40) 0;
+    font-weight: 300;
+    color: #666666;
+}
+
+.c-image-text__head {
+    font-size: prem(26);
+    font-weight: 500;
+    margin: 0 0 prem(30) 0;
+    color: #000;
+}
+
+.c-image-text__text {
+    font-size: prem(16);
+    line-height: 1.8;
+    margin: 0 0 prem(45) 0;
+    color: #000;
+}
+
+.c-image-text__content .c-custom-button {
+    margin: 0 auto;
+}
+
+/* PC時：テキスト左・画像右に反転（SPは常に画像上・テキスト下） */
+@media screen and (min-width: 769px) {
+    .c-image-text--reversed .c-image-text__container {
+        .c-image-text__image {
+            order: 2;
+        }
+        .c-image-text__content {
+            order: 1;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .c-image-text--reversed .c-image-text__container {
+        .c-image-text__image {
+            order: 1;
+        }
+        .c-image-text__content {
+            order: 2;
+        }
+    }
+
+    .c-image-text__container {
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+    }
+
+    .c-image-text__image img {
+        object-position: top center;
+    }
+
+    .c-image-text__image::before {
+        padding-top: 74%;
+    }
+
+    .c-image-text__content {
+        transform: translateY(-1px);
+        padding: prem(40) prem(20);
+    }
+
+    .c-image-text__title {
+        font-size: prem(30);
+    }
+
+    .c-image-text__subtitle {
+        margin-bottom: 20px;
+    }
+
+    .c-image-text__text {
+        font-size: prem(14);
+        margin-bottom: 30px;
+    }
+
+    .c-image-text__head {
+        font-size: prem(20);
+    }
+}

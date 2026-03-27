@@ -1,0 +1,111 @@
+@use '../../foundation' as *;
+
+/**
+ * ヒーローセクション（Gutenberg ブロック）
+ */
+.hero-section {
+    width: 100vw;
+    margin: 0 calc(50% - 50vw);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    max-height: 650px;
+    margin-bottom: prem(48);
+
+    /* アスペクト比設定 */
+    &[data-height="aspect-design"] {
+        aspect-ratio: 1200 / 650;
+    }
+
+    &[data-height="aspect-16-9"] {
+        aspect-ratio: 16 / 9;
+    }
+
+    &[data-height="aspect-21-9"] {
+        aspect-ratio: 21 / 9;
+    }
+
+    &[data-height="aspect-4-3"] {
+        aspect-ratio: 4 / 3;
+    }
+
+    &[data-height="aspect-1-1"] {
+        aspect-ratio: 1 / 1;
+    }
+
+    &__inner {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: prem(40) prem(20);
+        display: flex;
+    }
+
+    /* 水平位置 */
+    &--align-left &__inner {
+        justify-content: flex-start;
+    }
+
+    &--align-center &__inner {
+        justify-content: center;
+    }
+
+    &--align-right &__inner {
+        justify-content: flex-end;
+    }
+
+    /* 垂直位置 */
+    &--vertical-top {
+        align-items: flex-start;
+    }
+
+    &--vertical-center {
+        align-items: center;
+    }
+
+    &--vertical-bottom {
+        align-items: flex-end;
+    }
+
+    /* テキストスタイル */
+    &__text {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: bold;
+        max-width: 800px;
+        text-align: center;
+    }
+
+    &--text-white &__text {
+        color: #fff;
+    }
+
+    &--text-black &__text {
+        color: #000;
+    }
+}
+
+#hero-section-455 {
+    .hero-section__text {
+        background-color: #fff;
+        padding: prem(20) prem(40);
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hero-section {
+        &[data-height="aspect-design"] {
+            aspect-ratio: 750 / 550;
+        }
+
+        &__inner {
+            padding: prem(30) prem(15);
+        }
+
+        &__text {
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
+        }
+    }
+}

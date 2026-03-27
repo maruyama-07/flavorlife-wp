@@ -1,0 +1,99 @@
+@use '../foundation/tools' as *;
+
+.p-school-mv-splide {
+  position: relative;
+  width: 100%;
+}
+
+.p-school-mv-splide__inner {
+  width: 100%;
+}
+
+.p-school-mv-splide .splide__slide {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.p-school-mv-splide .splide__slide picture {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-height: 600px;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: calc(400 / 1200 * 100%);
+  }
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// コーポレート l-page と同じ MV ロードアニメ（page-hero-image.js が picture に .loaded）
+.p-school-mv-splide .img-effect .img-load.loaded img,
+.p-school-mv-splide .img-effect.img-load.loaded img {
+  opacity: 1;
+  scale: 1;
+}
+
+.p-school-mv-splide .img-effect .img-load img,
+.p-school-mv-splide .img-effect.img-load img {
+  transition-property: opacity, scale;
+  transition-duration: 1.35s;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: 0.4s;
+  opacity: 0;
+  scale: 1.25;
+  min-height: 1px;
+}
+
+.p-school-mv-splide .splide__slide-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) !important;
+  left: 5%;
+  font-size: 3vw;
+  color: #fff;
+  line-height: 1.5;
+  font-weight: 500;
+
+  p {
+    margin: 0;
+    letter-spacing: 0.15rem;
+  }
+}
+
+.p-school-mv-splide .splide.is-initialized .splide__slide-text {
+  opacity: 1;
+}
+
+.p-school-mv-splide .splide__pagination__page {
+  margin: prem(3) prem(5);
+  width: prem(6);
+  height: prem(6);
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+.p-school-mv-splide .splide__pagination__page.is-active {
+  background-color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-mv-splide .splide__slide picture::before {
+    padding-top: calc(510 / 640 * 100%);
+  }
+
+  .p-school-mv-splide .splide__slide-text {
+    font-size: prem(26);
+  }
+}

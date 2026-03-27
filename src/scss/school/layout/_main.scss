@@ -1,0 +1,22 @@
+@use '../foundation/tools' as *;
+
+.l-site--school main {
+  min-height: 60vh;
+  padding-top: prem(145);
+  // background-color: #F5F5F5;
+}
+
+.l-site--school .page-content {
+  padding: prem(32) prem(24);
+}
+
+.l-site--school .l-inner {
+  max-width: 1540px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .l-site--school main {
+    padding-top: prem(80);
+  }
+}

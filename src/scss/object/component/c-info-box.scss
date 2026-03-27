@@ -1,0 +1,52 @@
+@use '../../foundation' as *;
+
+/**
+ * 情報ボックス（?アイコン付き）
+ * 白背景・黒枠・角丸のボックス
+ */
+.c-info-box {
+    padding: prem(25) prem(20);
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: prem(8);
+    margin-bottom: prem(40);
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: prem(15);
+        font-size: prem(20);
+        font-weight: 700;
+        margin: 0 0 prem(15);
+        line-height: 1.5;
+
+        &::before {
+            content: '?';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: prem(32);
+            height: prem(32);
+            border-radius: 50%;
+            background: #0f2b0f;
+            color: #fff;
+            font-size: prem(18);
+            font-weight: 600;
+        }
+    }
+
+    &__body {
+        font-size: prem(16);
+        line-height: 1.8;
+        margin: 0;
+
+        p {
+            margin: 0 0 prem(10);
+
+            &:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+}

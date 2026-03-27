@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+@use './tools' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Baskervville:wght@400..700&family=Sawarabi+Mincho&display=swap');
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: prem(60);
+
+  @include mq('md') {
+    scroll-padding-top: prem(100);
+  }
+
+  @if $break-flg == 0 {
+    @media (max-width: 375px) {
+      font-size: vw(375, strip-unit($base-font-size));
+    }
+
+    font-size: $base-font-size;
+
+    @include mq('md') {
+      font-size: vw(strip-unit($inner), strip-unit($base-font-size));
+    }
+
+    @media (min-width: $inner) {
+      font-size: $base-font-size;
+    }
+  } @else {
+    font-size: $base-font-size;
+
+    @media (max-width: $inner) {
+      font-size: vw(strip-unit($inner), strip-unit($base-font-size));
+    }
+
+    @include mq('md') {
+      font-size: $base-font-size;
+    }
+
+    @media (max-width: 375px) {
+      font-size: vw(375, strip-unit($base-font-size));
+    }
+  }
+}
+
+html {
+  font-size: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 1.3333333333vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body.school-section {
+  font-family: 'Sawarabi Mincho', serif;
+  color: #000;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+// ハンバーガーオープン時は背面スクロール防止（hamburger.js が .is-mobile-nav-open を付与）
+body.school-section.is-mobile-nav-open {
+  overflow: hidden;
+}
+
+a {
+  color: #000;
+}
+
+// ACFテキスト内の {sp} / {{sp}} 用（スマホ時のみ改行）
+.u-br-sp {
+  display: none;
+}
+.splide {
+  // visibility: visible;
+}
+
+@media screen and (max-width: 767px) {
+  .u-br-sp {
+    display: block;
+  }
+}

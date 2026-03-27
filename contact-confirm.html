@@ -1,0 +1,101 @@
+<div class="p-contact__contents">
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-company">御社名<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [multiform your-company id:your-company]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-name">ご担当社名<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [multiform your-name id:your-name]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-name-furigana">ご担当社名（フリガナ）<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [multiform your-name-furigana id:your-name-furigana]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-email">メールアドレス<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item c-contact-item">
+        [multiform your-email id:your-email]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-tel">電話番号<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [multiform your-tel id:your-tel]
+      </dd>
+    </dl>
+    <div class="p-contact__wrap">
+        <dl class="p-contact__content">
+            <dt class="p-contact__head">
+                <label for="your-postcode">〒<span class="p-contact__required">*</span></label>
+            </dt>
+            <dd class="p-contact__item">
+            [multiform your-postcode id:your-postcode]
+            </dd>
+        </dl>
+        <dl class="p-contact__content">
+            <dt class="p-contact__head">
+                <label for="your-pref">都道府県<span class="p-contact__required">*</span></label>
+            </dt>
+            <dd class="p-contact__item">
+                [multiform your-pref]
+            </dd>
+        </dl>
+    </div>
+    <dl class="p-contact__content">
+        <dt class="p-contact__head">
+            <label for="your-name-furigana">市区町村番地<span class="p-contact__required">*</span></label>
+        </dt>
+        <dd class="p-contact__item">
+            [multiform your-address id:your-address]
+        </dd>
+    </dl>
+    <dl class="p-contact__content">
+        <dt class="p-contact__head">
+            <label for="your-building">マンション/ビル名</label>
+        </dt>
+        <dd class="p-contact__item">
+            [multiform your-building id:your-building]
+        </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-inquiry-type">資料請求・お問合せ内容<span class="p-contact__required">*</span></label>
+      </dt>
+      <dd class="p-contact__item">
+        [multiform your-inquiry-type]
+      </dd>
+    </dl>
+    <dl class="p-contact__content">
+      <dt class="p-contact__head">
+        <label for="your-message">お問合せの方は内容を具体的にお聞かせください。</label>
+      </dt>
+      <dd class="p-contact__item">
+        [multiform your-message id:your-message]
+      </dd>
+    </dl>
+    <div class="p-contact__btn-wrap">
+      <div class="p-contact__btn">
+        [previous "入力画面に戻る"]
+      </div>
+      <div class="p-contact__btn">
+        [submit class:c-contact-button " この内容で送信する "]
+      </div>
+        [multistep multistep-299 last_step send_email "/contact-thanks"]
+    </div>
+  </div>

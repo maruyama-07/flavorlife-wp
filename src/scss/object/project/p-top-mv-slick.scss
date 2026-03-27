@@ -1,0 +1,31 @@
+@use '../../foundation' as *;
+
+.p-top-mv-slick {
+  background: black;
+}
+.p-top-mv-slick__inner {
+  margin: 5% 5% 0 5%;
+}
+
+.p-top-mv-slick .slick-track {
+  display: block;
+  width: 100%;
+}
+
+.p-top-mv-slick .slick-slide{
+  display: block;
+  width: 100%;
+  aspect-ratio: 600 / 300;
+  margin: 0 5px;
+  }
+
+.p-top-mv-slick .slick-slide picture {
+  height: inherit;
+  height: 100%;
+}
+.p-top-mv-slick .slick-slide img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

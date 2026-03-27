@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "theme/hero-section",
+  "version": "1.0.0",
+  "title": "ヒーローセクション",
+  "category": "design",
+  "icon": "format-image",
+  "description": "フルワイドの背景画像とテキストを表示するセクション",
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "attributes": {
+    "backgroundImagePC": {
+      "type": "object",
+      "default": null
+    },
+    "backgroundImageSP": {
+      "type": "object",
+      "default": null
+    },
+    "heroText": {
+      "type": "string",
+      "default": ""
+    },
+    "textColor": {
+      "type": "string",
+      "default": "white"
+    },
+    "textPosition": {
+      "type": "string",
+      "default": "center"
+    },
+    "verticalPosition": {
+      "type": "string",
+      "default": "center"
+    },
+    "sectionHeight": {
+      "type": "string",
+      "default": "aspect-design"
+    },
+    "useAspectRatio": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "theme",
+  "editorScript": "file:./hero-section.js",
+  "editorStyle": "file:./editor.css",
+  "render": "file:./render.php"
+}

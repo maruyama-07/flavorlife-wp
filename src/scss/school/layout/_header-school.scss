@@ -1,0 +1,479 @@
+@use '../foundation/tools' as *;
+
+.l-header-school {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.l-header-school__inner {
+  max-width: $inner-school;
+  margin: 0 auto;
+  padding: prem(20) prem(30) prem(18);
+}
+
+.l-header-school__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: prem(20);
+}
+
+.l-header-school__branding {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: prem(20);
+}
+
+.l-header-school__site-label {
+  font-size: prem(12);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  color: #042c1b;
+}
+
+.l-header-school__logo {
+  display: inline-block;
+}
+
+.l-header-school__logo img {
+  width: prem(200);
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+.l-header-school__badges {
+  display: flex;
+  align-items: center;
+  gap: prem(14);
+  margin-left: auto;
+}
+
+.l-header-school__badges img {
+  width: auto;
+  height: prem(65);
+}
+
+.l-header-school__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: prem(24);
+  margin-top: prem(14);
+}
+
+.l-header-school__nav-list {
+  display: flex;
+  align-items: center;
+  gap: prem(24);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.l-header-school__nav-list li {
+  position: relative;
+}
+
+.l-header-school__nav-list li + li::before {
+  content: "";
+  position: absolute;
+  left: prem(-12);
+  top: 50%;
+  width: 1px;
+  height: prem(12);
+  background: #cbcbcb;
+  transform: translateY(-50%);
+}
+
+.l-header-school__nav-list a {
+  display: block;
+  font-size: prem(12);
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  color: #2f2f2f;
+  text-decoration: none;
+}
+
+.l-header-school__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: prem(172);
+  height: prem(40);
+  border-radius: 999px;
+  font-size: prem(12);
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-decoration: none;
+  background: #699;
+}
+
+.l-header-school__hamburger {
+  display: none;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: prem(4);
+  width: prem(54);
+  height: prem(54);
+  border-radius: 50%;
+  background: #003f2f;
+  margin-top: prem(6);
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.l-header-school__hamburger-bar {
+  display: block;
+  width: prem(22);
+  height: 2px;
+  border-radius: 999px;
+  background: #fff;
+  transform-origin: center;
+  transition:
+    transform 0.32s cubic-bezier(0.45, 0, 0.2, 1),
+    opacity 0.22s ease,
+    background-color 0.3s ease;
+}
+
+.l-header-school__hamburger.is-open {
+  background: #fff;
+}
+
+.l-header-school__hamburger.is-open .l-header-school__hamburger-bar {
+  background: #003f2f;
+}
+
+.l-header-school__hamburger.is-open .l-header-school__hamburger-bar:nth-child(1) {
+  transform: translateY(#{prem(6)}) rotate(45deg);
+}
+
+.l-header-school__hamburger.is-open .l-header-school__hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.l-header-school__hamburger.is-open .l-header-school__hamburger-bar:nth-child(3) {
+  transform: translateY(#{prem(-6)}) rotate(-45deg);
+}
+
+.p-mobile-nav--school {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
+  .l-header-school__inner {
+    padding: prem(14) prem(12);
+  }
+
+  .l-header-school__branding {
+    flex-direction: column;
+    gap: prem(4);
+  }
+
+  .l-header-school__site-label {
+    font-size: prem(10);
+  }
+
+  .l-header-school__logo img {
+    max-width: prem(190);
+    width: 100%;
+  }
+
+  .l-header-school__badges {
+    display: none;
+  }
+
+  .l-header-school__top {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .l-header-school__bottom {
+    display: none;
+  }
+
+  .l-header-school__hamburger {
+    display: inline-flex;
+    position: fixed;
+    right: prem(16);
+    top: prem(18);
+    z-index: 450;
+  }
+
+  .l-header-school__hamburger {
+    margin-top: 0;
+    width: prem(50);
+    height: prem(50);
+  }
+
+  .p-mobile-nav--school {
+    height: auto;
+    overflow: visible;
+    pointer-events: auto;
+  }
+
+  .p-mobile-nav--school {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: #818154;
+    opacity: 0;
+    visibility: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    transition: opacity 0.26s ease, visibility 0.26s ease;
+  }
+
+  .p-mobile-nav--school.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // CTA: ブロック1つ / メニュー: li ごと / フッター: パネル・SNS・コピーまとめて1ブロック（.__footer のみトランジション）
+  $nav-stagger: 0.06s;
+  // メニューのスタッガー後にフッター全体が一度に表示（li が増えたら *8 を大きく）
+  $footer-block-delay: $nav-stagger * 8;
+
+  .p-mobile-nav--school__cta,
+  .p-mobile-nav--school__list li,
+  .p-mobile-nav--school__footer {
+    opacity: 0;
+    transform: translateY(#{prem(10)});
+    transition:
+      opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .p-mobile-nav--school.is-open .p-mobile-nav--school__cta,
+  .p-mobile-nav--school.is-open .p-mobile-nav--school__list li,
+  .p-mobile-nav--school.is-open .p-mobile-nav--school__footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .p-mobile-nav--school.is-open .p-mobile-nav--school__cta {
+    transition-delay: 0s;
+  }
+
+  @for $i from 1 through 20 {
+    .p-mobile-nav--school.is-open .p-mobile-nav--school__list li:nth-child(#{$i}) {
+      transition-delay: $nav-stagger * $i;
+    }
+  }
+
+  .p-mobile-nav--school.is-open .p-mobile-nav--school__footer {
+    transition-delay: $footer-block-delay;
+  }
+
+  .p-mobile-nav--school:not(.is-open) .p-mobile-nav--school__cta,
+  .p-mobile-nav--school:not(.is-open) .p-mobile-nav--school__list li,
+  .p-mobile-nav--school:not(.is-open) .p-mobile-nav--school__footer {
+    transition-delay: 0s !important;
+    transition-duration: 0.12s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .l-header-school__hamburger,
+    .l-header-school__hamburger-bar {
+      transition-duration: 0.12s !important;
+    }
+
+    .p-mobile-nav--school__cta,
+    .p-mobile-nav--school__list li,
+    .p-mobile-nav--school__footer {
+      transition-duration: 0.01ms !important;
+      transition-delay: 0s !important;
+      transform: none;
+    }
+  }
+
+  .p-mobile-nav--school__inner {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: prem(80) prem(12) prem(16);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .p-mobile-nav--school__cta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: prem(20);
+    margin-bottom: prem(15);
+  }
+
+  .p-mobile-nav--school__cta-item {
+    min-height: prem(52);
+    background: #6fa9b3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: prem(12);
+    color: #fff;
+    text-decoration: none;
+    font-size: prem(14);
+    letter-spacing: 0.04em;
+  }
+
+  .p-mobile-nav--school__cta-item img {
+    width: prem(30);
+    height: prem(30);
+    object-fit: contain;
+  }
+
+  .p-mobile-nav--school__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .p-mobile-nav--school__list li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .p-mobile-nav--school__list a {
+    display: block;
+    padding: prem(22) prem(10);
+    color: #fff;
+    font-size: prem(16);
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  // フッター：白パネル（ブランド＋認定／SNS）＋全幅ダークグリーンのコピー帯（__inner の横 padding と相殺）
+  .p-mobile-nav--school__footer {
+    margin-top: auto;
+    margin-left: -#{prem(12)};
+    margin-right: -#{prem(12)};
+    width: calc(100% + #{prem(24)});
+    padding: prem(20) prem(12);
+  }
+
+  .p-mobile-nav--school__footer-panel {
+    padding: prem(20) prem(12) prem(24);
+    background: #fff;
+    border-radius: prem(4) prem(4) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: prem(45);
+    align-items: stretch;
+  }
+
+  .p-mobile-nav--school__footer-brand {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: prem(12);
+  }
+
+  .p-mobile-nav--school__footer-branding {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: prem(8);
+  }
+
+  .p-mobile-nav--school__footer-label {
+    margin: 0;
+    font-size: prem(7);
+    line-height: 1.5;
+    color: #1a1a1a;
+    text-align: left;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+  }
+
+  .p-mobile-nav--school__footer-logo {
+    display: block;
+    line-height: 0;
+  }
+
+  .p-mobile-nav--school__footer-logo img {
+    width: prem(120);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .p-mobile-nav--school__footer-badges {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: prem(10);
+  }
+
+  .p-mobile-nav--school__footer-badges img {
+    display: block;
+    height: prem(75);
+    width: auto;
+    object-fit: contain;
+  }
+
+  .p-mobile-nav--school__footer-sns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: prem(20);
+    flex-wrap: wrap;
+  }
+
+  .p-mobile-nav--school__footer-sns-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: prem(35);
+    height: prem(35);
+    border-radius: prem(6);
+    flex-shrink: 0;
+    line-height: 0;
+  }
+
+  .p-mobile-nav--school__footer-sns-link img {
+    width: prem(35);
+    height: prem(35);
+    object-fit: contain;
+    display: block;
+  }
+
+  .p-mobile-nav--school__footer-copy {
+    margin: 0;
+    width: 100%;
+    padding: prem(14) prem(16);
+    text-align: center;
+    background: #00332e;
+    box-sizing: border-box;
+  }
+
+  .p-mobile-nav--school__footer-copy small {
+    display: block;
+    font-size: prem(10);
+    line-height: 1.5;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+}

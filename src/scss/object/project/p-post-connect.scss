@@ -1,0 +1,18 @@
+@use '../../foundation' as *;
+
+.p-post-connect {
+}
+.p-post-connect__title {
+  font-size: prem(24);
+  color: $color-theme;
+}
+.p-post-connect__items {
+  display: grid;
+  gap: prem(50);
+  margin-top: prem(16);
+  @include mq('md') {
+    row-gap: prem(40);
+    column-gap: prem(20);
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

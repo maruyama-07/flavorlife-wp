@@ -1,0 +1,31 @@
+@use '../../foundation' as *;
+
+/**
+ * 3画像グリッド
+ * 横3列・均等サイズ・余白あり
+ */
+.c-image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: prem(15);
+    margin-bottom: prem(40);
+
+    &__item {
+        aspect-ratio: 1;
+        overflow: hidden;
+        max-width: 280px;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        margin-bottom: 0 !important;
+    }
+
+    @include mq(md) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: prem(25);
+    }
+}

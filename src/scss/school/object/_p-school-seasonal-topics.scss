@@ -1,0 +1,136 @@
+@use '../foundation/tools' as *;
+
+$p-school-olive: #707345;
+
+.p-school-seasonal-topics {
+  padding: prem(44) 0 prem(58);
+
+  @include mq('md') {
+    padding: prem(70) 0 prem(88);
+  }
+}
+
+.p-school-seasonal-topics__header {
+  text-align: center;
+}
+
+.p-school-seasonal-topics__title {
+  margin: 0;
+  color: $p-school-olive;
+  font-size: prem(38);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+
+  @include mq('md') {
+    font-size: prem(70);
+  }
+}
+
+.p-school-seasonal-topics__subtitle {
+  margin: prem(12) 0 0;
+  color: $p-school-olive;
+  font-size: prem(13);
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+}
+
+.p-school-seasonal-topics__content {
+  margin-top: prem(34);
+  display: grid;
+  gap: prem(30);
+
+  @include mq('md') {
+    margin-top: prem(48);
+    grid-template-columns: minmax(0, 52%) minmax(0, 1fr);
+    align-items: center;
+    gap: prem(40);
+  }
+}
+
+.p-school-seasonal-topics__media {
+  width: 100%;
+  overflow: hidden;
+  background: #dfddd5;
+
+  @include mq('md') {
+    border-radius: 0 prem(200) prem(200) 0;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.p-school-seasonal-topics__body {
+  padding: 0 prem(20);
+  @include mq('md') {
+    padding-right: prem(18);
+  }
+}
+
+.p-school-seasonal-topics__heading {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: prem(19);
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+
+  @include mq('md') {
+    font-size: prem(28);
+  }
+}
+
+.p-school-seasonal-topics__date {
+  margin: prem(20) 0 0;
+  color: #1a1a1a;
+  font-size: prem(16);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+.p-school-seasonal-topics__text {
+  margin: prem(18) 0 0;
+  color: #1a1a1a;
+  font-size: prem(13);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  @include mq('md') {
+    font-size: prem(14);
+    margin-top: prem(30);
+  }
+}
+
+.p-school-seasonal-topics__action {
+  margin: prem(24) 0 0;
+  text-align: center;
+
+  @include mq('md') {
+    text-align: right;
+  }
+}
+
+.p-school-seasonal-topics__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: prem(126);
+  height: prem(50);
+  border: 1px solid #6e6e6e;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: prem(39);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      background: #1a1a1a;
+      color: #fff;
+    }
+  }
+}

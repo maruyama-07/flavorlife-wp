@@ -1,0 +1,128 @@
+@use '../../foundation' as *;
+.aligncenter {
+    text-align: center;
+    margin: 0 auto;
+}
+.alignright {
+    text-align: right;
+}
+.alignleft {
+    text-align: left;
+}
+.alignjustify {
+    text-align: justify;
+}
+.wp-content-figure {
+    margin: prem(40) auto;
+    position: relative;
+    max-height: prem(550);
+    overflow: hidden; /* alignleft/alignright の float を包含 */
+
+    /* デフォルト: フルサイズ時は100%表示 */
+    &::before {
+        // content: '';
+        // padding-top: calc(550 / 900 * 100%);
+        // display: block;
+    }
+    img {
+        // position: absolute;
+        // top: 0;
+        // left: 0;
+        // width: 100%;
+        height: 100%;
+        max-height: prem(550);
+        object-fit: cover;
+    }
+
+    /* サイズ指定あり（中・小・大など）: 設定通りに表示 */
+    &:has(img.size-thumbnail),
+    &:has(img.size-medium),
+    &:has(img.size-large),
+    &:has(img.size-medium_large) {
+        &::before {
+            display: none;
+        }
+        img {
+            position: static;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            object-fit: initial;
+        }
+    }
+    img.size-thumbnail {
+        max-width: 150px;
+    }
+    img.size-medium {
+        max-width: 300px;
+    }
+    img.size-medium_large {
+        max-width: 768px;
+    }
+    img.size-large {
+        max-width: 1024px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wp-content-figure {
+        margin: prem(20) auto;
+        &::before {
+            padding-top: calc(480 / 650 * 100%);
+        }
+    }
+}
+
+/* ========================================
+   WP-PageNavi ページネーション
+   ======================================== */
+.wp-pagenavi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-top: prem(32);
+    font-size: prem(16);
+    font-weight: 500;
+
+    a,
+    span {
+        text-decoration: none;
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0 prem(12);
+        color: #000;
+        display: inline-block;
+    }
+
+    /* 無効時（戻れない/次へ行けない）: #b4bdb4 */
+    .previouspostslink.disabled,
+    .nextpostslink.disabled {
+        color: #b4bdb4;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    /* 現在より前のページ（smaller）: 薄いグレー */
+    .smaller {
+        color: #a9a9a9;
+    }
+
+    /* 現在のページ: 黒 */
+    .current {
+        color: #000;
+    }
+
+    /* ページ番号・Next >: 黒 */
+    .page,
+    .larger,
+    .nextpostslink {
+        color: #000;
+    }
+
+    a:hover {
+        opacity: 0.7;
+    }
+}

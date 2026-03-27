@@ -1,0 +1,340 @@
+@use '../../foundation' as *;
+
+.p-contact__contents{
+
+}
+
+.p-contact__content{
+  @include mq('md'){
+    // display: flex;
+    // align-items: center;
+  }
+}
+
+.p-contact__head{
+  // width: prem(250);
+  font-weight: 500;
+}
+.p-contact__top {
+  margin-top: prem(70);
+}
+
+.p-contact__item{
+  margin-top: prem(6);
+}
+
+.p-contact__item-example {
+  margin-top: prem(6);
+  color: gray;
+}
+
+// 必須
+.p-contact__required{
+  color: #ca1a1a;
+  padding-left: prem(5);
+}
+
+.p-contact__policy,
+.p-contact__content,
+.p-contact__btn {
+  margin: prem(24) 0;
+}
+
+.p-contact__policy-link {
+  transition: all 0.3s;
+  color: #0f2b0f;
+  text-decoration: underline;
+  font-size: prem(14);
+  margin-bottom: prem(25);
+  display: block;
+}
+.p-contact__policy {
+  text-align: center;
+}
+.p-contact__policy__head {
+  font-size: prem(20);
+  margin: prem(50) auto prem(25);
+}
+.p-contact__item-checkbox {
+  display: block;
+  
+}
+.p-contact__wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: prem(20);
+}
+
+.p-contact__btn-wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include mq(md){
+    flex-direction: row;
+    gap: prem(40);
+  }
+
+}
+.p-contact__btn {
+  display: inline-block;
+  text-align: center;
+}
+/* 送信ボタン：JS で span ラップ → c-custom-button と同じ矢印を ::after で表示 */
+.p-contact__btn-submit-wrap {
+  /* c-custom-button のスタイルを継承（クラスで付与済み） */
+  &::after {
+    content: '';
+    display: inline-block;
+    width: prem(7);
+    height: prem(10);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.33 9.95'%3E%3Cpolyline points='.57 9.13 6.57 4.98 .57 .82' fill='none' stroke='%23fff' stroke-miterlimit='10' stroke-width='2'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: prem(2);
+  }
+  &:hover::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8.33 9.95'%3E%3Cpolyline points='.57 9.13 6.57 4.98 .57 .82' fill='none' stroke='%230f2b0f' stroke-miterlimit='10' stroke-width='2'/%3E%3C/svg%3E");
+  }
+}
+.p-contact__btn-submit-input {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 都道府県セレクト：「選択してください。」表示時のみグレー（JSで .is-placeholder を付与） */
+.p-contact__item-select.is-placeholder {
+  color: #999;
+}
+
+.p-contact__item-text,
+.p-contact__item-tel,
+.p-contact__item-email,
+.p-contact__item-textarea,
+.p-contact__item-select {
+  margin: 0;
+  padding: prem(18) 0.8em;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 0;
+  outline: none;
+  background: none;
+  background-color: transparent;
+  font-size: prem(16);
+  color: inherit;
+  font-family: inherit;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background-color: #fff;
+}
+
+.p-contact__item-text:focus,
+.p-contact__item-tel:focus,
+.p-contact__item-email:focus,
+.p-contact__item-textarea:focus,
+.p-contact__item-select:focus {
+  // border: 1px solid rgba(0, 0, 0, 0.7);
+  box-shadow: none;
+  outline: none;
+}
+
+.p-contact__item-text {}
+.p-contact__item-tel {}
+.p-contact__item-email {}
+
+.p-contact__item-textarea {
+  height: 200px;
+  resize: none;
+  overflow: auto;
+
+}
+.p-contact__item-message {
+  white-space: pre-wrap;
+}
+.p-contact__item-select {
+    padding-right: 3em;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALJJREFUeNrslssNgCAQRCmB0ijBEuyEEijBEijBEizBEnAPy0UBWVj8JDvJJB5w3gsXVUoikXwsBrpAPdRCNcOmxi2P2yZ3cIKGU9dOCY0b590pdXhPHOyRyMEDsi4JhVIlSvBYTRGgSNTAQ+pFyyBRC7e5AdchUQt3d1fYIsEGb5Fgh1MktlFwisQwOIeE4/pGuDfhLRLscIrEMHiNxHB4SeIxeMyMPxkenyUSyT9zCDAAj5btZ4c3zaUAAAAASUVORK5CYII=");
+    background-repeat: no-repeat;
+    background-size: 1em;
+    background-position: right 0.5em center;
+    color: inherit;
+}
+.p-contact__item-select:invalid {
+  color: rgba(0, 0, 0, 0.32)
+}
+
+.p-contact__item-select select::-ms-expand {
+  display: none;
+}
+
+.p-contact__item-radio input[type="radio"],
+.p-contact__item-checkbox input[type="checkbox"]{
+  // タブキーでもカーソルが当たるようdisplay:none;ではなく、opacity:0,position: absoluteで対応
+  opacity: 0;
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+}
+
+.p-contact__item-radio input[type="radio"] +span,
+.p-contact__item-checkbox input[type="checkbox"] +span {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5em 1em 0.5em 1.5em;
+  color: #333;
+  font-size: prem(16);
+}
+// ラジオボタンとチェックボックスにフォーカスした場合
+//　必要ない場合は削除
+.p-contact__item-radio input[type="radio"]:focus +span,
+.p-contact__item-checkbox input[type="checkbox"]:focus + span{
+  opacity: 0.7;
+}
+
+.p-contact__item-radio input[type="radio"] + span::before,
+.p-contact__item-checkbox input[type="checkbox"] + span::before {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: prem(20);
+	height: prem(20);
+	content: "";
+  transform: translateY(-50%);
+  background: white;
+  border: 1px solid #1a1a1a;
+}
+.p-contact__item-checkbox input[type="checkbox"]:checked+span::before {
+  background: #333;
+}
+
+.p-contact__item-radio input[type="radio"]:checked+span::before {
+  background: white;
+}
+
+.p-contact__item-radio input[type="radio"]+span::before{
+  border-radius: 50%;
+}
+
+.p-contact__item-radio input[type="radio"]+span::after {
+  position: absolute;
+  content: "";
+  background: #333;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  height: 0.5em;
+  left: 0.25em;
+  opacity: 0;
+  padding: 0.125em;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease 0s;
+  width: 0.5em;
+}
+
+.p-contact__item-checkbox input[type="checkbox"]+span::after {
+  border-bottom: 2px solid white;
+  border-left: 2px solid white;
+  content: "";
+  display: block;
+  height: 0.35em;
+  left: 0.15em;
+  margin-top: -0.1em;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+  transition: all 0.3s ease 0s;
+  width: 0.8em;
+}
+
+.p-contact__item-checkbox input[type="checkbox"]:checked+span::after,
+.p-contact__item-radio input[type="radio"]:checked+span::after {
+  opacity: 1;
+}
+
+/* button */
+.p-contact__btn input[type="submit"],
+.p-contact__btn input[type="button"] {
+  // display: inline-block;
+  // margin: 0;
+  // padding: 0.5em 2em;
+  // -webkit-box-sizing: content-box;
+  // -webkit-appearance: button;
+  // background: rgba(0,0,0,0.32);
+  // color: #333;
+  // appearance: button;
+  // cursor: pointer;
+  // font-size: prem(16);
+  // border-radius: 0;
+  // border: 1px solid #333;
+  border: none;
+  transition: all 0.3s;
+}
+
+.p-contact__btn input[type="submit"]:hover,
+.p-contact__btn input[type="button"]:hover,
+.p-contact__btn input[type="submit"]:focus,
+.p-contact__btn input[type="button"]:focus {
+  outline: none;
+  // opacity: 0.7;
+}
+
+.p-contact__item-radio{}
+.p-contact__item-checkbox{}
+
+.p-contact__item,
+.p-contact__btn-submit
+ {
+  min-width: prem(150);
+}
+
+
+//送信ボタンを中央にするため、loadingアニメーションの位置を調整
+.wpcf7-spinner {
+  position: absolute;
+}
+.p-contact--thanks {
+  background: #e6e6e6;
+}
+.p-contact__thanks {
+  text-align: center;
+}
+.p-contact__title-thanks {
+  text-align: center;
+  font-size: prem(32);
+  font-weight: 500;
+  margin-bottom: prem(50);
+}
+.p-contact__description {
+  margin-bottom: prem(40);
+  line-height: 1.8;
+}
+
+@media screen and (max-width: 768px) {
+  .p-contact__wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    .p-contact__content {
+      width: 50%;
+    }
+  }
+  .p-contact__top {
+    margin-top: prem(40);
+  }
+  .p-contact__policy, .p-contact__content, .p-contact__btn {
+    margin: prem(18) 0;
+  }
+  .p-contact__head {
+    font-size: prem(14);
+  }
+}

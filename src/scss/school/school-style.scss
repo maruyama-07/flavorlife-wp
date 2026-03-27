@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+// foundation は順序が重要（reset → base）。tools は各ファイルから @use される
+@use "./foundation/reset";
+@use "./foundation/base";
+
+// layout / object 配下のパーシャルは自動で結合（新規ファイルもエントリ追記不要）
+// ※ gulp の sassGlob() が展開する（メインの style.scss と同じ方式）
+@use "./layout/**";
+@use "./object/**/**";

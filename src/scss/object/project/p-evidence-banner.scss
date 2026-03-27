@@ -1,0 +1,68 @@
+@use '../../foundation' as *;
+
+/**
+ * Evidenceバナー（sh_evidenc ページ専用）
+ * 緑背景・白テキスト・中央寄せ
+ */
+/**
+ * スマホ時のみ改行（テキストに {{sp}} を入れるとその位置でSPのみ改行）
+ */
+.u-br-sp {
+    display: none;
+}
+
+.p-evidence-banner {
+    background: #0f2b0f;
+    padding: prem(60) prem(20) prem(80);
+    text-align: center;
+    margin-bottom: prem(80);
+
+    &__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &__text {
+        color: #fff;
+        font-size: prem(18);
+        line-height: 2.5;
+        margin: 0 0 prem(45);
+
+        &:last-of-type {
+            margin-bottom: prem(30);
+        }
+    }
+
+    &__logo {
+        margin-top: prem(20);
+    }
+
+    &__logo-img {
+        max-width: prem(180);
+        height: auto;
+        display: inline-block;
+    }
+
+    &__logo-text {
+        color: #fff;
+        font-size: prem(28);
+        font-style: italic;
+        font-family: serif;
+        margin: 0;
+        letter-spacing: 0.05em;
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .u-br-sp {
+        display: block;
+    }
+    .p-evidence-banner {
+        padding: prem(40) prem(0) prem(60);
+        margin-bottom: prem(40);
+    }
+    .p-evidence-banner__text {
+        font-size: prem(14);
+    }
+}

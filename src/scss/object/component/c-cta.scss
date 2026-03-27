@@ -1,0 +1,137 @@
+@use '../../foundation' as *;
+
+// CTAコンポーネント（資料請求・お問い合わせ）※PC基準
+.c-cta {
+    padding: 0 0 prem(40);
+}
+
+.c-cta__intro {
+    text-align: center;
+    font-size: prem(22);
+    margin: 0 0 prem(40);
+}
+
+.c-cta__boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: prem(30);
+
+    &--single {
+        grid-template-columns: 1fr;
+        max-width: prem(500);
+        margin: 0 auto;
+    }
+}
+.c-cta__box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #0f2b0f;
+    overflow: hidden;
+}
+
+.c-cta__box-header {
+    background: #0f2b0f;
+    color: #fff;
+    font-size: prem(20);
+    text-align: center;
+    padding: prem(16);
+}
+
+.c-cta__box-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    padding: prem(32);
+    text-align: center;
+}
+
+.c-cta__phone {
+    display: block;
+    font-size: prem(40);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    color: #0f2b0f;
+    margin-bottom: prem(20);
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.c-cta__reception {
+    font-size: prem(14);
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.c-cta__form-btn {
+    // display: inline-flex;
+    align-items: center;
+    gap: prem(8);
+    background: #0f2b0f;
+    color: #fff;
+    font-size: prem(16);
+    padding: prem(16) prem(32);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: opacity 0.3s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &--disabled {
+        opacity: 0.6;
+        cursor: default;
+        pointer-events: none;
+    }
+}
+
+.c-cta__form-arrow {
+    font-size: prem(14);
+}
+
+.c-cta__form-description {
+    font-size: prem(14);
+    color: #1a1a1a;
+    text-align: left;
+    margin: prem(20) 0 0;
+    line-height: 1.8;
+}
+
+// SP時
+@media screen and (max-width: 768px) {
+    .c-cta {
+        padding: prem(60) 0;
+    }
+
+    .c-cta__intro {
+        font-size: prem(14);
+        margin-bottom: prem(32);
+    }
+
+    .c-cta__boxes {
+        grid-template-columns: 1fr;
+        gap: prem(24);
+    }
+
+    .c-cta__box-body {
+        padding: prem(24);
+    }
+
+    .c-cta__phone {
+        font-size: prem(20);
+    }
+
+    .c-cta__form-btn {
+        font-size: prem(14);
+        padding: prem(14) prem(24);
+    }
+
+    .c-cta__form-description {
+        font-size: prem(12);
+        margin-top: prem(16);
+    }
+}

@@ -1,0 +1,43 @@
+@use '../../foundation' as *;
+
+/**
+ * レスポンシブ画像
+ * PC用・SP用で別画像を表示（メディアクエリで切り替え）
+ */
+.c-responsive-image {
+    position: relative;
+    margin-bottom: prem(30);
+
+    &__pc,
+    &__sp {
+        width: 100%;
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 0 !important;
+        }
+    }
+
+    /* PC用：SP時は非表示（SP用がある場合のみ） */
+    &:has(.c-responsive-image__sp) .c-responsive-image__pc {
+        @media screen and (max-width: 767px) {
+            display: none !important;
+        }
+    }
+
+    /* SP用：PC時は非表示、SP時は表示 */
+    &__sp {
+        display: none !important;
+
+        @media screen and (max-width: 767px) {
+            display: block !important;
+        }
+    }
+
+    /* SPのみ指定の場合：常に表示 */
+    &:not(:has(.c-responsive-image__pc)) &__sp {
+        display: block !important;
+    }
+}

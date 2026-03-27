@@ -1,0 +1,220 @@
+@use '../foundation' as *;
+
+.l-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.l-header__logo {
+    max-width: 155px;
+    width: 25%;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    img {
+        transition: filter 0.3s ease;
+    }
+}
+.l-header__inner {
+    display: flex;
+    align-items: center;
+    padding: prem(20) prem(40);
+    max-width: 1750px;
+    margin: 0 auto;
+}
+.l-header__nav {
+    display: flex;
+    gap: prem(20) prem(40);
+    color: #000;
+    margin-left: auto;
+    margin-right: prem(50);
+    transition: color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.l-header__item {
+    position: relative;
+
+    /* サブメニューへのホバー移行用の橋（margin-top + translateY の隙間を埋める） */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-35%);
+        width: prem(220);
+        height: prem(40);
+    }
+}
+
+.l-header__item-link {
+    padding: prem(10) prem(5);
+}
+
+/* PC時のみ：Productサブメニュー（ホバーでふわっと表示） */
+.l-header__submenu {
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: translateX(-35%) translateY(prem(25));
+    width: prem(250);
+    margin-top: prem(8);
+    padding: prem(20) prem(20);
+    background: #fff;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 prem(4) prem(12) rgba(0, 0, 0, 0.08);
+    list-style: none;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+}
+
+.l-header__item:hover > .l-header__submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-35%) translateY(prem(25));
+}
+
+.l-header__submenu-item {
+    border-bottom: 1px solid #e4e4e4;
+
+    // &:last-child {
+    //     border-bottom: none;
+    // }
+}
+
+.l-header__submenu-link {
+    display: block;
+    padding: prem(10) prem(20) prem(10) 0;
+    font-size: prem(14);
+    text-decoration: none;
+    transition: background 0.2s;
+    color: #000;
+    &:hover {
+        background: #f5f5f5;
+    }
+}
+.l-header__hamburger {
+    width: prem(40);
+    height: prem(6);
+    position: relative;
+    cursor: pointer;
+}
+.l-header__hamburger-bar {
+    display: block;
+    width: 100%;
+    height: prem(1);
+    position: absolute;
+    border-radius: 5px;
+    left: 0;
+    transition: all .3s;
+    background-color: #000;
+}
+
+
+.l-header__hamburger-bar:nth-child(1) {
+    top: 0;
+}
+.l-header__hamburger-bar:nth-child(2) {
+    top: 100%;
+    transform: translateY(-100%);
+}
+
+/* モバイルナビオープン時：ロゴ・ナビをフェードアウト、ハンバーガーのみ×形で表示（レイアウトは維持してフェードのみ） */
+body.is-mobile-nav-open {
+    .l-header {
+        z-index: 250;
+        background-color: transparent !important;
+        transition: background-color 0s;
+    }
+    .l-header__inner {
+        position: relative;
+        width: 100%;
+    }
+    .l-header__logo,
+    .l-header__nav {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    .l-header__hamburger {
+        overflow: visible;
+        min-height: prem(24);
+        position: absolute;
+        right: prem(45);
+        top: prem(30);
+        transform: none;
+    }
+    .l-header__hamburger-bar {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        background-color: #fff !important;
+    }
+    .l-header__hamburger-bar:nth-child(2) {
+        transform: translateY(-50%) rotate(-45deg);
+    }
+}
+.home {
+    // TOPページのデフォルトスタイル（MVスライダー内）
+    .l-header {
+        background-color: transparent;
+    }
+    .l-header__nav {
+        color: #fff;
+    }
+    .l-header__hamburger-bar {
+        background-color: #fff;
+    }
+    .l-header__logo img {
+        filter: invert(100%);
+    }
+    
+    // スクロールしてMVスライダーを抜けた時
+    .l-header.is-scrolled {
+        background-color: #fff;
+        
+        .l-header__nav {
+            color: #000;
+        }
+        
+        .l-header__hamburger-bar {
+            background-color: #000;
+        }
+        
+        .l-header__logo img {
+            filter: none;
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .l-header__nav {
+        display: none;
+    }
+    .l-header__submenu {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+    .l-header__inner {
+        justify-content: space-between;
+    }
+    .l-header__inner {
+        padding: prem(20) prem(20);
+        justify-content: center;
+    }
+    .l-header__hamburger {
+        position: absolute;
+        right: prem(20);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .l-header__logo {
+        width: 32%;
+    }
+}

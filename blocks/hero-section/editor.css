@@ -1,0 +1,42 @@
+/* エディタ用スタイル */
+.hero-section-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.hero-section {
+    border: 2px dashed #ccc;
+    min-height: 300px;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-section:hover {
+    border-color: #0073aa;
+}
+
+/* 選択時のスタイル */
+.is-selected .hero-section {
+    border-color: #0073aa;
+    border-style: solid;
+}
+
+/* テキスト入力エリアのスタイル */
+.hero-section .block-editor-rich-text__editable {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+/* プレースホルダー */
+.hero-section .block-editor-rich-text__editable:empty::before {
+    opacity: 0.6;
+}
