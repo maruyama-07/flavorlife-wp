@@ -210,8 +210,10 @@
 
   .l-footer-school-contact__items {
     margin-top: prem(28);
+    margin: prem(28) auto 0;
     gap: prem(15);
-    justify-content: space-between;
+    max-width: 400px;
+    justify-content: space-around;
   }
 
   .l-footer-school__main {

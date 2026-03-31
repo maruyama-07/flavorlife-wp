@@ -452,8 +452,10 @@ body.school-section .page-content .l-inner > h5:not([class]):first-child {
   }
   .l-footer-school-contact__items {
     margin-top: 1.75rem;
+    margin: 1.75rem auto 0;
     gap: 0.9375rem;
-    justify-content: space-between;
+    max-width: 400px;
+    justify-content: space-around;
   }
   .l-footer-school__main {
     grid-template-columns: 1fr;
@@ -916,7 +918,7 @@ body.school-section .page-content .l-inner > h5:not([class]):first-child {
   }
   .p-mobile-nav--school__footer-label {
     margin: 0;
-    font-size: 0.4375rem;
+    font-size: 0.5rem;
     line-height: 1.5;
     color: #1a1a1a;
     text-align: left;
@@ -928,7 +930,7 @@ body.school-section .page-content .l-inner > h5:not([class]):first-child {
     line-height: 0;
   }
   .p-mobile-nav--school__footer-logo img {
-    width: 7.5rem;
+    width: 10rem;
     max-width: 100%;
     height: auto;
   }
@@ -1832,20 +1834,20 @@ body.school-section .page-content ul > li {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 7.875rem;
-  height: 3.125rem;
-  border: 1px solid #6e6e6e;
-  color: #1a1a1a;
+  padding: 0.625rem 2.5rem;
+  border: 1px solid #000;
   text-decoration: none;
-  font-size: 2.4375rem;
+  font-size: 1.25rem;
   line-height: 1;
   letter-spacing: 0.08em;
+  text-align: center;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 @media (hover: hover) {
   .p-school-seasonal-topics__button:hover {
-    background: #1a1a1a;
+    background: #699;
     color: #fff;
+    border-color: #699;
   }
 }
 

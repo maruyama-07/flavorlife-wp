@@ -4,7 +4,7 @@
  */
 $news_query = new WP_Query(array(
     'post_type' => 'news_school',
-    'posts_per_page' => 8,
+    'posts_per_page' => 1,
     'post_status' => 'publish',
     'orderby' => 'date',
     'order' => 'DESC',

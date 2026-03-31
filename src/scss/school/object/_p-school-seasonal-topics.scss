@@ -117,20 +117,20 @@ $p-school-olive: #707345;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: prem(126);
-  height: prem(50);
-  border: 1px solid #6e6e6e;
-  color: #1a1a1a;
+  padding: prem(10) prem(40);
+  border: 1px solid #000;
   text-decoration: none;
-  font-size: prem(39);
+  font-size: prem(20);
   line-height: 1;
   letter-spacing: 0.08em;
+  text-align: center;
   transition: background-color 0.2s ease, color 0.2s ease;
 
   @media (hover: hover) {
     &:hover {
-      background: #1a1a1a;
+      background: #699;
       color: #fff;
+      border-color: #699;
     }
   }
 }
