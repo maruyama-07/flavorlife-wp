@@ -46,6 +46,7 @@ function images() {
     .on('end', () => console.log('[DEBUG] images: Completed!'));
 }
 
+// src/js → assets/js にコピー（script.js はここを編集。assets 直編集は gulp で上書きされる）
 function javascript() {
   console.log('[DEBUG] javascript: Starting...');
   return src('../src/js/**/*')

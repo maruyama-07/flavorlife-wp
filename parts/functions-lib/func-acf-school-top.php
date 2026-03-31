@@ -17,7 +17,34 @@ add_action('acf/init', function () {
         return;
     }
 
-    $card_fields = array();
+    $fields = array(
+        array(
+            'key' => 'field_school_top_intro_brand',
+            'label' => 'イントロ見出し',
+            'name' => 'school_top_intro_brand',
+            'type' => 'text',
+            'required' => 0,
+            'default_value' => 'Flavorlife Aromatherapy School',
+        ),
+        array(
+            'key' => 'field_school_top_intro_lead',
+            'label' => 'イントロリード',
+            'name' => 'school_top_intro_lead',
+            'type' => 'text',
+            'required' => 0,
+            'default_value' => '確かな知識で、香りはもっと自由になる。',
+        ),
+        array(
+            'key' => 'field_school_top_intro_body',
+            'label' => 'イントロ本文',
+            'name' => 'school_top_intro_body',
+            'type' => 'textarea',
+            'required' => 0,
+            'rows' => 6,
+            'new_lines' => '',
+            'instructions' => '改行はフロントで <br> に変換されます。',
+        ),
+    );
     $labels = array(
         1 => '1列目（左）',
         2 => '2列目',
@@ -26,7 +53,7 @@ add_action('acf/init', function () {
     );
 
     foreach ($labels as $num => $label) {
-        $card_fields[] = array(
+        $fields[] = array(
             'key' => 'field_school_top_card_' . $num,
             'label' => 'カード: ' . $label,
             'name' => 'school_top_card_' . $num,
@@ -43,7 +70,7 @@ add_action('acf/init', function () {
     acf_add_local_field_group(array(
         'key' => 'group_school_top_intro_cards',
         'title' => 'スクールトップ（イントロ・4カード）',
-        'fields' => $card_fields,
+        'fields' => $fields,
         'location' => array(
             array(
                 array(
@@ -81,6 +108,34 @@ function school_top_get_card_pages()
     }
 
     return $out;
+}
+
+/**
+ * @return array{brand:string, lead:string, body:string}
+ */
+function school_top_get_intro_content()
+{
+    $defaults = array(
+        'brand' => 'Flavorlife Aromatherapy School',
+        'lead' => '確かな知識で、香りはもっと自由になる。',
+        'body' => "アロマテラピーは曖昧な世界ではありません。\n植物学・身体・心理の関係性を体系的に学び、“わかる”から“扱える”へ導く、学びの場。\nそして楽しく学ぶことが、精油の理解を深め、香りを暮らしに取り入れるプロの道をつくります。\n当スクールでは初めての方でも、知識のある方でも、発見と奥深さを学べるコースを取り揃えています。",
+    );
+
+    $root = function_exists('school_section_get_root_page_id') ? school_section_get_root_page_id() : 0;
+    if (!$root || !is_page() || (int) get_queried_object_id() !== $root || !function_exists('get_field')) {
+        return $defaults;
+    }
+
+    $page_id = (int) get_queried_object_id();
+    $brand = trim((string) get_field('school_top_intro_brand', $page_id));
+    $lead = trim((string) get_field('school_top_intro_lead', $page_id));
+    $body = trim((string) get_field('school_top_intro_body', $page_id));
+
+    return array(
+        'brand' => $brand !== '' ? $brand : $defaults['brand'],
+        'lead' => $lead !== '' ? $lead : $defaults['lead'],
+        'body' => $body !== '' ? $body : $defaults['body'],
+    );
 }
 
 /**

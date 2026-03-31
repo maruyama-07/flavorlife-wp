@@ -1,0 +1,13 @@
+@use '../foundation/tools' as *;
+
+// TinyMCE「ボタン」挿入ブロック（中身は .l-header-school__cta と同一クラス）
+.school-section .page-content {
+  .p-school-content-cta-wrap {
+    margin: prem(24) 0;
+    .l-header-school__cta {
+      font-size: prem(14);
+      padding: prem(14) prem(30);
+      height: fit-content;
+    }
+  }
+}

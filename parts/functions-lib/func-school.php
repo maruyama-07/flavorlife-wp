@@ -101,6 +101,9 @@ add_filter('body_class', function ($classes) {
     if (is_school_section()) {
         $classes[] = 'school-section';
     }
+    if (is_school_privacy_policy_page()) {
+        $classes[] = 'school-privacy-policy';
+    }
     return $classes;
 });
 
@@ -124,6 +127,29 @@ function is_school_section()
     }
     $ancestors = get_post_ancestors($current_id);
     return in_array($root_id, array_map('intval', $ancestors), true);
+}
+
+/**
+ * スクール配下「プライバシーポリシー」固定ページID（パス school/privacy-policy）
+ *
+ * @return int 0 = 該当なし
+ */
+function school_section_get_privacy_policy_page_id()
+{
+    $page = get_page_by_path('school/privacy-policy');
+    return $page ? (int) $page->ID : 0;
+}
+
+/**
+ * 現在の表示が /school/privacy-policy/ 相当の固定ページか
+ */
+function is_school_privacy_policy_page()
+{
+    if (!is_page()) {
+        return false;
+    }
+    $pid = school_section_get_privacy_policy_page_id();
+    return $pid && (int) get_queried_object_id() === $pid;
 }
 
 /**
@@ -344,3 +370,245 @@ function theme_enqueue_school_section_assets()
     );
     wp_add_inline_script('my-script', 'var sliderSettings = ' . json_encode($slider_settings) . ';', 'before');
 }
+
+/**
+ * コーポレート用クラシックエディタボタン（c- / p- 系ショートコード用）。
+ * スクール配下では school-style を読まないためプレビューが崩れる → ツールバーから除外。
+ * スクール専用ボタンは別途 mce_buttons_2 / mce_external_plugins で追加予定。
+ *
+ * @return string[]
+ */
+function school_section_corporate_mce_button_slugs()
+{
+    return array(
+        'image_grid',
+        'step_flow',
+        'product_card',
+        'service_columns',
+        'two_column_cards',
+        'responsive_image',
+    );
+}
+
+function school_section_is_page_edit_admin_screen()
+{
+    if (!is_admin() || !function_exists('get_current_screen')) {
+        return false;
+    }
+    $screen = get_current_screen();
+    if (!$screen || $screen->base !== 'post' || $screen->post_type !== 'page') {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * 固定ページの編集画面で対象となる投稿 ID（新規は 0。親は is_school_section_page 側で parent_id を参照）
+ */
+function school_section_get_edited_page_id()
+{
+    if (isset($_GET['post']) && ctype_digit((string) $_GET['post'])) {
+        return (int) $_GET['post'];
+    }
+    global $post;
+    if ($post instanceof WP_Post && $post->post_type === 'page') {
+        return (int) $post->ID;
+    }
+
+    return 0;
+}
+
+function school_section_should_hide_corporate_mce_tools()
+{
+    if (!school_section_is_page_edit_admin_screen()) {
+        return false;
+    }
+
+    return is_school_section_page(school_section_get_edited_page_id());
+}
+
+/**
+ * @param string[] $buttons
+ * @return string[]
+ */
+function school_section_mce_buttons_2_hide_corporate($buttons)
+{
+    if (!school_section_should_hide_corporate_mce_tools() || !is_array($buttons)) {
+        return $buttons;
+    }
+
+    return array_values(array_diff($buttons, school_section_corporate_mce_button_slugs()));
+}
+add_filter('mce_buttons_2', 'school_section_mce_buttons_2_hide_corporate', 999);
+
+/**
+ * @param array<string, string> $plugins
+ * @return array<string, string>
+ */
+function school_section_mce_external_plugins_hide_corporate($plugins)
+{
+    if (!school_section_should_hide_corporate_mce_tools() || !is_array($plugins)) {
+        return $plugins;
+    }
+    foreach (school_section_corporate_mce_button_slugs() as $slug) {
+        unset($plugins[$slug]);
+    }
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'school_section_mce_external_plugins_hide_corporate', 999);
+
+/**
+ * スクール固定ページ編集時のみ TinyMCE プレビュー用スタイル（.c-school-heading）
+ */
+function school_section_add_editor_style_for_school_pages()
+{
+    global $typenow;
+    if ($typenow !== 'page') {
+        return;
+    }
+    $post_id = school_section_get_edited_page_id();
+    if ($post_id && is_school_section_page($post_id)) {
+        add_editor_style('assets/css/school-editor-style.css');
+
+        return;
+    }
+    if (!$post_id && is_school_section_page(0)) {
+        add_editor_style('assets/css/school-editor-style.css');
+    }
+}
+add_action('admin_init', 'school_section_add_editor_style_for_school_pages', 20);
+
+/**
+ * TinyMCE モーダル（ボタン挿入など）でフッターが入力欄に重なる問題の修正用 CSS（wp-admin 本体）
+ */
+function school_section_enqueue_admin_tinymce_dialog_fix($hook)
+{
+    if ($hook !== 'post.php' && $hook !== 'post-new.php') {
+        return;
+    }
+    if (!school_section_should_hide_corporate_mce_tools()) {
+        return;
+    }
+    $path = get_theme_file_path('assets/css/admin-school-tinymce.css');
+    if (!is_readable($path)) {
+        return;
+    }
+    wp_enqueue_style(
+        'school-admin-tinymce',
+        get_template_directory_uri() . '/assets/css/admin-school-tinymce.css',
+        array(),
+        (string) filemtime($path)
+    );
+}
+add_action('admin_enqueue_scripts', 'school_section_enqueue_admin_tinymce_dialog_fix', 20);
+
+/**
+ * スクール固定ページ編集時：TinyMCE のフォントファミリーに base.scss と同系統の Google Fonts を出す。
+ * （school-editor-style.css で @import 済み。本文は Sawarabi Mincho に近い既定を維持）
+ *
+ * @param array<string, mixed> $init_array
+ * @return array<string, mixed>
+ */
+function school_section_tinymce_font_formats($init_array)
+{
+    if (!school_section_should_hide_corporate_mce_tools()) {
+        return $init_array;
+    }
+
+    $formats = array(
+        'デフォルト（継承）=inherit',
+        'Sawarabi Mincho=\'Sawarabi Mincho\', serif',
+        'Inter=Inter, sans-serif',
+        'Noto Sans JP=\'Noto Sans JP\', sans-serif',
+        'Baskervville=Baskervville, serif',
+        'ABeeZee=ABeeZee, sans-serif',
+        'Arial=arial, helvetica, sans-serif',
+        'Georgia=georgia, serif',
+    );
+
+    $init_array['font_formats'] = implode('; ', $formats);
+
+    return $init_array;
+}
+add_filter('tiny_mce_before_init', 'school_section_tinymce_font_formats', 25);
+
+/**
+ * スクール用 TinyMCE：横線+下線の見出し（h2.c-school-heading）
+ *
+ * @param string[] $buttons
+ * @return string[]
+ */
+function school_section_mce_buttons_add_location_heading($buttons)
+{
+    if (!school_section_should_hide_corporate_mce_tools() || !is_array($buttons)) {
+        return $buttons;
+    }
+    $buttons[] = 'school_location_heading';
+
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'school_section_mce_buttons_add_location_heading', 1000);
+
+/**
+ * @param array<string, string> $plugins
+ * @return array<string, string>
+ */
+function school_section_mce_external_plugins_add_location_heading($plugins)
+{
+    if (!school_section_should_hide_corporate_mce_tools() || !is_array($plugins)) {
+        return $plugins;
+    }
+    $plugins['school_location_heading'] = get_template_directory_uri() . '/assets/js/admin/school-location-heading.js';
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_location_heading', 1000);
+
+/**
+ * TinyMCE 用：CTA のデフォルト href（ヘッダー CTA と同じお申し込み先）
+ */
+function school_section_print_tinymce_cta_default_href()
+{
+    if (!school_section_should_hide_corporate_mce_tools()) {
+        return;
+    }
+    printf(
+        '<script>window.schoolTinymceCtaHref=%s;</script>' . "\n",
+        wp_json_encode(home_url('/school/contact/'))
+    );
+}
+add_action('admin_head', 'school_section_print_tinymce_cta_default_href', 5);
+
+/**
+ * スクール用 TinyMCE：ヘッダーと同じピル型ボタン（.l-header-school__cta、初期は target=_blank）
+ *
+ * @param string[] $buttons
+ * @return string[]
+ */
+function school_section_mce_buttons_add_cta($buttons)
+{
+    if (!school_section_should_hide_corporate_mce_tools() || !is_array($buttons)) {
+        return $buttons;
+    }
+    $buttons[] = 'school_cta_button';
+
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'school_section_mce_buttons_add_cta', 1000);
+
+/**
+ * @param array<string, string> $plugins
+ * @return array<string, string>
+ */
+function school_section_mce_external_plugins_add_cta($plugins)
+{
+    if (!school_section_should_hide_corporate_mce_tools() || !is_array($plugins)) {
+        return $plugins;
+    }
+    $plugins['school_cta_button'] = get_template_directory_uri() . '/assets/js/admin/school-cta-button.js';
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_cta', 1000);

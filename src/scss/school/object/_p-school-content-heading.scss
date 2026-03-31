@@ -1,0 +1,31 @@
+@use '../foundation/tools' as *;
+
+// スクール本文：TinyMCE「横線+下線の見出し」→ h2.c-school-heading
+body.school-section .page-content {
+  .c-school-heading {
+    margin-top: prem(40);
+    margin-bottom: prem(20);
+    padding: 0 0 prem(5) prem(15);
+    font-size: prem(32);
+    font-weight: 600;
+    line-height: 1.35;
+    color: #000;
+    border-left: prem(8) solid #042C1B;
+    border-bottom: 1px solid #042C1B;
+  }
+
+  .l-inner > .c-school-heading:first-child {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .c-school-heading {
+      font-size: prem(24);
+      padding-left: prem(12);
+      padding-bottom: prem(5);
+      margin-top: prem(32);
+      margin-bottom: prem(16);
+      border-left-width: prem(6);
+    }
+  }
+}

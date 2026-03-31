@@ -1,5 +1,6 @@
 /**
  * Splide: 要素があれば mount。新規は initSplideSlidersFromRegistry 内の registry に追加。
+ * ※ gulp の javascript タスクが src/js → assets/js にコピーするため、編集は src/js/script.js を正とする。
  * #mv_slider_school は parts/common/p-splide.php の id（post_type）と一致させること。
  */
 function splideMountIfPresent(selector, options) {

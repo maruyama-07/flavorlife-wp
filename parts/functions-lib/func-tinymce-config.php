@@ -25,6 +25,19 @@ function tool_add_styleselect_to_toolbar($buttons)
 add_filter('mce_buttons_2', 'tool_add_styleselect_to_toolbar');
 
 /**
+ * フォントサイズドロップダウンを px 基準にする。
+ * 既定の 12pt 等は画面では 16px 前後に換算され、本文 p の 1rem と見た目が同じになりやすい。
+ */
+function tool_tinymce_fontsize_formats_px($init_array)
+{
+    $init_array['fontsize_formats'] =
+        '10px 10px; 12px 12px; 14px 14px; 16px 16px; 18px 18px; 20px 20px; 24px 24px; 28px 28px; 32px 32px';
+
+    return $init_array;
+}
+add_filter('tiny_mce_before_init', 'tool_tinymce_fontsize_formats_px', 15);
+
+/**
  * 下余白スタイルを「スタイル」ドロップダウンに追加
  * 段落・見出しなどに適用可能。既存コンテンツには影響しない（適用時のみクラスが付与される）
  */

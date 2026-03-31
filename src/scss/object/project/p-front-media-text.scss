@@ -23,7 +23,7 @@
 .p-front-media-text__container {
     position: relative;
     z-index: 10;
-    max-width: 940px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 prem(20);
     display: grid;
@@ -38,7 +38,7 @@
     position: relative;
     &::before {
         content: '';
-        padding-top: 90.25%;
+        padding-top: 60.25%;
         display: block;
     }
     img {
@@ -105,7 +105,7 @@
 // 右側：テキストエリア（白背景）
 .p-front-media-text__right {
     background: #fff;
-    padding: prem(50) prem(20);
+    padding: prem(30) prem(20);
     height: 100%;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     // display: flex;
@@ -116,9 +116,9 @@
 }
 
 .p-front-media-text__text {
-    font-size: prem(20);
+    font-size: prem(18);
     line-height: 1.6;
-    margin-bottom: prem(80);
+    margin-bottom: prem(25);
     text-align: center;
     font-weight: 600;
 }
@@ -149,7 +149,7 @@
     
     .p-front-media-text__left {
         &::before {
-            padding-top: 70%;
+            // padding-top: 70%;
         }
     }
     

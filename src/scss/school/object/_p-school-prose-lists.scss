@@ -1,0 +1,29 @@
+@use '../foundation/tools' as *;
+
+// 本文リスト：reset の list-style: none を解除。
+// TinyMCE 番号付きの「デフォルト / ラテン / ギリシャ / ローマ…」は ol の list-style-type（インライン等）で指定されるため、li は inherit で追従する。
+body.school-section .page-content {
+  ol,
+  ul {
+    list-style: revert;
+    margin: prem(16) 0;
+    // outside マーカー位置は主にこのインデントで決まる（::marker に left は効かない）
+    padding-left: prem(36);
+  }
+
+  ol ol,
+  ul ul,
+  ol ul,
+  ul ol {
+    margin-top: prem(8);
+    margin-bottom: prem(8);
+  }
+
+  ol > li,
+  ul > li {
+    list-style: inherit;
+    list-style-position: outside;
+    display: list-item;
+    margin: 0.35em 0;
+  }
+}

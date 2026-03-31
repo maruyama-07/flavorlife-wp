@@ -11,7 +11,7 @@ $p-school-cream: #f2f1e8;
 .p-school-top-intro {
   position: relative;
   text-align: center;
-  padding: prem(25) prem(20) prem(80);
+  padding: prem(25) prem(16) prem(80);
   overflow: hidden;
 
   @include mq('md') {
@@ -48,7 +48,7 @@ $p-school-cream: #f2f1e8;
 
 .p-school-top-intro__brand {
   margin: 0;
-  font-size: prem(22);
+  font-size: 5.2vw;
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.35;
@@ -74,7 +74,7 @@ $p-school-cream: #f2f1e8;
 
 .p-school-top-intro__body {
   margin-top: prem(20);
-  max-width: prem(720);
+  max-width: prem(900);
   margin-left: auto;
   margin-right: auto;
   font-size: prem(12);

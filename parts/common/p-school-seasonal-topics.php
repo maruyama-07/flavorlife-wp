@@ -17,7 +17,7 @@ $button_text = $data['button_text'] !== '' ? $data['button_text'] : 'more';
 $button_url = $data['button_url'] ?? '';
 ?>
 <section class="p-school-seasonal-topics" aria-labelledby="p-school-seasonal-topics-heading">
-    <div class="p-school-seasonal-topics__inner l-inner">
+    <div class="p-school-seasonal-topics__inner">
         <header class="p-school-seasonal-topics__header">
             <h2 id="p-school-seasonal-topics-heading" class="p-school-seasonal-topics__title"><?php echo esc_html($title); ?></h2>
             <p class="p-school-seasonal-topics__subtitle"><?php echo esc_html($subtitle); ?></p>

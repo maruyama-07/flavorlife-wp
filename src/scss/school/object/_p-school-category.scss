@@ -17,10 +17,10 @@ $p-school-category-title: #707345;
   &::before {
     content: '';
     position: absolute;
-    top: prem(144);
+    top: prem(150);
     left: 0;
     width: 100%;
-    height: prem(570);
+    height: prem(490);
     background-color: $p-school-category-bg;
     z-index: -1;
     @media screen and (max-width: 767px) {
@@ -107,16 +107,24 @@ $p-school-category-title: #707345;
 .p-school-category__item-image {
   grid-area: image;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
   background: #dfddd5;
+  position: relative;
+  width: 100%;
+  &::before {
+    content: '';
+    display: block;
+    padding-top: calc( 340 / 250 * 100% );
+  }
   align-self: center;
   transition: all 0.35s ease;
   overflow: hidden;
   img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
     transition: transform 0.35s ease;
   }
   @include mq('md') {

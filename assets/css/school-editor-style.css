@@ -1,0 +1,78 @@
+/* base.scss と同じ Google Fonts（フォントファミリードロップダウンで選択したときに反映される） */
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Baskervville:wght@400..700&family=Sawarabi+Mincho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+/**
+ * スクール固定ページ編集時のみ add_editor_style で読み込み（TinyMCE プレビュー用）
+ */
+.mce-content-body .c-school-heading,
+.wp-block-freeform .c-school-heading {
+    margin: 2.5rem 0 1.25rem;
+    padding: 0 0 0.75rem 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #000;
+    border-left: 0.3125rem solid #707345;
+    border-bottom: 1px solid #707345;
+    letter-spacing: 0.02em;
+}
+
+.mce-content-body .c-school-heading:first-child,
+.wp-block-freeform .c-school-heading:first-child {
+    margin-top: 0;
+}
+
+/* 本文 CTA（layout/_header-school.scss の .l-header-school__cta と同一見た目・編集プレビュー用） */
+.mce-content-body .p-school-content-cta-wrap,
+.wp-block-freeform .p-school-content-cta-wrap {
+    margin: 1.5rem 0;
+}
+
+.mce-content-body .l-header-school__cta,
+.wp-block-freeform .l-header-school__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 10.75rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: #fff;
+    text-decoration: none;
+    background: #699;
+}
+
+/* 番号・箇条（TinyMCE とフロントを揃える。reset 相当で消えないよう明示） */
+.mce-content-body ol,
+.mce-content-body ul,
+.wp-block-freeform ol,
+.wp-block-freeform ul {
+    list-style: revert;
+    margin: 1em 0;
+    padding-left: 1.625rem;
+}
+
+.mce-content-body ol ol,
+.mce-content-body ul ul,
+.mce-content-body ol ul,
+.mce-content-body ul ol,
+.wp-block-freeform ol ol,
+.wp-block-freeform ul ul,
+.wp-block-freeform ol ul,
+.wp-block-freeform ul ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.mce-content-body ol > li,
+.mce-content-body ul > li,
+.wp-block-freeform ol > li,
+.wp-block-freeform ul > li {
+    list-style: inherit;
+    list-style-position: outside;
+    display: list-item;
+    margin: 0.35em 0;
+}

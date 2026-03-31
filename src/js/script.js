@@ -1,96 +1,75 @@
+/**
+ * Splide: 要素があれば mount。新規は initSplideSlidersFromRegistry 内の registry に追加。
+ * ※ gulp の javascript タスクが src/js → assets/js にコピーするため、編集は src/js/script.js を正とする。
+ * #mv_slider_school は parts/common/p-splide.php の id（post_type）と一致させること。
+ */
+function splideMountIfPresent(selector, options) {
+  if (!document.querySelector(selector)) {
+    return;
+  }
+  new Splide(selector, options).mount();
+}
+
+function getSplidePresetFadeMv() {
+  return {
+    type: 'fade',
+    speed: 3000,
+    autoplay: true,
+    interval: 4000,
+    rewind: true,
+    arrows: false,
+    perPage: 1,
+    breakpoints: {
+      767: { perPage: 1 }
+    },
+    perMove: 1,
+    focus: 'center',
+    gap: '10px',
+    pauseOnHover: false
+  };
+}
+
+function getSplidePresetLoopGallery() {
+  return {
+    type: 'loop',
+    speed: 3000,
+    autoplay: true,
+    interval: 3000,
+    rewind: true,
+    arrows: true,
+    perPage: 5,
+    breakpoints: {
+      767: { perPage: 2 }
+    },
+    perMove: 1,
+    focus: 'center',
+    gap: '10px'
+  };
+}
+
+function getSplidePresetLoopPost() {
+  var base = getSplidePresetLoopGallery();
+  base.perPage = 3;
+  return base;
+}
+
+function initSplideSlidersFromRegistry() {
+  var registry = [
+    { selector: '#mv_slider', options: getSplidePresetFadeMv() },
+    { selector: '#mv_slider_school', options: getSplidePresetFadeMv() },
+    { selector: '#gallery', options: getSplidePresetLoopGallery() },
+    { selector: '#post', options: getSplidePresetLoopPost() },
+    { selector: '#works', options: getSplidePresetLoopGallery() }
+  ];
+  for (var i = 0; i < registry.length; i++) {
+    splideMountIfPresent(registry[i].selector, registry[i].options);
+  }
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   var library = sliderSettings.library;
-  // Splideの読み込み
   if (library === "splide") {
-    // Splideの読み込み
-    if (document.querySelector('#mv_slider')) {
-      new Splide('#mv_slider',
-        {
-          type: 'fade',   // slide,loop,fade から選択
-          speed: 3000,    // スライダーの移動時間をミリ秒単位で指定
-          autoplay: true, // 自動実行を有効にする true:有効、false:無効
-          interval: 4000, // スライドが自動的に進むまでの時間をミリ秒単位で指定する
-          rewind: true,    // true:スライダーの終わりまで行ったときに、先頭に巻き戻す(type:fade,slideの時使用)
-          arrows: false,    // true:矢印ボタンを表示,false:非表示
-          perPage: 1,      // 1ページに何枚のスライドを表示するかを指定
-          breakpoints: {   // レスポンシブデザインのブレークポイントを指定（指定したpx以下の場合）
-            767: {
-              perPage: 1,  // 1ページに何枚のスライドを表示するかを指定
-            }
-          },
-          perMove: 1,      // 1度の移動で、何枚のスライドを移動するかを指定
-          focus: 'center', //これを指定すると中央にある画像にフォーカスされる
-          gap: '10px',     // 画像間の余白の設定
-          pauseOnHover: false // true:マウスがスライダーの上にある間は自動再生を一時停止します,false:停止しない
-        }
-      ).mount();
-    }
-    if (document.querySelector('#gallery')) {
-      new Splide('#gallery',
-        {
-          type: 'loop',   // slide,loop,fade から選択
-          speed: 3000,    // スライダーの移動時間をミリ秒単位で指定
-          autoplay: true, // 自動実行を有効にする
-          interval: 3000, // スライドが自動的に進むまでの時間をミリ秒単位で指定する
-          rewind: true,    // true:スライダーの終わりまで行ったときに、先頭に巻き戻す(type:fadeの時使用)
-          arrows: true,    // true:矢印ボタンを表示
-          perPage: 5,      // 1ページに何枚のスライドを表示するかを指定
-          breakpoints: {   // レスポンシブデザインのブレークポイントを指定（指定したpx以下の場合）
-            767: {
-              perPage: 2,  // 1ページに何枚のスライドを表示するかを指定
-            }
-          },
-          perMove: 1,      // 1度の移動で、何枚のスライドを移動するかを指定
-          focus: 'center',//これを指定すると中央にある画像にフォーカスされる
-          gap: '10px',     // 画像間の余白の設定
-        }
-      ).mount();
-    }
-    // event
-    if (document.querySelector('#post')) {
-      new Splide('#post',
-        {
-          type: 'loop',   // slide,loop,fade から選択
-          speed: 3000,    // スライダーの移動時間をミリ秒単位で指定
-          autoplay: true, // 自動実行を有効にする
-          interval: 3000, // スライドが自動的に進むまでの時間をミリ秒単位で指定する
-          rewind: true,    // true:スライダーの終わりまで行ったときに、先頭に巻き戻す(type:fadeの時使用)
-          arrows: true,    // true:矢印ボタンを表示
-          perPage: 3,      // 1ページに何枚のスライドを表示するかを指定
-          breakpoints: {   // レスポンシブデザインのブレークポイントを指定（指定したpx以下の場合）
-            767: {
-              perPage: 2,  // 1ページに何枚のスライドを表示するかを指定
-            }
-          },
-          perMove: 1,      // 1度の移動で、何枚のスライドを移動するかを指定
-          focus: 'center',//これを指定すると中央にある画像にフォーカスされる
-          gap: '10px',     // 画像間の余白の設定
-        }
-      ).mount();
-    }
-    // works
-    if (document.querySelector('#works')) {
-      new Splide('#works',
-        {
-          type: 'loop',   // slide,loop,fade から選択
-          speed: 3000,    // スライダーの移動時間をミリ秒単位で指定
-          autoplay: true, // 自動実行を有効にする
-          interval: 3000, // スライドが自動的に進むまでの時間をミリ秒単位で指定する
-          rewind: true,    // true:スライダーの終わりまで行ったときに、先頭に巻き戻す(type:fadeの時使用)
-          arrows: true,    // true:矢印ボタンを表示
-          perPage: 5,      // 1ページに何枚のスライドを表示するかを指定
-          breakpoints: {   // レスポンシブデザインのブレークポイントを指定（指定したpx以下の場合）
-            767: {
-              perPage: 2,  // 1ページに何枚のスライドを表示するかを指定
-            }
-          },
-          perMove: 1,      // 1度の移動で、何枚のスライドを移動するかを指定
-          focus: 'center',//これを指定すると中央にある画像にフォーカスされる
-          gap: '10px',     // 画像間の余白の設定
-        }
-      ).mount();
-    }
+    initSplideSlidersFromRegistry();
   }
   if (library === "swiper") {
     // Swiperの読み込み

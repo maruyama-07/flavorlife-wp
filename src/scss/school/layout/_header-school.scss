@@ -18,7 +18,7 @@
 
 .l-header-school__top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: prem(20);
 }
@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
+  width: 40%;
   gap: prem(20);
 }
 
@@ -35,10 +36,13 @@
   line-height: 1.4;
   letter-spacing: 0.08em;
   color: #042c1b;
+  white-space: nowrap;
 }
 
 .l-header-school__logo {
   display: inline-block;
+  width: 57%;
+  max-width: 250px;
 }
 
 .l-header-school__logo img {
@@ -63,7 +67,7 @@
 .l-header-school__bottom {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: prem(24);
   margin-top: prem(14);
 }
@@ -94,7 +98,7 @@
 
 .l-header-school__nav-list a {
   display: block;
-  font-size: prem(12);
+  font-size: prem(14);
   line-height: 1.4;
   letter-spacing: 0.06em;
   color: #2f2f2f;
@@ -173,7 +177,11 @@
   height: 0;
   overflow: hidden;
   pointer-events: none;
+  p,a,span {
+    font-family: "Inter", sans-serif;
+  }
 }
+
 
 @media screen and (max-width: 767px) {
   .l-header-school__inner {

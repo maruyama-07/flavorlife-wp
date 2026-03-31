@@ -3,6 +3,8 @@
 @use './tools' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Baskervville:wght@400..700&family=Sawarabi+Mincho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 
 html {
   scroll-behavior: smooth;
@@ -76,10 +78,132 @@ a {
 }
 
 // 本文ブロックのみ。フッター等の p は各コンポーネントで指定。
-// ※エディタの span style="font-size: …" はインラインで優先されるが、
-//   12pt は多くの環境で 16px 前後となり、下記 1rem と見た目がほぼ同じになりやすい。
+// ※ p の算出 font-size は DevTools で <p> を選んだときの値（子の span とは別）。
+// ※ span に font-size: 12pt を付けても、ブラウザでは 12pt ≒ 16px のため本文 1rem と見た目が同じになりやすい。
+//   小さくしたいときは 12px を使う（TinyMCE は func-tinymce-config の fontsize_formats で px 出力可）。
 body.school-section .page-content p {
   font-size: prem(16);
+}
+
+// クラシックエディタ本文：class 未付与の要素のみ縦リズム（CF7 等の付与クラスは除外）
+body.school-section .page-content {
+  strong {
+    font-weight: bold;
+  }
+  p:not([class]) {
+    margin-top: 0;
+    margin-bottom: prem(20);
+  }
+
+  p:not([class]):last-child {
+    margin-bottom: 0;
+  }
+
+  img:not([class]) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-top: prem(24);
+    margin-bottom: prem(24);
+  }
+
+  img:not([class]):first-child {
+    margin-top: 0;
+  }
+
+  img:not([class]):last-child {
+    margin-bottom: 0;
+  }
+
+  iframe:not([class]) {
+    display: block;
+    max-width: 100%;
+    margin-top: prem(24);
+    margin-bottom: prem(24);
+  }
+
+  iframe:not([class]):first-child {
+    margin-top: 0;
+  }
+
+  iframe:not([class]):last-child {
+    margin-bottom: 0;
+  }
+
+  h1:not([class]) {
+    margin-top: prem(40);
+    margin-bottom: prem(25);
+    line-height: 1.6;
+  }
+
+  h2:not([class]) {
+    margin-top: prem(36);
+    margin-bottom: prem(25);
+    line-height: 1.6;
+  }
+
+  h3:not([class]) {
+    margin-top: prem(28);
+    margin-bottom: prem(25);
+    line-height: 1.6;
+  }
+
+  h4:not([class]) {
+    margin-top: prem(24);
+    margin-bottom: prem(20);
+    line-height: 1.5;
+  }
+
+  h5:not([class]) {
+    margin-top: prem(20);
+    margin-bottom: prem(8);
+    line-height: 1.45;
+  }
+
+  .l-inner > h1:not([class]):first-child,
+  .l-inner > h2:not([class]):first-child,
+  .l-inner > h3:not([class]):first-child,
+  .l-inner > h4:not([class]):first-child,
+  .l-inner > h5:not([class]):first-child {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    p:not([class]) {
+      margin-bottom: prem(16);
+    }
+
+    img:not([class]),
+    iframe:not([class]) {
+      margin-top: prem(20);
+      margin-bottom: prem(20);
+    }
+
+    h1:not([class]) {
+      margin-top: prem(32);
+      margin-bottom: prem(12);
+    }
+
+    h2:not([class]) {
+      margin-top: prem(28);
+      margin-bottom: prem(10);
+    }
+
+    h3:not([class]) {
+      margin-top: prem(24);
+      margin-bottom: prem(10);
+    }
+
+    h4:not([class]) {
+      margin-top: prem(20);
+      margin-bottom: prem(8);
+    }
+
+    h5:not([class]) {
+      margin-top: prem(18);
+      margin-bottom: prem(6);
+    }
+  }
 }
 
 // ACFテキスト内の {sp} / {{sp}} 用（スマホ時のみ改行）

@@ -13,11 +13,16 @@
 .p-school-contact-section__lead {
   font-size: prem(18);
   margin-bottom: prem(40);
+  p {
+    margin-bottom: 0 !important;
+  }
 }
 
 .p-school-contact {
   max-width: prem(1120);
   margin: 0 auto;
+  background-color: #fff;
+  padding: prem(20) prem(20) prem(40);
 }
 
 .p-school-contact__row {

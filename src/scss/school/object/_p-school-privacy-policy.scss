@@ -1,0 +1,17 @@
+@use '../foundation/tools' as *;
+
+// /school/privacy-policy/ のみ（body.school-section.school-privacy-policy）
+// Noto Sans JP は theme_enqueue_school_section_assets で読み込み済み
+.school-section.school-privacy-policy {
+  .page-content {
+    font-family: "Inter", sans-serif;
+    padding-top: prem(80);
+  }
+  p {
+    line-height: 1.8;
+  }
+  
+  h2,h3,h4,h5,h6 {
+    font-weight: 400;
+  }
+}

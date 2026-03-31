@@ -71,7 +71,8 @@
                 <div class="l-footer-school__column">
                     <p class="l-footer-school__heading">はじめての方へ</p>
                     <ul>
-                        <li><a href="<?php echo esc_url(home_url('/school/access/')); ?>">アクセスお問い合わせ</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/school/access/')); ?>">アクセス</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/school/contact/')); ?>">お問い合わせ</a></li>
                         <li><a href="<?php echo esc_url(home_url('/school/voice/')); ?>">受講生の声</a></li>
                         <li><a href="<?php echo esc_url(home_url('/school/entry/')); ?>">お申込み方法</a></li>
                         <li><a href="<?php echo esc_url(home_url('/school/lesson/')); ?>">スクール講座一覧</a></li>

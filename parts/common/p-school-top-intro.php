@@ -4,19 +4,27 @@ if (!function_exists('school_section_is_queried_root') || !school_section_is_que
 }
 
 $card_pages = function_exists('school_top_get_card_pages') ? school_top_get_card_pages() : array();
+$intro = function_exists('school_top_get_intro_content') ? school_top_get_intro_content() : array(
+    'brand' => 'Flavorlife Aromatherapy School',
+    'lead' => '確かな知識で、香りはもっと自由になる。',
+    'body' => "アロマテラピーは曖昧な世界ではありません。\n植物学・身体・心理の関係性を体系的に学び、“わかる”から“扱える”へ導く、学びの場。\nそして楽しく学ぶことが、精油の理解を深め、香りを暮らしに取り入れるプロの道をつくります。\n当スクールでは初めての方でも、知識のある方でも、発見と奥深さを学べるコースを取り揃えています。",
+);
 ?>
 <div class="p-school-top-block">
     <section class="p-school-top-intro" aria-labelledby="p-school-top-intro-heading">
         <div class="p-school-top-intro__curve" aria-hidden="true"></div>
         <div class="p-school-top-intro__inner">
-            <h1 id="p-school-top-intro-heading" class="p-school-top-intro__brand">Flavorlife Aromatherapy School</h1>
-            <p class="p-school-top-intro__lead">確かな知識で、香りはもっと自由になる。</p>
+            <h1 id="p-school-top-intro-heading" class="p-school-top-intro__brand"><?php echo esc_html((string) $intro['brand']); ?></h1>
+            <p class="p-school-top-intro__lead"><?php echo esc_html((string) $intro['lead']); ?></p>
             <div class="p-school-top-intro__body">
                 <p>
-                アロマテラピーは曖昧な世界ではありません。
-                植物学・身体・心理の関係性を体系的に学び、“わかる”から“扱える”へ導く、学びの場。<br>
-                そして楽しく学ぶことが、精油の理解を深め、香りを暮らしに取り入れるプロの道をつくります。<br>
-                当スクールでは初めての方でも、知識のある方でも、発見と奥深さを学べるコースを取り揃えています。
+                    <?php
+                    if (function_exists('tool_format_text_with_sp_break')) {
+                        echo tool_format_text_with_sp_break((string) $intro['body']);
+                    } else {
+                        echo nl2br(esc_html((string) $intro['body']));
+                    }
+                    ?>
                 </p>
             </div>
         </div>
