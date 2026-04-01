@@ -47,7 +47,7 @@ add_action('acf/init', function () {
                 'type' => 'textarea',
                 'rows' => 3,
                 'new_lines' => '',
-                'instructions' => '改行できます。スマホ時のみ改行する箇所には {sp} を入力してください。',
+                'instructions' => function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : '',
             ),
             array(
                 'key' => 'field_school_seasonal_body',
@@ -56,7 +56,7 @@ add_action('acf/init', function () {
                 'type' => 'textarea',
                 'rows' => 8,
                 'new_lines' => '',
-                'instructions' => 'スマホ時のみ改行する箇所には {sp} を入力してください。',
+                'instructions' => function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : '',
             ),
             array(
                 'key' => 'field_school_seasonal_button_text',

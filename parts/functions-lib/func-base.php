@@ -82,3 +82,13 @@ function tool_default_page_template_meta_box($page, $context, $post) {
         }
     }
 }
+
+/**
+ * ACF テキストエリア（段落）向けの共通説明文（改行・スマホ専用改行トークン）
+ *
+ * @return string
+ */
+function tool_acf_paragraph_field_instructions()
+{
+    return '改行はそのまま表示されます。スマホ表示のみで改行したい位置に {sp} または {{sp}} を入力できます。';
+}

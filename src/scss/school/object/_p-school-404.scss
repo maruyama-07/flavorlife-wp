@@ -1,0 +1,81 @@
+@use '../foundation/tools' as *;
+
+$p-school-voice-teal: #669999;
+
+.p-school-404 {
+  padding: prem(48) prem(24) prem(100);
+  text-align: center;
+}
+
+.p-school-404__code {
+  margin: 0;
+  font-size: prem(48);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: $p-school-voice-teal;
+}
+
+.p-school-404__title {
+  margin: prem(24) 0 0;
+  font-size: prem(18);
+  font-weight: 500;
+  line-height: 1.6;
+  color: #000;
+}
+
+.p-school-404__lead {
+  margin: prem(16) auto 0;
+  max-width: prem(520);
+  font-size: prem(14);
+  line-height: 1.75;
+  color: #333;
+}
+
+.p-school-404__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: prem(16);
+  margin-top: prem(40);
+}
+
+.p-school-404__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: prem(200);
+  padding: prem(14) prem(24);
+  font-size: prem(13);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: #fff;
+  background: $p-school-voice-teal;
+  border-radius: prem(4);
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.p-school-404__btn--sub {
+  color: #333;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-404 {
+    padding: prem(32) prem(16) prem(64);
+  }
+
+  .p-school-404__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .p-school-404__btn {
+    width: 100%;
+    min-width: 0;
+  }
+}

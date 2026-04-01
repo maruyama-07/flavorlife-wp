@@ -28,6 +28,76 @@ function school_section_is_queried_root()
     return $root && (int) get_queried_object_id() === $root;
 }
 
+/**
+ * スクール直下の「受講生の声」固定ページ（/school/voice/）か
+ *
+ * @return bool
+ */
+function school_section_is_voice_page()
+{
+    if (!is_page()) {
+        return false;
+    }
+    $root = school_section_get_root_page_id();
+    if (!$root) {
+        return false;
+    }
+    $page = get_queried_object();
+    if (!$page instanceof WP_Post || $page->post_name !== 'voice') {
+        return false;
+    }
+
+    return (int) $page->post_parent === $root;
+}
+
+/**
+ * スクール紹介固定ページ（/school/about/）の投稿 ID
+ *
+ * @return int 0 = 該当なし
+ */
+function school_section_get_about_page_id()
+{
+    $page = get_page_by_path('school/about');
+    return $page ? (int) $page->ID : 0;
+}
+
+/**
+ * 現在の表示が /school/about/ 相当の固定ページか
+ *
+ * @return bool
+ */
+function school_section_is_about_page()
+{
+    if (!is_page()) {
+        return false;
+    }
+    $pid = school_section_get_about_page_id();
+    return $pid && (int) get_queried_object_id() === $pid;
+}
+
+/**
+ * スクールと同一ブランドのレイアウト（固定ページ school 配下 ＋ 受講生の声 CPT）
+ *
+ * @return bool
+ */
+function is_school_brand_layout()
+{
+    if (is_school_section()) {
+        return true;
+    }
+    if (!empty($GLOBALS['school_voice_archive_fallback'])) {
+        return true;
+    }
+    if (!empty($GLOBALS['school_section_404'])) {
+        return true;
+    }
+    if (is_singular('voice_school')) {
+        return true;
+    }
+
+    return false;
+}
+
 add_action('customize_register', function ($wp_customize) {
     $wp_customize->add_section('school_section_settings', array(
         'title' => 'スクールページ',
@@ -98,7 +168,7 @@ add_filter('template_include', function ($template) {
 }, 5);
 
 add_filter('body_class', function ($classes) {
-    if (is_school_section()) {
+    if (is_school_brand_layout()) {
         $classes[] = 'school-section';
     }
     if (is_school_privacy_policy_page()) {

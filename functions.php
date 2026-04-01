@@ -92,6 +92,8 @@ get_template_part('parts/functions-lib/func-service');
 
 // School セクション（/school および子ページ用のヘッダー・フッター・CSS切り替え）
 get_template_part('parts/functions-lib/func-school');
+// スクール紹介（/school/about/）講師一覧ショートコード＋ACF
+get_template_part('parts/functions-lib/func-school-about-instructors');
 
 // 固定ページ一覧：コーポレート / スクール切り替え（管理画面）
 get_template_part('parts/functions-lib/func-admin-pages-section');
@@ -114,6 +116,9 @@ get_template_part('parts/functions-lib/func-add-posttype-mv-school');
 get_template_part('parts/functions-lib/func-acf-mv-school');
 // （News（スクール）用）カスタム投稿タイプ
 get_template_part('parts/functions-lib/func-add-posttype-news-school');
+// （受講生の声（スクール）用）カスタム投稿タイプ
+get_template_part('parts/functions-lib/func-add-posttype-voice-school');
+get_template_part('parts/functions-lib/func-acf-school-voice');
 
 // スクリプト、スタイルシートの設定
 get_template_part('parts/functions-lib/func-enqueue-assets');

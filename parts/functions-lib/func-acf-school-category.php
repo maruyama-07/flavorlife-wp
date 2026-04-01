@@ -40,7 +40,7 @@ add_action('acf/init', function () {
             'rows' => 4,
             'new_lines' => 'br',
             'required' => 0,
-            'instructions' => '未入力時は選択ページの抜粋（excerpt）を表示します。',
+            'instructions' => '未入力時は選択ページの抜粋（excerpt）を表示します。' . "\n\n" . (function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : ''),
         );
     }
 

@@ -22,7 +22,7 @@
 
 .l-footer-school-contact__inner {
   min-height: prem(356);
-  padding: prem(120) prem(40) prem(42);
+  padding: prem(120) prem(40) prem(90);
   text-align: center;
   color: #fff;
 }
@@ -44,27 +44,34 @@
 .l-footer-school-contact__items {
   display: flex;
   justify-content: center;
-  gap: prem(120);
-  margin-top: prem(40);
-  flex-wrap: wrap;
+  margin-top: prem(50);
 }
 
 .l-footer-school-contact__item {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: prem(10);
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: prem(120);
   text-decoration: none;
   color: #fff;
 }
 
-.l-footer-school-contact__item img {
+.l-footer-school-contact__subitem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: prem(10);
+}
+
+.l-footer-school-contact__subitem img {
   width: prem(65);
   height: prem(65);
   object-fit: contain;
 }
 
-.l-footer-school-contact__item span {
+.l-footer-school-contact__subitem > span {
   font-size: prem(20);
   letter-spacing: 0.2em;
 }
@@ -209,10 +216,12 @@
   }
 
   .l-footer-school-contact__items {
-    margin-top: prem(28);
     margin: prem(28) auto 0;
-    gap: prem(15);
     max-width: 400px;
+  }
+
+  .l-footer-school-contact__item {
+    gap: prem(45);
     justify-content: space-around;
   }
 
@@ -238,11 +247,11 @@
     order: 2;
     width: prem(220);
   }
-  .l-footer-school-contact__item img {
+  .l-footer-school-contact__subitem img {
     width: prem(40);
     height: prem(40);
   }
-  .l-footer-school-contact__item span {
+  .l-footer-school-contact__subitem > span {
     font-size: prem(14);
     letter-spacing: 0.05em;
   }

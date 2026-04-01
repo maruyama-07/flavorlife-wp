@@ -1,0 +1,268 @@
+@use '../foundation/tools' as *;
+
+$p-school-voice-teal: #669999;
+$p-school-voice-olive: #666633;
+
+.p-school-voice {
+  padding-bottom: prem(100);
+}
+
+.p-school-voice__intro {
+  text-align: center;
+  padding: prem(36) prem(24) prem(90);
+}
+
+.p-school-voice__intro-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.p-school-voice__intro-line {
+  display: block;
+  font-size: prem(32);
+  font-weight: 400;
+  line-height: 1.6;
+  color: $p-school-voice-teal;
+}
+
+.p-school-voice__intro-body {
+  margin: prem(40) auto 0;
+  font-size: prem(20);
+  line-height: 1.7;
+}
+
+.p-school-voice__grid-wrap {
+  padding: 0 prem(24);
+}
+
+.p-school-voice__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: prem(80) prem(32);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.p-school-voice-card {
+  max-width: prem(280);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.p-school-voice-card__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.p-school-voice-card__media {
+  border-radius: prem(130) prem(130) 0 0;
+  overflow: hidden;
+  background: #e8e6e0;
+  position: relative;
+  &::before {
+    content: '';
+    padding-top: calc(321 / 277 * 100%);
+    display: block;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.p-school-voice-card__name {
+  margin: prem(16) 0 0;
+  font-size: prem(14);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  color: #000;
+  text-align: left;
+}
+
+.p-school-voice-card__quote {
+  margin: prem(10) 0 0;
+  font-size: prem(15);
+  line-height: 1.75;
+  letter-spacing: 0.03em;
+  color: #1a1a1a;
+  text-align: left;
+  flex: 1 1 auto;
+}
+
+.p-school-voice-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: prem(8);
+  margin-top: prem(20);
+  width: 100%;
+  padding: prem(14) prem(16);
+  font-size: prem(16);
+  line-height: 1.3;
+  letter-spacing: 0.12em;
+  color: #fff;
+  text-decoration: none;
+  background: $p-school-voice-olive;
+  border-radius: prem(4);
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.92;
+  }
+}
+
+.p-school-voice-card__btn-label {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.p-school-voice-card__btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: prem(22);
+  height: prem(22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.p-school-voice__pagination {
+  padding: 0 prem(24);
+  font-family: "inner" ;
+  .page-numbers {
+  }
+  
+  ul.page-numbers {
+    margin-top: prem(100);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0 prem(30);
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0;
+    }
+
+    a.page-numbers,
+    span.page-numbers {
+      display: inline-block;
+      min-width: prem(28);
+      margin: 0;
+      padding: 0 0 prem(12);
+      font-size: prem(30);
+      font-weight: 400;
+      color: #000;
+      text-decoration: none;
+      border-bottom: none;
+      transition: opacity 0.2s ease;
+    }
+
+    a.page-numbers:hover {
+      opacity: 0.7;
+    }
+
+    /* コーポレートの p-pager（&lt; Back / Next &gt;）に合わせた前後リンク */
+    a.prev.page-numbers,
+    a.next.page-numbers {
+      min-width: auto;
+      padding-left: prem(4);
+      padding-right: prem(4);
+      font-size: prem(16);
+    }
+
+    span.page-numbers.dots {
+      min-width: auto;
+      padding-bottom: prem(12);
+      font-weight: 400;
+      color: #a9a9a9;
+    }
+
+    span.page-numbers.current {
+      border-bottom: 2px solid #000;
+    }
+  }
+}
+
+.p-school-voice__footer-note {
+  margin-top: prem(80) !important;
+  padding: 0 prem(24) prem(48);
+}
+
+.p-school-voice__footer-note-inner {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: prem(16) prem(22);
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  font-size: prem(14);
+  line-height: 1.85;
+  letter-spacing: 0.04em;
+  color: #000;
+  text-align: left;
+}
+
+.p-school-voice__empty {
+  padding: prem(40) prem(24);
+  text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .p-school-voice__grid {
+    // grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-voice__grid-wrap {
+    padding: 0 prem(16);
+  }
+  .p-school-voice__intro {
+    padding: prem(16) prem(16) prem(32);
+  }
+
+  .p-school-voice__intro-line {
+    font-size: prem(18);
+  }
+
+  .p-school-voice__intro-body {
+    margin-top: prem(20);
+    font-size: prem(14);
+  }
+
+  .p-school-voice__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: prem(32) prem(20);
+  }
+
+  .p-school-voice-card__media {
+    max-height: none;
+    
+  }
+
+  .p-school-voice__pagination {
+    margin-top: prem(40);
+  }
+
+  .p-school-voice__footer-note {
+    margin-top: prem(60) !important;
+    padding: 0 prem(16) prem(40);
+  }
+
+  .p-school-voice__footer-note-inner {
+    padding: prem(20) prem(18);
+    font-size: prem(13);
+  }
+}

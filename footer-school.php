@@ -4,17 +4,19 @@
             <h2 class="l-footer-school-contact__title">Contact</h2>
             <p class="l-footer-school-contact__subtitle">ご相談・お問い合わせ</p>
             <div class="l-footer-school-contact__items">
-                <a class="l-footer-school-contact__item" href="<?php echo esc_url(home_url('/school/request/')); ?>">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/school/receipt.png'); ?>" alt="">
-                    <span>資料請求</span>
-                </a>
-                <a class="l-footer-school-contact__item" href="<?php echo esc_url(home_url('/school/entry/')); ?>">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/school/document.png'); ?>" alt="">
-                    <span>お申し込み</span>
-                </a>
                 <a class="l-footer-school-contact__item" href="<?php echo esc_url(home_url('/school/contact/')); ?>">
-                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/school/mail.png'); ?>" alt="">
-                    <span>お問い合わせ</span>
+                    <span class="l-footer-school-contact__subitem">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/school/receipt.png'); ?>" alt="">
+                        <span>資料請求</span>
+                    </span>
+                    <span class="l-footer-school-contact__subitem">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/school/document.png'); ?>" alt="">
+                        <span>お申し込み</span>
+                    </span>
+                    <span class="l-footer-school-contact__subitem">
+                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/school/mail.png'); ?>" alt="">
+                        <span>お問合せ</span>
+                    </span>
                 </a>
             </div>
         </div>

@@ -62,7 +62,7 @@ $has_boxes = $show_phone || $show_form;
                         </span>
                     <?php endif; ?>
                     <?php if ($form_description) : ?>
-                        <p class="c-cta__form-description"><?php echo nl2br(esc_html($form_description)); ?></p>
+                        <p class="c-cta__form-description"><?php echo function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $form_description) : nl2br(esc_html((string) $form_description)); ?></p>
                     <?php endif; ?>
                 </div>
             </div>

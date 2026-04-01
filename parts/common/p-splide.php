@@ -87,7 +87,7 @@ if (!function_exists('p_splide_get_attachment_id')) {
                 </picture>
                 <?php if (!empty($slide_text)) : ?>
                 <div class="splide__slide-text">
-                    <p><?php echo nl2br(esc_html($slide_text)); ?></p>
+                    <p><?php echo function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $slide_text) : nl2br(esc_html((string) $slide_text)); ?></p>
                 </div>
                 <?php endif; ?>
             </<?php echo $tag; ?>>

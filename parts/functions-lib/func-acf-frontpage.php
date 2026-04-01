@@ -35,7 +35,7 @@ if (function_exists('acf_add_local_field_group')) {
                 'label' => 'テキスト',
                 'name' => 'section_text',
                 'type' => 'textarea',
-                'instructions' => '本文を入力してください',
+                'instructions' => '本文を入力してください。' . "\n\n" . (function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : ''),
                 'required' => 0,
                 'rows' => 3,
             ),

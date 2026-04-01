@@ -203,6 +203,7 @@ if (function_exists('acf_add_local_field_group')) {
                 'type' => 'textarea',
                 'rows' => 3,
                 'default_value' => "ご希望の方はこちらからお問い合わせをお願いします。\n当社営業担当者よりご連絡させていただきます。",
+                'instructions' => function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : '',
             ),
             array(
                 'key' => 'field_shop_cta_tab',

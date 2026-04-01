@@ -65,7 +65,7 @@ if (!$left_media && !$section_text) {
             <h2 class="p-front-media-text__title">Company</h2>
             <p class="p-front-media-text__subtitle c-head-sub">会社概要</p>
             <?php if ($section_text) : ?>
-            <p class="p-front-media-text__text"><?php echo nl2br(esc_html($section_text)); ?></p>
+            <p class="p-front-media-text__text"><?php echo function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $section_text) : nl2br(esc_html((string) $section_text)); ?></p>
             <?php endif; ?>
 
             <?php if ($section_highlight) : ?>

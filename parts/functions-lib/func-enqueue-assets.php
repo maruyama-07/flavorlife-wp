@@ -11,8 +11,8 @@ function my_script_init()
   global $slider_library;
   $slider_library = 'splide'; //splide,swiper,slickから選択する
 
-  // スクールセクションは school-style.css 等（func-school の theme_enqueue_school_section_assets）
-  if (function_exists('is_school_section') && is_school_section()) {
+  // スクールセクション・受講生の声 CPT は school-style.css 等（func-school の theme_enqueue_school_section_assets）
+  if (function_exists('is_school_brand_layout') && is_school_brand_layout()) {
     if (function_exists('theme_enqueue_school_section_assets')) {
       theme_enqueue_school_section_assets();
     }

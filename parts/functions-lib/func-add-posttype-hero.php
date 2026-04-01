@@ -94,7 +94,7 @@ function hero_section_meta_box_callback($post) {
         <div class="hero-field">
             <label>テキスト（オプション）</label>
             <textarea id="hero_text" name="hero_text"><?php echo esc_textarea($text); ?></textarea>
-            <p class="description">テキストを入力してください。改行も反映されます。</p>
+            <p class="description"><?php echo esc_html(function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : 'テキストを入力してください。改行も反映されます。'); ?></p>
         </div>
         
         <!-- 高さ設定 -->
@@ -269,7 +269,7 @@ function hero_section_shortcode($atts) {
         <div class="hero-section__inner">
             <?php if (!empty($text)) : ?>
                 <div class="hero-section__text">
-                    <?php echo nl2br(esc_html($text)); ?>
+                    <?php echo function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $text) : nl2br(esc_html((string) $text)); ?>
                 </div>
             <?php endif; ?>
         </div>

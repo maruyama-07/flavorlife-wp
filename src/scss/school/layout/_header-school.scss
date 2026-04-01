@@ -1,7 +1,7 @@
 @use '../foundation/tools' as *;
 
 .l-header-school {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -184,6 +184,9 @@
 
 
 @media screen and (max-width: 767px) {
+  .l-header-school {
+    position: fixed;
+  }
   .l-header-school__inner {
     padding: prem(14) prem(12);
   }
@@ -191,6 +194,7 @@
   .l-header-school__branding {
     flex-direction: column;
     gap: prem(4);
+    width: auto;
   }
 
   .l-header-school__site-label {
@@ -390,13 +394,13 @@
   .p-mobile-nav--school__footer-brand {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-end;
-    gap: prem(12);
+    gap: prem(30);
   }
 
   .p-mobile-nav--school__footer-branding {
-    flex: 1;
+    // flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;

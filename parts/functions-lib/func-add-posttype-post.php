@@ -6,9 +6,15 @@ function Change_menulabel() {
 global $menu;
 global $submenu;
 $name = 'News';
-$menu[5][0] = $name;
-$submenu['edit.php'][5][0] = $name.'一覧';
-$submenu['edit.php'][10][0] = '新しい'.$name;
+if (isset($menu[5][0])) {
+    $menu[5][0] = $name;
+}
+if (isset($submenu['edit.php'][5][0])) {
+    $submenu['edit.php'][5][0] = $name.'一覧';
+}
+if (isset($submenu['edit.php'][10][0])) {
+    $submenu['edit.php'][10][0] = '新しい'.$name;
+}
 }
 function Change_objectlabel() {
 global $wp_post_types;

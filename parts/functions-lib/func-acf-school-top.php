@@ -42,7 +42,7 @@ add_action('acf/init', function () {
             'required' => 0,
             'rows' => 6,
             'new_lines' => '',
-            'instructions' => '改行はフロントで <br> に変換されます。',
+            'instructions' => '改行はフロントで反映されます。' . "\n\n" . (function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : ''),
         ),
     );
     $labels = array(

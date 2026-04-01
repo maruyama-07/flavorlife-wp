@@ -57,9 +57,10 @@ function new_posting($days = 7 ,$entry_time = null){
 }
 
 /**
- * ACFテキスト内のスマホ改行トークンをHTMLへ変換
- * - {sp} または {{sp}} を <br class="u-br-sp"> に変換
+ * ACFテキストエリア（段落）向けの整形（コーポレート・スクール共通）
  * - 改行は nl2br で反映
+ * - {sp} または {{sp}} はスマホのみ改行（&lt;br class="u-br-sp"&gt;）。スタイルは .u-br-sp（style.css / school-style）
+ * 管理画面の説明文は tool_acf_paragraph_field_instructions() をフィールドに付与
  *
  * @param string $text
  * @return string
