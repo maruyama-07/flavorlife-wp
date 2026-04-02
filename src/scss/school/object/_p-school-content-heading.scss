@@ -4,12 +4,12 @@
 body.school-section .page-content {
   .c-school-heading {
     margin-top: prem(40);
-    margin-bottom: prem(20);
+    margin-bottom: prem(40);
     padding: 0 0 prem(5) prem(15);
     font-size: prem(32);
     font-weight: 600;
     line-height: 1.35;
-    color: #000;
+    color: #042C1B;
     border-left: prem(8) solid #042C1B;
     border-bottom: 1px solid #042C1B;
   }
@@ -20,7 +20,7 @@ body.school-section .page-content {
 
   @media screen and (max-width: 767px) {
     .c-school-heading {
-      font-size: prem(24);
+      font-size: prem(22);
       padding-left: prem(12);
       padding-bottom: prem(5);
       margin-top: prem(32);

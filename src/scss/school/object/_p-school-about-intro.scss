@@ -1,0 +1,70 @@
+@use '../foundation/tools' as *;
+
+.p-school-about-intro {
+  padding: 0 prem(24) prem(12);
+  font-family: "inner" ,sans-serif;
+}
+
+.p-school-about-intro__inner {
+  max-width: prem(1240);
+}
+
+.p-school-about-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) prem(300);
+  gap: prem(55);
+  align-items: start;
+}
+
+.p-school-about-intro__text {
+  font-size: prem(16);
+  line-height: 2;
+  color: #111;
+
+  // .page-content 外のため、本文ブロックと同様に段落間の縦リズムを明示する
+  p {
+    margin: 0 0 prem(20);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.p-school-about-intro__media {
+  margin: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+.p-school-about-intro__caption {
+  margin-top: prem(14);
+  font-size: prem(14);
+  line-height: 1.45;
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-about-intro {
+    padding: prem(10) prem(15) prem(8);
+  }
+
+  .p-school-about-intro__grid {
+    grid-template-columns: 1fr;
+    gap: prem(20);
+  }
+
+  .p-school-about-intro__text {
+    font-size: prem(15);
+    line-height: 1.9;
+  }
+
+  .p-school-about-intro__caption {
+    margin-top: prem(12);
+    font-size: prem(16);
+  }
+}

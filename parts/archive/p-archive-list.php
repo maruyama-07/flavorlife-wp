@@ -34,9 +34,17 @@ $subtitle = $args['subtitle'];
                             <?php endif; ?>
                         </div>
                         <div class="p-archive-list__content">
-                            <time class="p-archive-list__date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>">
-                                <?php echo esc_html(get_the_date('Y.m.d')); ?>
-                            </time>
+                            <div class="p-archive-list__meta">
+                                <time class="p-archive-list__date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>">
+                                    <?php echo esc_html(get_the_date('Y.m.d')); ?>
+                                </time>
+                                <?php
+                                $blog_cat = function_exists('tool_get_blog_category_label') ? tool_get_blog_category_label() : '';
+                                if ($blog_cat !== '') :
+                                    ?>
+                                <span class="c-blog-category-badge"><?php echo esc_html($blog_cat); ?></span>
+                                <?php endif; ?>
+                            </div>
                             <h2 class="p-archive-list__item-title"><?php the_title(); ?></h2>
                         </div>
                         <span class="p-archive-list__arrow">

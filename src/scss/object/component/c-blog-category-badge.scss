@@ -1,0 +1,15 @@
+@use '../../foundation' as *;
+
+// ブログカテゴリー（一覧・詳細共通）
+.c-blog-category-badge {
+  display: inline-block;
+  padding: prem(4) prem(10);
+  font-size: prem(12);
+  font-weight: 500;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  background: #0f2b0f;
+  border-radius: prem(14);
+  box-sizing: border-box;
+}

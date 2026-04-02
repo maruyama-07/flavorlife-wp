@@ -119,6 +119,14 @@ get_template_part('parts/functions-lib/func-add-posttype-news-school');
 // （受講生の声（スクール）用）カスタム投稿タイプ
 get_template_part('parts/functions-lib/func-add-posttype-voice-school');
 get_template_part('parts/functions-lib/func-acf-school-voice');
+// （スクール講座一覧用）カスタム投稿タイプ・ACF
+get_template_part('parts/functions-lib/func-add-posttype-course-school');
+get_template_part('parts/functions-lib/func-course-school-category-order');
+get_template_part('parts/functions-lib/func-course-school-post-order');
+get_template_part('parts/functions-lib/func-acf-school-course');
+// （スクール講師紹介グリッド用）カスタム投稿タイプ
+get_template_part('parts/functions-lib/func-add-posttype-school-instructor');
+get_template_part('parts/functions-lib/func-acf-school-instructor');
 
 // スクリプト、スタイルシートの設定
 get_template_part('parts/functions-lib/func-enqueue-assets');
@@ -132,6 +140,8 @@ get_template_part('parts/functions-lib/func-add-posttype-hero');
 
 // （Recruitセクション用）カスタム投稿タイプの設定
 get_template_part('parts/functions-lib/func-add-posttype-recruit-section');
+get_template_part('parts/functions-lib/func-add-posttype-recruit-job');
+get_template_part('parts/functions-lib/func-acf-recruit-job');
 
 // （gallery用）カスタムフィールドの設定
 get_template_part('parts/functions-lib/func-add-posttype-gallery');

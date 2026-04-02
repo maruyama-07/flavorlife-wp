@@ -1,9 +1,27 @@
 @use '../../foundation' as *;
 
-.p-404__title{
+.p-404 {
+  padding: prem(60) 0 prem(100);
+}
+
+.p-404 .page-content {
   text-align: center;
 }
-.p-404__btn{
-  text-align: center;
 
+.p-404__head {
+  margin: 0 0 prem(24);
+  font-size: prem(72);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.p-404__title {
+  text-align: center;
+}
+
+.p-404__btn {
+  margin-top: prem(40);
+  text-align: center;
 }

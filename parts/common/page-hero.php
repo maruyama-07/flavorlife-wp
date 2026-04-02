@@ -37,10 +37,18 @@ $unique_id = 'page-hero-' . get_the_ID();
 
 <div class="page-hero__content l-inner">
     <?php if ($is_single_post) : ?>
-    <div class="">
+    <div class="page-hero__meta">
         <time class="page-hero__date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>">
             <?php echo esc_html(get_the_date('Y.m.d')); ?>
         </time>
+        <?php
+        if (get_post_type() === 'blog' && function_exists('tool_get_blog_category_label')) {
+            $blog_cat_label = tool_get_blog_category_label();
+            if ($blog_cat_label !== '') {
+                echo '<span class="c-blog-category-badge">' . esc_html($blog_cat_label) . '</span>';
+            }
+        }
+        ?>
     </div>
     <?php endif; ?>
     <h1 class="page-hero__title"><?php the_title(); ?></h1>

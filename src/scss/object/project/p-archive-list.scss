@@ -103,7 +103,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: prem(4);
+    gap: prem(7);
+}
+
+.p-archive-list__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: prem(10);
 }
 
 .p-archive-list__date {

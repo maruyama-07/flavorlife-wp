@@ -11,22 +11,30 @@ get_header(); ?>
         
         <?php
         $page_subtitle = get_field('page_subtitle');
-        $all_children = get_pages(array(
-            'parent'      => get_the_ID(),
-            'sort_column' => 'menu_order,post_title',
-            'post_status' => 'publish',
-        ));
-        // 求人詳細テンプレートを選択した子ページのみ
-        $child_pages = array_filter($all_children, function ($child) {
-            return get_page_template_slug($child->ID) === 'template-recruit.php';
-        });
-        $child_pages = array_values($child_pages);
+
         $parent_id = wp_get_post_parent_id(get_the_ID());
+        /** @var bool 旧子固定ページの求人詳細（テンプレート継続利用時） */
+        $is_recruit_child_detail = $parent_id && get_page_template_slug(get_the_ID()) === 'template-recruit.php';
+
+        $recruit_job_items = array();
+        if (!$is_recruit_child_detail) {
+            $recruit_jobs_q = new WP_Query(array(
+                'post_type'           => 'recruit_job',
+                'posts_per_page'      => -1,
+                'post_status'         => 'publish',
+                'orderby'             => 'date',
+                'order'               => 'DESC',
+                'ignore_sticky_posts' => true,
+                'no_found_rows'       => true,
+            ));
+            $recruit_job_items = $recruit_jobs_q->posts;
+            wp_reset_postdata();
+        }
         $hide_thumbnail = get_field('hide_thumbnail');
         $has_thumbnail = has_post_thumbnail();
         ?>
         
-        <?php if (empty($child_pages) && $parent_id) : ?>
+        <?php if ($is_recruit_child_detail) : ?>
             <!-- 求人詳細子ページ（営業職など）のヘッダー -->
             <?php
             $parent_title = get_the_title($parent_id);
@@ -85,20 +93,20 @@ get_header(); ?>
                 <?php if ($page_subtitle) : ?>
                     <p class="page-hero__subtitle c-head-sub"><?php echo esc_html($page_subtitle); ?></p>
                 <?php endif; ?>
-                <?php if (!empty($child_pages)) : ?>
+                <?php if (!empty($recruit_job_items)) : ?>
                     <div class="l-inner">
                     <ul class="p-recruit-list">
-                        <?php foreach ($child_pages as $child) : ?>
+                        <?php foreach ($recruit_job_items as $job) : ?>
                             <li class="p-recruit-list__item">
-                                <a href="<?php echo esc_url(get_permalink($child)); ?>" class="p-recruit-list__link">
+                                <a href="<?php echo esc_url(get_permalink($job)); ?>" class="p-recruit-list__link">
                                     <span class="p-recruit-list__icon">f</span>
-                                    <span class="p-recruit-list__title"><?php echo esc_html($child->post_title); ?></span>
+                                    <span class="p-recruit-list__title"><?php echo esc_html($job->post_title); ?></span>
                                     <?php
-                                    $child_tag = get_field('page_subtitle', $child->ID);
-                                    if ($child_tag) :
+                                    $job_tag = function_exists('get_field') ? get_field('recruit_job_subtitle', $job->ID) : '';
+                                    if ($job_tag) :
                                     ?>
 
-                                        <span class="p-recruit-list__tag"><?php echo esc_html($child_tag); ?></span>
+                                        <span class="p-recruit-list__tag"><?php echo esc_html($job_tag); ?></span>
                                     <?php endif; ?>
                                     <svg class="p-recruit-list__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="12" cy="12" r="11.5" stroke="currentColor" fill="#0f2b0f"></circle>
@@ -128,18 +136,18 @@ get_header(); ?>
                     <?php if ($page_subtitle) : ?>
                         <p class="p-recruit-list-header__subtitle"><?php echo esc_html($page_subtitle); ?></p>
                     <?php endif; ?>
-                    <?php if (!empty($child_pages)) : ?>
+                    <?php if (!empty($recruit_job_items)) : ?>
                         <ul class="p-recruit-list">
-                            <?php foreach ($child_pages as $child) : ?>
+                            <?php foreach ($recruit_job_items as $job) : ?>
                                 <li class="p-recruit-list__item">
-                                    <a href="<?php echo esc_url(get_permalink($child)); ?>" class="p-recruit-list__link">
+                                    <a href="<?php echo esc_url(get_permalink($job)); ?>" class="p-recruit-list__link">
                                         <span class="p-recruit-list__icon">f</span>
-                                        <span class="p-recruit-list__title"><?php echo esc_html($child->post_title); ?></span>
+                                        <span class="p-recruit-list__title"><?php echo esc_html($job->post_title); ?></span>
                                         <?php
-                                        $child_tag = get_field('page_subtitle', $child->ID);
-                                        if ($child_tag) :
+                                        $job_tag = function_exists('get_field') ? get_field('recruit_job_subtitle', $job->ID) : '';
+                                        if ($job_tag) :
                                         ?>
-                                            <span class="p-recruit-list__tag"><?php echo esc_html($child_tag); ?></span>
+                                            <span class="p-recruit-list__tag"><?php echo esc_html($job_tag); ?></span>
                                         <?php endif; ?>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="12" cy="12" r="11.5" stroke="currentColor" fill="#0f2b0f"></circle>

@@ -1,0 +1,445 @@
+@use 'sass:color';
+@use '../foundation/tools' as *;
+
+$course-green: #2e7d32;
+$course-teal: #4d7373;
+$course-point-red: #c62828;
+$course-status-red: #c62828;
+$course-border: #d9d6d0;
+$course-card-border: #6d7f6e;
+$course-text-muted: #666;
+
+.p-school-course {
+  padding-bottom: prem(80);
+}
+
+.p-school-course__layout {
+  display: grid;
+  grid-template-columns: prem(240) minmax(0, 1fr);
+  gap: prem(40);
+  align-items: start;
+  max-width: prem(1240);
+  padding: prem(40) prem(20) 0;
+}
+
+.p-school-course__aside-title {
+  margin: 0 0 prem(12);
+  padding-bottom: prem(10);
+  font-size: prem(24);
+  font-weight: 400;
+  line-height: 1.3;
+  border-bottom: prem(2) solid #000;
+}
+
+.p-school-course__nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid $course-border;
+}
+
+.p-school-course__nav-item {
+  border-bottom: 1px solid $course-border;
+
+  &.is-current .p-school-course__nav-link {
+    // color: #111;
+  }
+}
+
+.p-school-course__nav-link {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: prem(8);
+  padding: prem(25) 0;
+  font-size: prem(20);
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    // color: #000;
+  }
+}
+
+.p-school-course__nav-label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: prem(4);
+}
+
+.p-school-course__nav-label-main {
+  display: block;
+  max-width: 100%;
+  white-space: pre-line;
+}
+
+.p-school-course__nav-label-sub {
+  display: block;
+  font-size: prem(14);
+  font-weight: 500;
+  line-height: 1.35;
+  color: inherit;
+  opacity: 0.92;
+}
+
+.p-school-course__nav-arrow {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: prem(24);
+  height: prem(24);
+  margin-top: prem(2);
+  border: 1px solid #C3C3C3;
+  border-radius: 50%;
+  color: #b0b0b0;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.p-school-course__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.p-school-course__item + .p-school-course__item {
+  margin-top: prem(20);
+}
+.p-school-course__item {
+  position: relative;
+}
+// 講座一覧カード全体が詳細へのリンク
+.p-school-course-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(prem(260), 0.5fr);
+  gap: prem(20) prem(28);
+  align-items: center;
+  padding: prem(20) prem(22);
+  border: 1px solid #C3C3C3;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: color.adjust($course-card-border, $lightness: -8%);
+    box-shadow: 0 prem(4) prem(16) rgba(0, 0, 0, 0.06);
+  }
+
+  &:focus-visible {
+    outline: prem(2) solid $course-teal;
+    outline-offset: prem(2);
+  }
+}
+
+.p-school-course-card__body {
+  min-width: 0;
+}
+
+.p-school-course-card__badge-row {
+  top: 0;
+  position: absolute;
+}
+
+// バッジ背景色: course_school_get_badge_tone_presets() の hex と対応（変更時は PHP 側も更新）
+.p-school-course-card__badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: prem(2);
+  padding: prem(5) prem(22);
+  font-size: prem(14);
+  font-weight: 600;
+  line-height: 1.3;
+  color: #fff;
+  border-radius: 0;
+
+  &-main {
+    display: block;
+    max-width: 100%;
+    white-space: pre-line;
+  }
+
+  &-sub {
+    display: block;
+    font-size: prem(11);
+    font-weight: 600;
+    line-height: 1.25;
+    opacity: 0.95;
+  }
+
+  &--green {
+    background: $course-green;
+  }
+
+  &--teal {
+    background: $course-teal;
+  }
+
+  &--navy {
+    background: #1e3a5f;
+  }
+
+  &--blue {
+    background: #1565c0;
+  }
+
+  &--purple {
+    background: #6a1b9a;
+  }
+
+  &--brown {
+    background: #998067;
+  }
+
+  &--orange {
+    background: #e65100;
+  }
+
+  &--rose {
+    background: #ad1457;
+  }
+
+  &--slate {
+    background: #455a64;
+  }
+
+  &--olive {
+    background: #558b2f;
+  }
+}
+
+.p-school-course-card__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: prem(10) prem(14);
+  margin: 0 0 prem(18);
+}
+
+.p-school-course-card__status {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: prem(3) prem(10);
+  font-size: prem(12);
+  font-weight: 600;
+  line-height: 1.35;
+  color: $course-status-red;
+  border: 1px solid $course-status-red;
+  border-radius: prem(2);
+  background: transparent;
+}
+
+.p-school-course-card__title {
+  flex: 1;
+  margin: 0;
+  min-width: 0;
+  font-size: prem(20);
+  font-weight: 700;
+  line-height: 1.35;
+  color: #111;
+}
+
+.p-school-course-card__point {
+  display: flex;
+  align-items: center;
+  gap: prem(15);
+  margin: 0 0 prem(20);
+}
+
+.p-school-course-card__point-label {
+  flex-shrink: 0;
+  padding: prem(7) prem(12);
+  font-size: prem(16);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+  background: $course-point-red;
+  border-radius: prem(10);
+}
+
+.p-school-course-card__point-text {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  font-size: prem(14);
+  font-weight: 600;
+  line-height: 1.5;
+  color: $course-point-red;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.p-school-course-card__dates {
+  display: flex;
+  align-items: flex-start;
+  gap: prem(8);
+  margin: 0 0 prem(12);
+  font-size: prem(14);
+  line-height: 1.5;
+  color: $course-text-muted;
+}
+
+.p-school-course-card__dates-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-top: prem(2);
+  color: #999;
+}
+
+.p-school-course-card__dates-text {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.p-school-course-card__rule {
+  height: 1px;
+  margin: 0 0 prem(12);
+  background: $course-border;
+}
+
+.p-school-course-card__detail {
+  font-size: prem(13);
+  line-height: 1.75;
+  color: #333;
+  word-break: break-word;
+  white-space: pre-line;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.p-school-course-card__media {
+  position: relative;
+  overflow: hidden;
+  align-self: stretch;
+  height: prem(210);
+}
+
+.p-school-course-card__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.p-school-course-card__media-ph {
+  width: 100%;
+  background: linear-gradient(135deg, #e0ded8 0%, #eceae6 100%);
+}
+
+.p-school-course__empty {
+  margin: prem(24) 0 0;
+  font-size: prem(15);
+  color: #666;
+}
+
+.p-school-course__pagination {
+  margin-top: prem(40);
+
+  ul.page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: prem(8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  a.page-numbers,
+  span.page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: prem(40);
+    padding: prem(8) prem(12);
+    font-size: prem(14);
+    line-height: 1.3;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid $course-border;
+    border-radius: prem(2);
+    background: #fff;
+    box-sizing: border-box;
+  }
+
+  a.page-numbers:hover {
+    border-color: #999;
+  }
+
+  span.page-numbers.current {
+    font-weight: 700;
+    color: #fff;
+    background: $course-teal;
+    border-color: $course-teal;
+  }
+
+  span.page-numbers.dots {
+    min-width: auto;
+    padding: prem(8);
+    border: none;
+    background: transparent;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .p-school-course__layout {
+    grid-template-columns: prem(200) minmax(0, 1fr);
+    gap: prem(28);
+  }
+
+  a.p-school-course-card {
+    grid-template-columns: minmax(0, 1fr) prem(220);
+    gap: prem(18) prem(22);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-course {
+    padding-bottom: prem(48);
+  }
+
+  .p-school-course__layout {
+    grid-template-columns: 1fr;
+    gap: prem(28);
+  }
+
+  a.p-school-course-card {
+    grid-template-columns: 1fr;
+    gap: prem(16);
+    padding: prem(18);
+  }
+
+  .p-school-course-card__media {
+    order: -1;
+    min-height: prem(200);
+  }
+
+  .p-school-course-card__img {
+    min-height: prem(200);
+  }
+
+  .p-school-course-card__title {
+    font-size: prem(18);
+  }
+}

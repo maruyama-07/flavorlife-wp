@@ -108,12 +108,21 @@
     // margin-bottom: prem(75);
 }
 
-/* 投稿詳細: 日付（左揃え） */
+/* 投稿詳細: 日付 + カテゴリー（左揃え・横並び） */
+.page-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: prem(12);
+    margin-bottom: prem(12);
+    text-align: left;
+}
+
 .page-hero__date {
-    display: block;
+    display: inline-block;
     font-size: prem(14);
     color: #808080;
-    margin-bottom: prem(12);
+    margin-bottom: 0;
     text-align: left;
 }
 
@@ -235,10 +244,12 @@
         font-size: prem(12);
     }
     
+    .page-hero__meta {
+        margin-bottom: prem(30);
+    }
+
     .page-hero__date {
         font-size: prem(12);
-        // padding: 0 prem(10);
-        margin-bottom: prem(30);
     }
     
     .page-header {

@@ -6,8 +6,23 @@
 
 get_header('school'); ?>
 
-<main class="l-main l-main--school">
-    <?php if (function_exists('school_section_is_voice_page') && school_section_is_voice_page()) : ?>
+<?php
+$main_class = 'l-main';
+if (function_exists('school_section_is_about_page') && school_section_is_about_page()) {
+    $main_class .= ' l-main--school p-school-about';
+}
+?>
+<main class="<?php echo esc_attr($main_class); ?>">
+    <?php if (function_exists('school_section_is_course_page') && school_section_is_course_page()) : ?>
+        <?php
+        while (have_posts()) :
+            the_post();
+            get_template_part('parts/common/p-school-subpage-hero');
+        endwhile;
+        rewind_posts();
+        ?>
+        <?php get_template_part('parts/project/p-school-course-archive'); ?>
+    <?php elseif (function_exists('school_section_is_voice_page') && school_section_is_voice_page()) : ?>
         <?php
         while (have_posts()) :
             the_post();
@@ -40,6 +55,14 @@ get_header('school'); ?>
                 </div>
             </div>
                 <?php
+                if (function_exists('school_section_is_about_page') && school_section_is_about_page()) {
+                    get_template_part('parts/project/p-school-about-intro', null, array(
+                        'post_id' => get_the_ID(),
+                    ));
+                    get_template_part('parts/project/p-school-about-bottom-links', null, array(
+                        'post_id' => get_the_ID(),
+                    ));
+                }
             endif;
             ?>
         <?php endwhile; ?>

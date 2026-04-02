@@ -14,8 +14,8 @@ $school-about-btn: #666633;
   margin-top: prem(40);
   margin-bottom: prem(40);
   padding: prem(48) prem(24);
-  box-sizing: border-box;
-  background: #f8f6f1;
+  background: #E5E6DF;
+  font-family: "inner" ,sans-serif;
 }
 
 .p-school-about-instructors__inner {
@@ -24,10 +24,10 @@ $school-about-btn: #666633;
 }
 
 .p-school-about-instructors__title {
-  margin: 0 0 prem(28);
+  margin: 0 0 prem(40);
   padding: 0 0 prem(5) prem(15);
   font-size: prem(32);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.35;
   color: #000;
   border-left: prem(8) solid $school-about-green;
@@ -36,8 +36,8 @@ $school-about-btn: #666633;
 
 .p-school-about-instructors__grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: prem(20);
+  grid-template-columns: repeat(auto-fill, minmax(prem(220), 1fr));
+  gap: prem(10);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -51,18 +51,24 @@ $school-about-btn: #666633;
 }
 
 .p-school-about-instructors__media {
-  aspect-ratio: 1 / 1;
   width: 100%;
   overflow: hidden;
   border-radius: prem(4);
   background: #e0ded8;
-}
-
-.p-school-about-instructors__img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: relative;
+  &::before {
+    content: '';
+    padding-top: calc(270 / 210 * 100%);
+    display: block;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .p-school-about-instructors__placeholder {
@@ -86,22 +92,24 @@ $school-about-btn: #666633;
 .p-school-about-instructors__btn {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: prem(8);
-  margin-top: prem(12);
-  padding: prem(10) prem(16);
+  justify-content: center;
+  margin-top: prem(14);
+  padding: prem(10) prem(20);
   font-size: prem(14);
-  font-weight: 500;
-  line-height: 1.3;
+  font-weight: 400;
+  line-height: 1;
   color: #fff;
   text-decoration: none;
-  background: $school-about-btn;
-  border-radius: prem(999);
+  background: #042C19;
+  border-radius: prem(15);
+  text-align: center;
   transition: opacity 0.2s ease;
+  letter-spacing: 0.2em;
+  position: relative;
+  min-height: prem(40);
 
   &:hover {
-    opacity: 0.92;
-    color: #fff;
+    
   }
 }
 
@@ -111,29 +119,30 @@ $school-about-btn: #666633;
 }
 
 .p-school-about-instructors__btn-label {
-  flex: 1;
-  min-width: 0;
+  display: block;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: center;
+  line-height: 1.2;
+  padding: 0 prem(10);
+  box-sizing: border-box;
 }
 
 .p-school-about-instructors__btn-icon {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: prem(24);
-  height: prem(24);
+  position: absolute;
+  top: 50%;
+  right: prem(12);
+  transform: translateY(-50%);
+  width: prem(20);
+  height: prem(20);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-@media screen and (max-width: 1100px) {
-  .p-school-about-instructors__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  background-color: #fff;
+  background-image: url("../images/svg/arrow-line.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: prem(9) auto;
 }
 
 @media screen and (max-width: 767px) {
@@ -146,7 +155,7 @@ $school-about-btn: #666633;
   .p-school-about-instructors__title {
     font-size: prem(24);
     margin-bottom: prem(20);
-    padding-left: prem(12);
+    padding-left: prem(11);
     border-left-width: prem(6);
   }
 
@@ -156,7 +165,19 @@ $school-about-btn: #666633;
   }
 
   .p-school-about-instructors__btn {
-    padding: prem(8) prem(12);
-    font-size: prem(13);
+    padding: prem(10) prem(10);
+    font-size: prem(12);
+    min-height: prem(40);
+  }
+
+  .p-school-about-instructors__btn-label {
+    padding: 0 prem(10);
+    padding-right: prem(19);
+  }
+
+  .p-school-about-instructors__btn-icon {
+    // width: prem(34);
+    // height: prem(34);
+    right: prem(10);
   }
 }

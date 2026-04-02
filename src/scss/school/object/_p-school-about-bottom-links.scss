@@ -1,0 +1,77 @@
+@use '../foundation/tools' as *;
+.p-school-about {
+  .page-content {
+    padding-bottom: prem(20);
+  }
+  @media screen and (max-width: 767px) {
+    .page-content {
+      padding-bottom: 0;
+    }
+  }
+}
+.p-school-about-bottom-links {
+  padding: prem(24) prem(24) prem(80);
+}
+
+.p-school-about-bottom-links__inner {
+  max-width: prem(1240);
+}
+
+.p-school-about-bottom-links__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: prem(38);
+}
+
+.p-school-about-bottom-links__card {
+  display: block;
+  color: #111;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.92;
+    color: #111;
+  }
+}
+
+.p-school-about-bottom-links__image {
+  overflow: hidden;
+  border-radius: prem(24);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 600 / 250;
+    object-fit: cover;
+    object-position: top;
+  }
+}
+
+.p-school-about-bottom-links__text {
+  margin: prem(20) 0 0;
+  font-size: prem(20);
+  line-height: 1.4;
+  color: #111;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-about-bottom-links {
+    padding: prem(20) prem(15) prem(48);
+  }
+
+  .p-school-about-bottom-links__grid {
+    grid-template-columns: 1fr;
+    gap: prem(24);
+  }
+
+  .p-school-about-bottom-links__image {
+    border-radius: prem(16);
+  }
+
+  .p-school-about-bottom-links__text {
+    margin-top: prem(14);
+    font-size: prem(17);
+  }
+}

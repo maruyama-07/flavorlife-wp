@@ -76,6 +76,56 @@ function school_section_is_about_page()
 }
 
 /**
+ * 講座一覧固定ページ（/school/course/）の投稿 ID
+ *
+ * @return int 0 = 該当なし
+ */
+function school_section_get_course_page_id()
+{
+    $page = get_page_by_path('school/course');
+    return $page ? (int) $page->ID : 0;
+}
+
+/**
+ * 現在の表示が /school/course/ 相当の固定ページか
+ *
+ * @return bool
+ */
+function school_section_is_course_page()
+{
+    if (!is_page()) {
+        return false;
+    }
+    $root = school_section_get_root_page_id();
+    if (!$root) {
+        return false;
+    }
+    $page = get_queried_object();
+    if (!$page instanceof WP_Post || $page->post_name !== 'course') {
+        return false;
+    }
+
+    return (int) $page->post_parent === $root;
+}
+
+/**
+ * 講座一覧のカテゴリーフィルター（URL: ?course_cat=スラッグ）
+ *
+ * @return string 空 = 全件
+ */
+function school_course_get_filter_category_slug()
+{
+    $slug = '';
+    if (isset($_GET['course_cat'])) {
+        $slug = sanitize_title(wp_unslash((string) $_GET['course_cat']));
+    } elseif (get_query_var('course_cat')) {
+        $slug = sanitize_title((string) get_query_var('course_cat'));
+    }
+
+    return $slug;
+}
+
+/**
  * スクールと同一ブランドのレイアウト（固定ページ school 配下 ＋ 受講生の声 CPT）
  *
  * @return bool
