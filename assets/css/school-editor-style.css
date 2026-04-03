@@ -24,6 +24,34 @@
     margin-top: 0;
 }
 
+/* 茶色バナー（スタイル／ツールバーボタン共通・フロントと揃えたプレビュー） */
+.mce-content-body .c-school-editor-banner,
+.wp-block-freeform .c-school-editor-banner {
+    background-color: #998067;
+    color: #fff;
+    font-family: "游明朝", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    padding: 1.25rem 1rem;
+    margin: 1rem 0;
+    box-sizing: border-box;
+}
+
+.mce-content-body .c-school-editor-banner p,
+.wp-block-freeform .c-school-editor-banner p {
+    margin: 0 0 0.5em;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+.mce-content-body .c-school-editor-banner p:last-child,
+.wp-block-freeform .c-school-editor-banner p:last-child {
+    margin-bottom: 0;
+}
+
 /* 本文 CTA（layout/_header-school.scss の .l-header-school__cta と同一見た目・編集プレビュー用） */
 .mce-content-body .p-school-content-cta-wrap,
 .wp-block-freeform .p-school-content-cta-wrap {

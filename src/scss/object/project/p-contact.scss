@@ -3,6 +3,9 @@
 .p-contact__contents{
 
 }
+.p-contact__inner {
+  padding-top: prem(35);
+}
 
 .p-contact__content{
   @include mq('md'){

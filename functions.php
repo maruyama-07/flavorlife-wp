@@ -6,6 +6,9 @@
 // 基本設定
 get_template_part('parts/functions-lib/func-base');
 
+// Google アナリティクス（gtag・計測IDは func-analytics-gtag 内フィルターで変更可）
+get_template_part('parts/functions-lib/func-analytics-gtag');
+
 // カスタムメニューWalker
 get_template_part('parts/functions-lib/func-menu-walker');
 
@@ -47,6 +50,8 @@ get_template_part('parts/functions-lib/func-custom-button');
 
 // TinyMCEエディタの設定
 get_template_part('parts/functions-lib/func-tinymce-config');
+// スクール系クラシックエディタ専用 TinyMCE（茶色バナー等）
+get_template_part('parts/functions-lib/func-tinymce-school');
 
 // 段落をpタグで出力（TinyMCE設定＋既存divのp変換）
 get_template_part('parts/functions-lib/func-content-paragraph');
@@ -155,4 +160,8 @@ get_template_part('parts/functions-lib/func-add-posttype-post');
 // （Blog用）カスタム投稿タイプの設定
 get_template_part('parts/functions-lib/func-add-posttype-blog');
 
+// メール送信設定
+// add_action('phpmailer_init', function($phpmailer) {
+//     $phpmailer->isSMTP();
+// });
 ?>

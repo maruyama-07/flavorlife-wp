@@ -62,3 +62,28 @@ body {
 
 /* 画像直後の改行 */
 figure + * { clear: both; }
+
+/* スクール本文：スタイル「茶色バナー」（管理画面のクラシックエディタ内プレビュー用） */
+.c-school-editor-banner {
+    background-color: #998067;
+    color: #fff;
+    font-family: "游明朝", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    padding: 1.25rem 1rem;
+    margin: 1rem 0;
+    box-sizing: border-box;
+}
+
+.c-school-editor-banner p {
+    margin: 0 0 0.5em;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+.c-school-editor-banner p:last-child {
+    margin-bottom: 0;
+}

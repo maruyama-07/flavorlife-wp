@@ -1,0 +1,28 @@
+@use '../foundation/tools' as *;
+
+// クラシックエディタ「スタイル」→ 茶色バナー（.c-school-editor-banner）
+body.school-section .page-content .c-school-editor-banner {
+  margin: prem(24) 0;
+  padding: prem(40) prem(24);
+  background-color: #998067;
+  color: #fff;
+  width: 100vw;
+  margin: 0 calc(50% - 50vw);
+  font-family: '游明朝', 'Yu Mincho', YuMincho, 'Hiragino Mincho ProN', 'Noto Serif JP', serif;
+  font-size: prem(30);
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+  box-sizing: border-box;
+
+  p {
+    margin: 0 0 prem(8);
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}

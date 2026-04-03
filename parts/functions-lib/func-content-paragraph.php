@@ -36,6 +36,8 @@ function tool_convert_paragraph_divs_to_p($content)
         'wp-block-pullquote', 'wp-block-code', 'wp-block-preformatted', 'wp-block-verse',
         'wp-block-file', 'wp-block-audio', 'wp-block-video', 'wp-block-heading',
         'has-background', 'alignwide', 'alignfull', 'aligncenter', 'alignleft', 'alignright',
+        // クラシックエディタの div（中に p があり p に変換すると無効ネストになる）
+        'c-school-editor-banner',
     );
 
     $max_iterations = 20;

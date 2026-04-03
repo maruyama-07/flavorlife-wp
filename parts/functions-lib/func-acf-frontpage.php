@@ -91,4 +91,42 @@ if (function_exists('acf_add_local_field_group')) {
         'position' => 'normal',
         'style' => 'default',
     ));
+
+    acf_add_local_field_group(array(
+        'key' => 'group_frontpage_top_blog',
+        'title' => 'TOP：Blogセクション',
+        'fields' => array(
+            array(
+                'key' => 'field_top_blog_image',
+                'label' => 'Blog：画像（p-top-blog__image）',
+                'name' => 'top_blog_image',
+                'type' => 'image',
+                'instructions' => '左側の人物画像。未設定のときはテーマ同梱の top-blog.webp を表示します。',
+                'return_format' => 'array',
+                'preview_size' => 'medium',
+                'library' => 'all',
+            ),
+            array(
+                'key' => 'field_top_blog_text',
+                'label' => 'Blog：本文（p-top-blog__text）',
+                'name' => 'top_blog_text',
+                'type' => 'textarea',
+                'rows' => 5,
+                'new_lines' => '',
+                'instructions' => '右側白背景エリアの本文。改行はそのまま折り返して表示されます。',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'page_type',
+                    'operator' => '==',
+                    'value' => 'front_page',
+                ),
+            ),
+        ),
+        'menu_order' => 6,
+        'position' => 'normal',
+        'style' => 'default',
+    ));
 }

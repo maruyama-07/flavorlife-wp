@@ -10,7 +10,7 @@
 
 .p-404__head {
   margin: 0 0 prem(24);
-  font-size: prem(72);
+  font-size: prem(40);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: 0.05em;
@@ -19,6 +19,8 @@
 
 .p-404__title {
   text-align: center;
+  font-size: prem(18);
+  margin-bottom: prem(30);
 }
 
 .p-404__btn {

@@ -2466,6 +2466,30 @@ body.school-section .page-content .l-inner > .c-school-heading:first-child {
     font-size: 1.125rem;
   }
 }
+body.school-section .page-content .c-school-editor-banner {
+  margin: 1.5rem 0;
+  padding: 2.5rem 1.5rem;
+  background-color: #998067;
+  color: #fff;
+  width: 100vw;
+  margin: 0 calc(50% - 50vw);
+  font-family: "游明朝", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Noto Serif JP", serif;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+  box-sizing: border-box;
+}
+body.school-section .page-content .c-school-editor-banner p {
+  margin: 0 0 0.5rem;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+body.school-section .page-content .c-school-editor-banner p:last-child {
+  margin-bottom: 0;
+}
+
 .p-school-mv-splide {
   position: relative;
   width: 100%;

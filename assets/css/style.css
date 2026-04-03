@@ -2067,7 +2067,7 @@ a:hover .c-btn-arrow path {
 
 .p-404__head {
   margin: 0 0 1.5rem;
-  font-size: 4.5rem;
+  font-size: 2.5rem;
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: 0.05em;
@@ -2076,6 +2076,8 @@ a:hover .c-btn-arrow path {
 
 .p-404__title {
   text-align: center;
+  font-size: 1.125rem;
+  margin-bottom: 1.875rem;
 }
 
 .p-404__btn {
@@ -2235,6 +2237,10 @@ a:hover .c-btn-arrow path {
 .p-company-name {
   position: relative;
   top: -1.25rem;
+}
+
+.p-contact__inner {
+  padding-top: 2.1875rem;
 }
 
 .p-contact__head {

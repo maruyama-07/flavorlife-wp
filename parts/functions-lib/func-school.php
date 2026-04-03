@@ -732,3 +732,43 @@ function school_section_mce_external_plugins_add_cta($plugins)
     return $plugins;
 }
 add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_cta', 1000);
+
+/**
+ * スクール用 TinyMCE：茶色バナー（div.c-school-editor-banner）
+ *
+ * @param string[] $buttons
+ * @return string[]
+ */
+function school_section_mce_buttons_add_editor_banner($buttons)
+{
+    if (
+        !function_exists('tool_school_tinymce_is_target_screen')
+        || !tool_school_tinymce_is_target_screen()
+        || !is_array($buttons)
+    ) {
+        return $buttons;
+    }
+    $buttons[] = 'school_editor_banner';
+
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'school_section_mce_buttons_add_editor_banner', 1000);
+
+/**
+ * @param array<string, string> $plugins
+ * @return array<string, string>
+ */
+function school_section_mce_external_plugins_add_editor_banner($plugins)
+{
+    if (
+        !function_exists('tool_school_tinymce_is_target_screen')
+        || !tool_school_tinymce_is_target_screen()
+        || !is_array($plugins)
+    ) {
+        return $plugins;
+    }
+    $plugins['school_editor_banner'] = get_template_directory_uri() . '/assets/js/admin/school-editor-banner.js';
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_editor_banner', 1000);
