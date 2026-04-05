@@ -1,0 +1,21 @@
+/**
+ * WordPress コアの align* クラス（foundation 不要）
+ * ※ school-style は style.css を読まないため、このファイルを school-style.scss からも @use する
+ */
+.aligncenter {
+    clear: both;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.alignright {
+    text-align: right;
+}
+
+.alignleft {
+    text-align: left;
+}
+
+.alignjustify {
+    text-align: justify;
+}

@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+// クラシックエディタ「スタイル」→ 行間（TinyMCE の class 付与）
+// 複数クラスが付いた場合は、このファイル内で後にあるルールが優先されます。
+.u-lh-inherit {
+  line-height: inherit !important;
+}
+
+.u-lh-150 {
+  line-height: 1.5 !important;
+}
+
+.u-lh-175 {
+  line-height: 1.75 !important;
+}
+
+.u-lh-200 {
+  line-height: 2 !important;
+}
+
+.u-lh-220 {
+  line-height: 2.2 !important;
+}

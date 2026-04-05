@@ -1,0 +1,105 @@
+@use '../../foundation' as *;
+
+/*** 固定ページ・投稿本文（.page-content）内のテーブル
+ */
+.page-content {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+  }
+
+  table tr:first-child > th,
+  table tr:first-child > td {
+    background-color: #0f2b0f;
+    color: #fff;
+  }
+
+  table th,
+  table td {
+    padding: prem(6) prem(10);
+    border: 1px solid #d9d9d9;
+  }
+
+  /** page-content-table-scroll.js が付与（SP は内側で横スクロール） */
+  .u-table-scroll-wrap {
+    position: relative;
+    margin: prem(16) 0;
+
+    /** .l-inner 内でもビューポート幅いっぱいに（100vw 単体では親幅に縛られる） */
+    @media screen and (max-width: 767px) {
+      width: 100vw;
+      max-width: 100vw;
+      margin-top: prem(16);
+      margin-bottom: prem(16);
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      /** 画面端に密着しない（常時。overflow 有無に依存させない） */
+      padding-left: prem(25);
+      // padding-right: prem(15);
+      box-sizing: border-box;
+    }
+  }
+
+  .u-table-scroll-wrap__inner {
+    @media screen and (max-width: 767px) {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  /** SP: max-content で列幅を確保（100vw はラッパー側で確保済み） */
+  @media screen and (max-width: 767px) {
+    .u-table-scroll-wrap__inner table {
+      width: max-content;
+      min-width: 100%;
+      max-width: none;
+    }
+
+    table th,
+    table td {
+      min-width: prem(112);
+    }
+
+    /** 講座表など 6 列想定：主要列を広めに（nth は列順が同じ表向け） */
+    table th:nth-child(2),
+    table td:nth-child(2) {
+      min-width: prem(200);
+    }
+
+    table th:nth-child(3),
+    table td:nth-child(3) {
+      min-width: prem(220);
+    }
+
+    /** 開講形式など短い見出しが縦積みにならないよう */
+    table th:nth-child(5),
+    table td:nth-child(5) {
+      min-width: prem(120);
+      white-space: nowrap;
+    }
+  }
+
+  /** 右端に影（スクロール可能かつ末尾未達のとき。背景色に依存しない） */
+  @media screen and (max-width: 767px) {
+    .u-table-scroll-wrap--overflow:not(.u-table-scroll-wrap--end) .u-table-scroll-wrap__inner {
+      box-shadow: inset -1.25rem 0 1rem -0.5rem rgba(0, 0, 0, 0.07);
+    }
+  }
+
+  .u-table-scroll-hint {
+    margin: prem(8) 0 0;
+    padding: 0;
+    font-size: prem(12);
+    line-height: 1.4;
+    color: #666;
+    text-align: center;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}

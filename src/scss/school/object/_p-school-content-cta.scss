@@ -1,12 +1,13 @@
 @use '../foundation/tools' as *;
 
 // TinyMCE「ボタン」挿入ブロック（中身は .l-header-school__cta と同一クラス）
+// 背景色は <a style="background-color:…"> で上書き可能（既定は header の #699）
 .school-section .page-content {
   .p-school-content-cta-wrap {
     margin: prem(24) 0;
     .l-header-school__cta {
-      font-size: prem(14);
-      padding: prem(14) prem(30);
+      font-size: prem(16);
+      padding: prem(14) prem(50);
       height: fit-content;
     }
   }

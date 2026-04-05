@@ -31,7 +31,7 @@ function course_school_register_post_type()
             'exclude_from_search' => true,
             'has_archive' => false,
             'rewrite' => array(
-                'slug' => 'school/lesson',
+                'slug' => 'school/course',
                 'with_front' => false,
             ),
             'capability_type' => 'post',
@@ -168,8 +168,8 @@ function course_school_register_taxonomy()
 
 add_action('init', function () {
     $v = (int) get_option('course_school_rewrite_v', 0);
-    if ($v < 3) {
+    if ($v < 4) {
         flush_rewrite_rules(false);
-        update_option('course_school_rewrite_v', 3);
+        update_option('course_school_rewrite_v', 4);
     }
 }, 999);

@@ -57,9 +57,37 @@ function new_posting($days = 7 ,$entry_time = null){
 }
 
 /**
+ * 投稿・固定ページの本文（the_content）でも条件付き改行トークンを変換
+ * - {sp} / {{sp}} … スマホのみ &lt;br class="u-br-sp"&gt;
+ * - {pc} / {{pc}} … PC（768px以上）のみ &lt;br class="u-br-pc"&gt;
+ * クラシックエディタの「ビジュアル」ではそのまま文字として表示され、フロントで置換される
+ */
+add_filter('the_content', 'tool_the_content_replace_sp_break', 12);
+
+function tool_the_content_replace_sp_break($content)
+{
+    if ($content === '' || $content === null) {
+        return $content;
+    }
+    $content = (string) $content;
+    if (
+        strpos($content, '{sp}') === false && strpos($content, '{{sp}}') === false
+        && strpos($content, '{pc}') === false && strpos($content, '{{pc}}') === false
+    ) {
+        return $content;
+    }
+
+    $content = str_replace(array('{{sp}}', '{sp}'), '<br class="u-br-sp">', $content);
+    $content = str_replace(array('{{pc}}', '{pc}'), '<br class="u-br-pc">', $content);
+
+    return $content;
+}
+
+/**
  * ACFテキストエリア（段落）向けの整形（コーポレート・スクール共通）
  * - 改行は nl2br で反映
- * - {sp} または {{sp}} はスマホのみ改行（&lt;br class="u-br-sp"&gt;）。スタイルは .u-br-sp（style.css / school-style）
+ * - {sp} / {{sp}} はスマホのみ改行、{pc} / {{pc}} は PC のみ改行（768px 以上）
+ * - 固定ページ・投稿本文では tool_the_content_replace_sp_break（the_content）でも同トークンを解釈
  * 管理画面の説明文は tool_acf_paragraph_field_instructions() をフィールドに付与
  *
  * @param string $text
@@ -70,11 +98,14 @@ function tool_format_text_with_sp_break($text)
     $text = (string) $text;
     // ACFの new_lines=br で混入する <br> を一旦改行へ戻す
     $text = preg_replace('/<br\s*\/?>/i', "\n", $text);
-    // {sp} は nl2br 前にプレースホルダへ退避
+    // 長いトークンを先に退避（{{sp}} 内に {sp} が含まれるため）
     $text = str_replace(array('{{sp}}', '{sp}'), '__SP_BR__', $text);
+    $text = str_replace(array('{{pc}}', '{pc}'), '__PC_BR__', $text);
 
     $escaped = esc_html($text);
     $escaped = nl2br($escaped);
     $escaped = str_replace('__SP_BR__', '<br class="u-br-sp">', $escaped);
+    $escaped = str_replace('__PC_BR__', '<br class="u-br-pc">', $escaped);
+
     return wp_kses($escaped, array('br' => array('class' => true)));
 }

@@ -12,11 +12,32 @@ if (function_exists('get_field')) {
 }
 $thumb_sp = $thumb_sp !== '' ? $thumb_sp : $thumb_pc;
 $has_thumb = !empty($thumb_pc);
+/** 講座詳細は一覧カード用サムネのみで、ヒーローは常に is-no-thumb に統一 */
+if (is_singular('course_school')) {
+    $has_thumb = false;
+}
+
+$course_category_labels = array();
+if (is_singular('course_school')) {
+    $course_terms = get_the_terms(get_the_ID(), 'course_school_category');
+    if (is_array($course_terms)) {
+        foreach ($course_terms as $ct) {
+            if ($ct instanceof WP_Term) {
+                $course_category_labels[] = $ct->name;
+            }
+        }
+    }
+}
 ?>
 <section class="p-school-subpage-hero<?php echo $has_thumb ? ' is-has-thumb' : ' is-no-thumb'; ?>">
   <div class="p-school-subpage-hero__inner">
     <div class="p-school-subpage-hero__title-wrap">
-      <h1 class="p-school-subpage-hero__title"><?php echo esc_html($title); ?></h1>
+      <div class="p-school-subpage-hero__title-stack">
+        <h1 class="p-school-subpage-hero__title"><?php echo esc_html($title); ?></h1>
+        <?php if ($course_category_labels !== array()) : ?>
+        <p class="p-school-subpage-hero__categories"><?php echo esc_html(implode(' ・ ', $course_category_labels)); ?></p>
+        <?php endif; ?>
+      </div>
     </div>
     <?php if ($has_thumb) : ?>
       <div class="p-school-subpage-hero__media img-effect">

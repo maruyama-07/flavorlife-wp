@@ -4,6 +4,12 @@
 @use "./foundation/reset";
 @use "./foundation/base";
 
+// コーポレートと共有（スクールは style.css を読まないため明示的に取り込む）
+@use "../object/utility/wp-alignment";
+@use "../object/component/c-page-content-table";
+@use "../object/component/c-framed-section-title";
+@use "../object/component/c-content-two-col";
+
 // layout / object 配下のパーシャルは自動で結合（新規ファイルもエントリ追記不要）
 // ※ gulp の sassGlob() が展開する（メインの style.scss と同じ方式）
 @use "./layout/**";

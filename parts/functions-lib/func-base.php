@@ -90,5 +90,5 @@ function tool_default_page_template_meta_box($page, $context, $post) {
  */
 function tool_acf_paragraph_field_instructions()
 {
-    return '改行はそのまま表示されます。スマホ表示のみで改行したい位置に {sp} または {{sp}} を入力できます。';
+    return '改行はそのまま表示されます。スマホのみ改行: {sp} または {{sp}}。PC（画面幅768px以上）のみ改行: {pc} または {{pc}}。固定ページ・投稿の本文／クラシックエディタの本文でも利用できます。';
 }

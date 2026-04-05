@@ -22,6 +22,13 @@ function my_script_init()
   wp_enqueue_script('page-hero-image', get_template_directory_uri() . '/assets/js/page-hero-image.js', array(), filemtime(get_theme_file_path('assets/js/page-hero-image.js')), true);
   // ページコンテンツスクロールフェードイン
   wp_enqueue_script('page-content-scroll', get_template_directory_uri() . '/assets/js/page-content-scroll.js', array(), filemtime(get_theme_file_path('assets/js/page-content-scroll.js')), true);
+  wp_enqueue_script(
+    'page-content-table-scroll',
+    get_template_directory_uri() . '/assets/js/page-content-table-scroll.js',
+    array(),
+    filemtime(get_theme_file_path('assets/js/page-content-table-scroll.js')),
+    true
+  );
   // 基本CSS
   wp_enqueue_style('my-style', get_template_directory_uri() . '/assets/css/style.css', array(), filemtime(get_theme_file_path('assets/css/style.css')), 'all');
 

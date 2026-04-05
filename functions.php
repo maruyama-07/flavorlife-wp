@@ -73,6 +73,8 @@ get_template_part('parts/functions-lib/func-image-grid');
 
 // ステップフロー（ショートコード）
 get_template_part('parts/functions-lib/func-step-flow');
+get_template_part('parts/functions-lib/func-framed-section-title');
+get_template_part('parts/functions-lib/func-content-two-col');
 
 // 商品カード（ショートコード）
 get_template_part('parts/functions-lib/func-product-card');

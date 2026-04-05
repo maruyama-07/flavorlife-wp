@@ -1,14 +1,15 @@
 /**
  * スクール固定ページ編集時のみ読み込み。
  * TinyMCE の windowManager モーダルで、フッター（OK/キャンセル）が本文に重なって入力できない問題の緩和。
+ * ※ 下記「スクール専用モーダル」には適用しない（別レイアウト）。
  */
-.mce-window .mce-window-body {
+.mce-window:not(.mce-school-course-intro-modal):not(.mce-school-cta-modal):not(.mce-tool-line-height-modal) .mce-window-body {
   padding-bottom: 1rem !important;
   box-sizing: border-box;
 }
 
-/* abs レイアウトで foot が本文の上に載るのを防ぎ、ボタン行を下へ */
-.mce-window .mce-abs-layout-item.mce-foot {
+/* abs レイアウトで foot が本文の上に載るのを防ぎ、ボタン行を下へ（スクール専用モーダル除外） */
+.mce-window:not(.mce-school-course-intro-modal):not(.mce-school-cta-modal):not(.mce-tool-line-height-modal) .mce-abs-layout-item.mce-foot {
   position: relative !important;
   top: auto !important;
   right: auto !important;
@@ -22,14 +23,111 @@
   z-index: 1;
 }
 
-.mce-window .mce-foot .mce-btn {
+.mce-window:not(.mce-school-course-intro-modal):not(.mce-school-cta-modal):not(.mce-tool-line-height-modal) .mce-foot .mce-btn {
   position: relative;
   z-index: 2;
 }
 
-/* スキンによっては foot に abs が付かない場合の保険 */
-.mce-window .mce-foot:not(.mce-abs-layout-item) {
+.mce-window:not(.mce-school-course-intro-modal):not(.mce-school-cta-modal):not(.mce-tool-line-height-modal) .mce-foot:not(.mce-abs-layout-item) {
   margin-top: 1rem !important;
   padding-top: 0.75rem !important;
   border-top: 1px solid #dcdcde;
+}
+
+/* ----- スクール専用モーダル共通：講座2カラム・本文ボタン（入力はみ出し防止・フッター固定） ----- */
+.mce-window.mce-school-course-intro-modal,
+.mce-window.mce-school-cta-modal {
+  max-width: calc(100vw - 24px) !important;
+  max-height: calc(100vh - 24px) !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.mce-window.mce-school-course-intro-modal .mce-abs-layout-item.mce-foot,
+.mce-window.mce-school-cta-modal .mce-abs-layout-item.mce-foot {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: auto !important;
+  width: 100% !important;
+  margin-top: 0 !important;
+  padding: 0.65rem 0.75rem !important;
+  border-top: 1px solid #dcdcde;
+  background: #fff;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-school-course-intro-modal .mce-window-head,
+.mce-window.mce-school-cta-modal .mce-window-head {
+  flex-shrink: 0;
+}
+
+.mce-window.mce-school-course-intro-modal .mce-window-body,
+.mce-window.mce-school-cta-modal .mce-window-body {
+  position: relative !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0.75rem 4rem !important;
+  box-sizing: border-box !important;
+}
+
+.mce-window.mce-school-course-intro-modal .mce-form,
+.mce-window.mce-school-cta-modal .mce-form {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-school-course-intro-modal .mce-formitem,
+.mce-window.mce-school-cta-modal .mce-formitem {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-school-course-intro-modal .mce-formitem .mce-container-body,
+.mce-window.mce-school-cta-modal .mce-formitem .mce-container-body {
+  max-width: 100%;
+  min-width: 0;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-school-course-intro-modal .mce-textbox,
+.mce-window.mce-school-course-intro-modal input.mce-textbox,
+.mce-window.mce-school-course-intro-modal textarea.mce-textbox,
+.mce-window.mce-school-cta-modal .mce-textbox,
+.mce-window.mce-school-cta-modal input.mce-textbox,
+.mce-window.mce-school-cta-modal textarea.mce-textbox {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* listbox（背景色プリセット等） */
+.mce-window.mce-school-course-intro-modal .mce-listbox,
+.mce-window.mce-school-cta-modal .mce-listbox {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mce-window.mce-school-course-intro-modal .mce-listbox .mce-txt,
+.mce-window.mce-school-cta-modal .mce-listbox .mce-txt {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-school-course-intro-modal .school-course-intro-pick-img {
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  height: auto;
+  line-height: 1.4;
+  padding: 0.4rem 0.75rem;
 }

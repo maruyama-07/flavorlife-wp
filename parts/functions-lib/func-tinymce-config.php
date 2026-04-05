@@ -27,11 +27,15 @@ add_filter('mce_buttons_2', 'tool_add_styleselect_to_toolbar');
 /**
  * フォントサイズドロップダウンを px 基準にする。
  * 既定の 12pt 等は画面では 16px 前後に換算され、本文 p の 1rem と見た目が同じになりやすい。
+ *
+ * TinyMCE（modern テーマ）は fontsize_formats を「半角スペース」だけで分割する。
+ * 「10px 10px; 12px 12px;」のように書くと「10px」「10px;」の2項目になりセミコロン付きが重複表示されるため、
+ * 値はスペース区切り1列にする。表示名と値を変えたいときだけ「小=12px」のように = を使う。
  */
 function tool_tinymce_fontsize_formats_px($init_array)
 {
     $init_array['fontsize_formats'] =
-        '10px 10px; 12px 12px; 14px 14px; 16px 16px; 18px 18px; 20px 20px; 24px 24px; 28px 28px; 32px 32px';
+        '10px 12px 14px 16px 18px 20px 24px 28px 32px';
 
     return $init_array;
 }
@@ -87,6 +91,36 @@ function tool_add_margin_styles($init_array)
                     'title'   => '大',
                     'selector' => 'p,h1,h2,h3,h4,h5,h6,div',
                     'classes' => 'u-mb-large',
+                ),
+            ),
+        ),
+        array(
+            'title' => '行間',
+            'items' => array(
+                array(
+                    'title'    => '継承・リセット',
+                    'selector' => 'p,h1,h2,h3,h4,h5,h6,div,li,blockquote',
+                    'classes'  => 'u-lh-inherit',
+                ),
+                array(
+                    'title'    => '1.5（やや詰める）',
+                    'selector' => 'p,h1,h2,h3,h4,h5,h6,div,li,blockquote',
+                    'classes'  => 'u-lh-150',
+                ),
+                array(
+                    'title'    => '1.75（広め）',
+                    'selector' => 'p,h1,h2,h3,h4,h5,h6,div,li,blockquote',
+                    'classes'  => 'u-lh-175',
+                ),
+                array(
+                    'title'    => '2（ゆったり）',
+                    'selector' => 'p,h1,h2,h3,h4,h5,h6,div,li,blockquote',
+                    'classes'  => 'u-lh-200',
+                ),
+                array(
+                    'title'    => '2.2（教材・本文向け）',
+                    'selector' => 'p,h1,h2,h3,h4,h5,h6,div,li,blockquote',
+                    'classes'  => 'u-lh-220',
                 ),
             ),
         ),
@@ -161,3 +195,41 @@ function tool_add_heading_styles($init_array)
     return $init_array;
 }
 add_filter('tiny_mce_before_init', 'tool_add_heading_styles');
+
+/**
+ * 行間（line-height）を数値・単位で指定する TinyMCE プラグイン
+ */
+function tool_line_height_mce_plugin($plugins)
+{
+    $plugins['tool_line_height'] = get_template_directory_uri() . '/assets/js/admin/tool-line-height.js?v=' . filemtime(get_template_directory() . '/assets/js/admin/tool-line-height.js');
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'tool_line_height_mce_plugin');
+
+function tool_line_height_mce_button($buttons)
+{
+    $buttons[] = 'tool_line_height';
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'tool_line_height_mce_button');
+
+/**
+ * ツール用モーダル（行間など）の管理画面スタイル
+ */
+function tool_tinymce_tool_modal_admin_assets($hook)
+{
+    if ($hook !== 'post.php' && $hook !== 'post-new.php') {
+        return;
+    }
+    $path = get_template_directory() . '/assets/css/admin-tinymce-tool-modals.css';
+    if (!is_readable($path)) {
+        return;
+    }
+    wp_enqueue_style(
+        'tool-tinymce-tool-modals',
+        get_template_directory_uri() . '/assets/css/admin-tinymce-tool-modals.css',
+        array(),
+        (string) filemtime($path)
+    );
+}
+add_action('admin_enqueue_scripts', 'tool_tinymce_tool_modal_admin_assets', 20);

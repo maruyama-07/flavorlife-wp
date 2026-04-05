@@ -1,39 +1,22 @@
 @use '../../foundation' as *;
-.aligncenter {
-    text-align: center;
-    margin: 0 auto;
-}
-.alignright {
-    text-align: right;
-}
-.alignleft {
-    text-align: left;
-}
-.alignjustify {
-    text-align: justify;
-}
+@use './wp-alignment';
+
 .wp-content-figure {
     margin: prem(40) auto;
     position: relative;
     max-height: prem(550);
-    overflow: hidden; /* alignleft/alignright の float を包含 */
-
-    /* デフォルト: フルサイズ時は100%表示 */
+    overflow: hidden;
     &::before {
         // content: '';
         // padding-top: calc(550 / 900 * 100%);
         // display: block;
     }
     img {
-        // position: absolute;
-        // top: 0;
-        // left: 0;
-        // width: 100%;
+        
         height: 100%;
         max-height: prem(550);
         object-fit: cover;
     }
-
     /* サイズ指定あり（中・小・大など）: 設定通りに表示 */
     &:has(img.size-thumbnail),
     &:has(img.size-medium),

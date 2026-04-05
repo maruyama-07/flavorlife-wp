@@ -1,7 +1,7 @@
 @use '../foundation/tools' as *;
 
 // クラシックエディタ「スタイル」→ 茶色バナー（.c-school-editor-banner）
-body.school-section .page-content .c-school-editor-banner {
+.school-section .page-content .c-school-editor-banner {
   margin: prem(24) 0;
   padding: prem(40) prem(24);
   background-color: #998067;
@@ -24,5 +24,11 @@ body.school-section .page-content .c-school-editor-banner {
 
   p:last-child {
     margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 767px) {
+  .school-section .page-content .c-school-editor-banner {
+    font-size: prem(20);
+    padding: prem(30) prem(20);
   }
 }

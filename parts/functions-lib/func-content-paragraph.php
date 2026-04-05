@@ -52,6 +52,13 @@ function tool_convert_paragraph_divs_to_p($content)
                 $attrs = $m[1] ?? '';
                 $inner = $m[2];
 
+                // 講座紹介2カラム等：BEM 子要素も含め div のまま保つ（p 化でレイアウトが壊れる）
+                if (preg_match('/class=["\']([^"\']*)["\']/', $attrs, $class_m)) {
+                    if (strpos($class_m[1], 'c-school-course-intro') !== false) {
+                        return $m[0];
+                    }
+                }
+
                 // class属性があればレイアウト用かチェック
                 if (preg_match('/class=["\']([^"\']*)["\']/', $attrs, $class_m)) {
                     $classes = preg_split('/\s+/', trim($class_m[1]));

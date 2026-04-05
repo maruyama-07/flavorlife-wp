@@ -1,0 +1,54 @@
+@use '../../foundation' as *;
+
+/**
+ * 枠付きセクション見出し（[framed_title]）
+ * オリーブ枠・中央揃え。色はデザイン指定 #666633 固定
+ */
+.c-framed-section-title {
+    $color: #666633;
+    padding: prem(16) prem(40);
+    border: 1px solid $color;
+    color: $color;
+    font-size: prem(30);
+    text-align: center;
+    width: 45%;
+    max-width: 450px;
+    margin: prem(40) auto;
+}
+
+.c-framed-section-title__main {
+    margin: 0;
+    font-size: prem(30) !important;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+}
+
+.c-framed-section-title__sub {
+    margin: prem(10) 0 0;
+    font-size: prem(20);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .c-framed-section-title {
+        margin: prem(30) auto;
+        padding: prem(16) prem(30);
+        width: 100%;
+    }
+
+    .c-framed-section-title__main {
+        font-size: prem(20) !important;
+    }
+
+    .c-framed-section-title__sub {
+        font-size: prem(16);
+    }
+}
+

@@ -266,7 +266,7 @@ if (function_exists('acf_add_local_field_group')) {
                 'label' => 'テキスト',
                 'name' => 'evidence_banner_text_1',
                 'type' => 'textarea',
-                'instructions' => 'スマホ時のみ改行したい位置に {{sp}} を入力してください。',
+                'instructions' => 'スマホのみ改行: {{sp}} または {sp}。PC（768px以上）のみ改行: {{pc}} または {pc}。',
                 'rows' => 2,
             ),
             array(

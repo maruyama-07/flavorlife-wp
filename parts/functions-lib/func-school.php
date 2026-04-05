@@ -144,6 +144,10 @@ function is_school_brand_layout()
     if (is_singular('voice_school')) {
         return true;
     }
+    /** 講座 CPT（/school/course/スラッグ/）。固定ページ is_school_section には含まれない */
+    if (is_singular('course_school')) {
+        return true;
+    }
 
     return false;
 }
@@ -473,6 +477,13 @@ function theme_enqueue_school_section_assets()
         filemtime(get_theme_file_path('assets/js/page-hero-image.js')),
         true
     );
+    wp_enqueue_script(
+        'page-content-table-scroll',
+        get_template_directory_uri() . '/assets/js/page-content-table-scroll.js',
+        array(),
+        filemtime(get_theme_file_path('assets/js/page-content-table-scroll.js')),
+        true
+    );
 
     $school_css_path = get_theme_file_path('assets/css/school-style.css');
     wp_enqueue_style(
@@ -541,6 +552,22 @@ function school_section_get_edited_page_id()
 
 function school_section_should_hide_corporate_mce_tools()
 {
+    if (!is_admin() || !function_exists('get_current_screen')) {
+        return false;
+    }
+    $screen = get_current_screen();
+    if (!$screen || $screen->base !== 'post') {
+        return false;
+    }
+
+    /** スクール講座・受講生の声・スクールニュース等：コーポレート用挿入ボタンを出さない */
+    $school_types = function_exists('tool_school_tinymce_post_types_list')
+        ? tool_school_tinymce_post_types_list()
+        : array();
+    if ($school_types !== array() && isset($screen->post_type) && in_array($screen->post_type, $school_types, true)) {
+        return true;
+    }
+
     if (!school_section_is_page_edit_admin_screen()) {
         return false;
     }
@@ -585,6 +612,16 @@ add_filter('mce_external_plugins', 'school_section_mce_external_plugins_hide_cor
 function school_section_add_editor_style_for_school_pages()
 {
     global $typenow;
+
+    $school_types = function_exists('tool_school_tinymce_post_types_list')
+        ? tool_school_tinymce_post_types_list()
+        : array();
+    if ($school_types !== array() && in_array($typenow, $school_types, true)) {
+        add_editor_style('assets/css/school-editor-style.css');
+
+        return;
+    }
+
     if ($typenow !== 'page') {
         return;
     }
@@ -608,9 +645,19 @@ function school_section_enqueue_admin_tinymce_dialog_fix($hook)
     if ($hook !== 'post.php' && $hook !== 'post-new.php') {
         return;
     }
-    if (!school_section_should_hide_corporate_mce_tools()) {
+
+    $school_tinymce = function_exists('tool_school_tinymce_is_target_screen') && tool_school_tinymce_is_target_screen();
+
+    // 講座紹介2カラムなど：wp.media（親ウィンドウ）を TinyMCE から使う
+    if ($school_tinymce) {
+        wp_enqueue_media();
+    }
+
+    // スクール固定ページに加え、スクール系 CPT 編集時もモーダル用 CSS を読み込む
+    if (!school_section_should_hide_corporate_mce_tools() && !$school_tinymce) {
         return;
     }
+
     $path = get_theme_file_path('assets/css/admin-school-tinymce.css');
     if (!is_readable($path)) {
         return;
@@ -666,6 +713,8 @@ function school_section_mce_buttons_add_location_heading($buttons)
         return $buttons;
     }
     $buttons[] = 'school_location_heading';
+    $buttons[] = 'school_location_heading_plain';
+    $buttons[] = 'school_heading_bar';
 
     return $buttons;
 }
@@ -772,3 +821,103 @@ function school_section_mce_external_plugins_add_editor_banner($plugins)
     return $plugins;
 }
 add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_editor_banner', 1000);
+
+/**
+ * TinyMCE「茶色矢印」用 SVG URL（スクール本文編集画面）
+ */
+function school_section_print_tinymce_brown_arrow_urls()
+{
+    if (!function_exists('tool_school_tinymce_is_target_screen') || !tool_school_tinymce_is_target_screen()) {
+        return;
+    }
+    printf(
+        '<script>window.schoolTinymceBrownArrow=%s;</script>' . "\n",
+        wp_json_encode(
+            array(
+                'pc' => get_template_directory_uri() . '/assets/images/school/brown-arronw.svg',
+                'sp' => get_template_directory_uri() . '/assets/images/school/brown-arronw-sp.svg',
+            )
+        )
+    );
+}
+add_action('admin_head', 'school_section_print_tinymce_brown_arrow_urls', 5);
+
+/**
+ * スクール用 TinyMCE：茶色矢印（PC/SP で画像切替）
+ *
+ * @param string[] $buttons
+ * @return string[]
+ */
+function school_section_mce_buttons_add_brown_arrow($buttons)
+{
+    if (
+        !function_exists('tool_school_tinymce_is_target_screen')
+        || !tool_school_tinymce_is_target_screen()
+        || !is_array($buttons)
+    ) {
+        return $buttons;
+    }
+    $buttons[] = 'school_brown_arrow';
+
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'school_section_mce_buttons_add_brown_arrow', 1000);
+
+/**
+ * @param array<string, string> $plugins
+ * @return array<string, string>
+ */
+function school_section_mce_external_plugins_add_brown_arrow($plugins)
+{
+    if (
+        !function_exists('tool_school_tinymce_is_target_screen')
+        || !tool_school_tinymce_is_target_screen()
+        || !is_array($plugins)
+    ) {
+        return $plugins;
+    }
+    $plugins['school_brown_arrow'] = get_template_directory_uri() . '/assets/js/admin/school-brown-arrow.js?v=' . filemtime(get_template_directory() . '/assets/js/admin/school-brown-arrow.js');
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_brown_arrow', 1000);
+
+/**
+ * スクール用 TinyMCE：講座紹介2カラム（画像幅 % 可変）
+ *
+ * @param string[] $buttons
+ * @return string[]
+ */
+function school_section_mce_buttons_add_course_intro($buttons)
+{
+    if (
+        !function_exists('tool_school_tinymce_is_target_screen')
+        || !tool_school_tinymce_is_target_screen()
+        || !is_array($buttons)
+    ) {
+        return $buttons;
+    }
+    $buttons[] = 'school_course_intro';
+
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'school_section_mce_buttons_add_course_intro', 1000);
+
+/**
+ * @param array<string, string> $plugins
+ * @return array<string, string>
+ */
+function school_section_mce_external_plugins_add_course_intro($plugins)
+{
+    if (
+        !function_exists('tool_school_tinymce_is_target_screen')
+        || !tool_school_tinymce_is_target_screen()
+        || !is_array($plugins)
+    ) {
+        return $plugins;
+    }
+    $plugins['school_course_intro'] = get_template_directory_uri() . '/assets/js/admin/school-course-intro.js';
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_course_intro', 1000);

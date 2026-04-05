@@ -71,6 +71,11 @@ function watchFiles() {
     browserSync.reload();
     done();
   }));
+  // school-style が @use するコーポレート側 object（例: component/_c-page-content-table）変更時は stylesSchool も必須
+  watch('../src/scss/object/**/*.scss', series(stylesSchool, function(done) {
+    browserSync.reload();
+    done();
+  }));
   watch(['../src/scss/**/*.scss', '!../src/scss/school/**/*.scss'], series(styles, function(done) {
     browserSync.reload();
     done();

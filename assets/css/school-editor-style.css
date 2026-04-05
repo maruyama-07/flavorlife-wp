@@ -6,6 +6,106 @@
 /**
  * スクール固定ページ編集時のみ add_editor_style で読み込み（TinyMCE プレビュー用）
  */
+
+/* {sp} / {pc} 本文トークン（the_content 置換後の br・iframe 内プレビュー） */
+.u-br-sp {
+    display: none;
+}
+.u-br-pc {
+    display: none;
+}
+@media screen and (max-width: 767px) {
+    .u-br-sp {
+        display: block;
+    }
+}
+@media screen and (min-width: 768px) {
+    .u-br-pc {
+        display: inline;
+    }
+}
+
+/* 本文テーブル（フロント .page-content と同様・TinyMCE プレビュー用） */
+.mce-content-body table,
+.wp-block-freeform table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.mce-content-body table tr:first-child > th,
+.mce-content-body table tr:first-child > td,
+.wp-block-freeform table tr:first-child > th,
+.wp-block-freeform table tr:first-child > td {
+    background-color: #0f2b0f;
+    color: #fff;
+}
+.mce-content-body table th,
+.mce-content-body table td,
+.wp-block-freeform table th,
+.wp-block-freeform table td {
+    padding: 6px;
+}
+
+/* 本文2カラム（TinyMCE・コーポレートと同仕様） */
+.mce-content-body .c-content-two-col,
+.wp-block-freeform .c-content-two-col {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 1.5rem 0;
+}
+
+.mce-content-body .c-content-two-col__col,
+.wp-block-freeform .c-content-two-col__col {
+    flex: 0 0 45%;
+    max-width: 45%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .mce-content-body .c-content-two-col__col,
+    .wp-block-freeform .c-content-two-col__col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* 枠付き見出し [framed_title]（HTML貼り付け時のプレビュー用） */
+.mce-content-body .c-framed-section-title,
+.wp-block-freeform .c-framed-section-title {
+    margin: 1.5rem 0;
+    padding: 1.75rem 1.25rem;
+    border: 1px solid #666633;
+    color: #666633;
+    text-align: center;
+    font-family: 'Noto Serif', 'Noto Serif JP', serif;
+    box-sizing: border-box;
+}
+.mce-content-body .c-framed-section-title__main,
+.wp-block-freeform .c-framed-section-title__main {
+    margin: 0;
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+}
+.mce-content-body .c-framed-section-title__sub,
+.wp-block-freeform .c-framed-section-title__sub {
+    margin: 0.625rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+}
+.mce-content-body .c-framed-section-title__sub:first-child,
+.wp-block-freeform .c-framed-section-title__sub:first-child {
+    margin-top: 0;
+}
+
 .mce-content-body .c-school-heading,
 .wp-block-freeform .c-school-heading {
     margin: 2.5rem 0 1.25rem;
@@ -13,15 +113,88 @@
     font-size: 2rem;
     font-weight: 600;
     line-height: 1.35;
-    color: #000;
-    border-left: 0.3125rem solid #707345;
-    border-bottom: 1px solid #707345;
+    color: #042c1b;
+    border-left: 0.3125rem solid currentColor;
+    border-bottom: 1px solid currentColor;
     letter-spacing: 0.02em;
+    box-sizing: border-box;
+}
+
+.mce-content-body .c-school-heading.c-school-heading--no-underline,
+.wp-block-freeform .c-school-heading.c-school-heading--no-underline {
+    border-bottom: none;
 }
 
 .mce-content-body .c-school-heading:first-child,
 .wp-block-freeform .c-school-heading:first-child {
     margin-top: 0;
+}
+
+.mce-content-body .c-school-heading-bar,
+.wp-block-freeform .c-school-heading-bar {
+    position: relative;
+    box-sizing: border-box;
+    margin: 2.5rem 0 1.5rem;
+    padding: 0 0 1.25rem;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #000 !important;
+}
+
+.mce-content-body .c-school-heading-bar .c-school-heading-bar__rule,
+.wp-block-freeform .c-school-heading-bar .c-school-heading-bar__rule {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    display: block;
+    width: 100px;
+    height: 4px;
+    transform: translateX(-50%);
+    background-color: var(--c-school-heading-bar-rule, #cdb030);
+}
+
+.mce-content-body .c-school-heading-bar:not(:has(.c-school-heading-bar__rule))::after,
+.wp-block-freeform .c-school-heading-bar:not(:has(.c-school-heading-bar__rule))::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    display: block;
+    width: 100px;
+    height: 4px;
+    transform: translateX(-50%);
+    background-color: var(--c-school-heading-bar-rule, #cdb030);
+}
+
+.mce-content-body .c-school-heading-bar:has(.c-school-heading-bar__rule)::after,
+.wp-block-freeform .c-school-heading-bar:has(.c-school-heading-bar__rule)::after {
+    content: none;
+}
+
+.mce-content-body .c-school-heading-bar:first-child,
+.wp-block-freeform .c-school-heading-bar:first-child {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .mce-content-body .c-school-heading-bar,
+    .wp-block-freeform .c-school-heading-bar {
+        font-size: 1.375rem;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+    }
+
+    .mce-content-body .c-school-heading-bar .c-school-heading-bar__rule,
+    .wp-block-freeform .c-school-heading-bar .c-school-heading-bar__rule,
+    .mce-content-body .c-school-heading-bar:not(:has(.c-school-heading-bar__rule))::after,
+    .wp-block-freeform .c-school-heading-bar:not(:has(.c-school-heading-bar__rule))::after {
+        width: 5rem;
+        height: 3px;
+    }
 }
 
 /* 茶色バナー（スタイル／ツールバーボタン共通・フロントと揃えたプレビュー） */
@@ -52,6 +225,51 @@
     margin-bottom: 0;
 }
 
+/* 茶色矢印（ツールバー挿入・PC/SP 画像切替） */
+.mce-content-body .c-school-brown-arrow,
+.wp-block-freeform .c-school-brown-arrow {
+    display: block;
+    clear: both;
+    text-align: center;
+    margin: 1.5rem auto;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.mce-content-body .c-school-brown-arrow img,
+.wp-block-freeform .c-school-brown-arrow img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+}
+
+.mce-content-body .c-school-brown-arrow__pc,
+.wp-block-freeform .c-school-brown-arrow__pc {
+    display: inline-block;
+}
+
+.mce-content-body .c-school-brown-arrow__sp,
+.wp-block-freeform .c-school-brown-arrow__sp {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .mce-content-body .c-school-brown-arrow,
+    .wp-block-freeform .c-school-brown-arrow {
+        margin: 1rem auto;
+    }
+
+    .mce-content-body .c-school-brown-arrow__pc,
+    .wp-block-freeform .c-school-brown-arrow__pc {
+        display: none;
+    }
+
+    .mce-content-body .c-school-brown-arrow__sp,
+    .wp-block-freeform .c-school-brown-arrow__sp {
+        display: inline-block;
+    }
+}
+
 /* 本文 CTA（layout/_header-school.scss の .l-header-school__cta と同一見た目・編集プレビュー用） */
 .mce-content-body .p-school-content-cta-wrap,
 .wp-block-freeform .p-school-content-cta-wrap {
@@ -71,6 +289,132 @@
     color: #fff;
     text-decoration: none;
     background: #699;
+}
+
+/* 講座紹介2カラム（フロントの _p-school-course-intro と同じブレークポイント） */
+.mce-content-body .c-school-course-intro,
+.wp-block-freeform .c-school-course-intro {
+    --c-school-course-intro-img: 42%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1.75rem;
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.mce-content-body .c-school-course-intro--media-right,
+.wp-block-freeform .c-school-course-intro--media-right {
+    flex-direction: row-reverse;
+}
+
+.mce-content-body .c-school-course-intro__media,
+.wp-block-freeform .c-school-course-intro__media {
+    flex: 0 0 var(--c-school-course-intro-img);
+    max-width: 100%;
+}
+
+.mce-content-body .c-school-course-intro__media img,
+.wp-block-freeform .c-school-course-intro__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mce-content-body .c-school-course-intro__body,
+.wp-block-freeform .c-school-course-intro__body {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.mce-content-body .c-school-course-intro__title,
+.wp-block-freeform .c-school-course-intro__title {
+    margin: 0 0 1.25rem;
+    padding-left: 0.75rem;
+    border-left: 0.3125rem solid #d8d8d8;
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #042c1b;
+}
+
+.mce-content-body .c-school-course-intro__text,
+.wp-block-freeform .c-school-course-intro__text {
+    margin-bottom: 1.75rem;
+    font-size: 1rem;
+    line-height: 2.2;
+    color: #2f2f2f;
+}
+
+.mce-content-body .c-school-course-intro__text p,
+.wp-block-freeform .c-school-course-intro__text p {
+    margin: 0 0 1em;
+    line-height: 2.2;
+}
+
+.mce-content-body .c-school-course-intro__text p:last-child,
+.wp-block-freeform .c-school-course-intro__text p:last-child {
+    margin-bottom: 0;
+}
+
+.mce-content-body .c-school-course-intro__cta,
+.wp-block-freeform .c-school-course-intro__cta {
+    text-align: center;
+}
+
+.mce-content-body .c-school-course-intro__cta .l-header-school__cta,
+.wp-block-freeform .c-school-course-intro__cta .l-header-school__cta {
+    font-size: 0.875rem;
+    padding: 0.875rem 1.875rem;
+    height: auto;
+}
+
+@media screen and (max-width: 767px) {
+    .mce-content-body .c-school-course-intro,
+    .wp-block-freeform .c-school-course-intro {
+        flex-direction: column;
+    }
+
+    .mce-content-body .c-school-course-intro--media-right,
+    .wp-block-freeform .c-school-course-intro--media-right {
+        flex-direction: column-reverse;
+    }
+
+    .mce-content-body .c-school-course-intro__media,
+    .wp-block-freeform .c-school-course-intro__media {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .mce-content-body .c-school-course-intro__body,
+    .wp-block-freeform .c-school-course-intro__body {
+        flex: 0 1 auto;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .mce-content-body .c-school-course-intro,
+    .wp-block-freeform .c-school-course-intro {
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+
+    .mce-content-body .c-school-course-intro__body,
+    .wp-block-freeform .c-school-course-intro__body {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .mce-content-body .c-school-course-intro__cta,
+    .wp-block-freeform .c-school-course-intro__cta {
+        margin-top: auto;
+    }
 }
 
 /* 番号・箇条（TinyMCE とフロントを揃える。reset 相当で消えないよう明示） */

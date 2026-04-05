@@ -1,0 +1,116 @@
+@use '../foundation/tools' as *;
+
+// クラシックエディタ「講座紹介2カラム」（画像幅は --c-school-course-intro-img で % 指定）
+// SP: 従来どおり縦積み・自然なフロー。PC(768px+)のみ右カラムを伸ばして CTA を下端に配置。
+.school-section .page-content {
+  .c-school-course-intro {
+    --c-school-course-intro-img: 42%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: prem(45);
+    margin: prem(40) 0;
+  }
+
+  // 画像を右・テキストを左（モバイルは下記メディアクエリで縦積み）
+  .c-school-course-intro--media-right {
+    flex-direction: row-reverse;
+  }
+
+  .c-school-course-intro__media {
+    flex: 0 0 var(--c-school-course-intro-img);
+    max-width: 100%;
+  }
+
+  .c-school-course-intro__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .c-school-course-intro__body {
+    flex: 1 1 0;
+    min-width: min(100%, #{prem(280)});
+  }
+
+  .c-school-course-intro__title {
+    margin: 0 0 prem(26);
+    padding-left: prem(12);
+    border-left: prem(5) solid #D9D9D9;
+    font-size: prem(30);
+    font-weight: 400;
+    line-height: 1.4;
+    color: #4D4D4D;
+  }
+
+  .c-school-course-intro__text {
+    margin-bottom: prem(28);
+    font-size: prem(16);
+    line-height: 2.1;
+    color: #4D4D4D;
+  }
+
+  .c-school-course-intro__text p {
+    margin: 0 0 1em;
+    line-height: 2.2;
+  }
+
+  .c-school-course-intro__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .c-school-course-intro__cta {
+    text-align: center;
+  }
+
+  .c-school-course-intro__cta .l-header-school__cta {
+    font-size: prem(16);
+    padding: prem(14) prem(50);
+    height: fit-content;
+  }
+
+  @media screen and (min-width: 768px) {
+    .c-school-course-intro {
+      flex-wrap: nowrap;
+      align-items: stretch;
+    }
+
+    .c-school-course-intro__body {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .c-school-course-intro__cta {
+      margin-top: auto;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .c-school-course-intro {
+      flex-direction: column;
+      gap: prem(20);
+      margin: prem(28) 0;
+    }
+
+    .c-school-course-intro--media-right {
+      flex-direction: column-reverse;
+    }
+
+    .c-school-course-intro__media {
+      flex: 1 1 100%;
+      width: 100%;
+    }
+
+    .c-school-course-intro__body {
+      flex: 0 1 auto;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .c-school-course-intro__title {
+      font-size: prem(22);
+    }
+  }
+}

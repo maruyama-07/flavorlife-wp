@@ -39,6 +39,63 @@ body {
     border-top: 1px solid #e4e4e4;
 }
 
+/* [framed_title] 展開後HTMLを貼った場合のプレビュー（通常はショートコード文字列表示） */
+.c-framed-section-title {
+    margin: 1.5rem 0;
+    padding: 1.75rem 1.25rem;
+    border: 1px solid #666633;
+    color: #666633;
+    text-align: center;
+    font-family: 'Noto Serif', serif;
+    box-sizing: border-box;
+}
+.c-framed-section-title__main {
+    margin: 0;
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+}
+.c-framed-section-title__sub {
+    margin: 0.625rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+}
+.c-framed-section-title__sub:first-child {
+    margin-top: 0;
+}
+
+/* 本文2カラム（TinyMCE・ビジュアルプレビュー） */
+.mce-content-body .c-content-two-col,
+.wp-block-freeform .c-content-two-col {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 1.5rem 0;
+}
+
+.mce-content-body .c-content-two-col__col,
+.wp-block-freeform .c-content-two-col__col {
+    flex: 0 0 45%;
+    max-width: 45%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .mce-content-body .c-content-two-col__col,
+    .wp-block-freeform .c-content-two-col__col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
 .c-head-question::before {
     content: 'Q';
     display: flex;
@@ -60,8 +117,33 @@ body {
 .u-mb-medium { margin-bottom: 1.5625rem; }
 .u-mb-large { margin-bottom: 2.5rem; }
 
+/* 行間ユーティリティ（スタイルドロップダウン） */
+.u-lh-inherit { line-height: inherit !important; }
+.u-lh-150 { line-height: 1.5 !important; }
+.u-lh-175 { line-height: 1.75 !important; }
+.u-lh-200 { line-height: 2 !important; }
+.u-lh-220 { line-height: 2.2 !important; }
+
 /* 画像直後の改行 */
 figure + * { clear: both; }
+
+/* {sp} / {{sp}}・{pc} / {{pc}} 本文置換後の br（フロントと同じ挙動でエディタ内プレビュー） */
+.u-br-sp {
+    display: none;
+}
+.u-br-pc {
+    display: none;
+}
+@media screen and (max-width: 767px) {
+    .u-br-sp {
+        display: block;
+    }
+}
+@media screen and (min-width: 768px) {
+    .u-br-pc {
+        display: inline;
+    }
+}
 
 /* スクール本文：スタイル「茶色バナー」（管理画面のクラシックエディタ内プレビュー用） */
 .c-school-editor-banner {
@@ -86,4 +168,24 @@ figure + * { clear: both; }
 
 .c-school-editor-banner p:last-child {
     margin-bottom: 0;
+}
+
+/* 本文テーブル（フロント .page-content と同様・プレビュー用） */
+.mce-content-body table,
+.wp-block-freeform table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.mce-content-body table tr:first-child > th,
+.mce-content-body table tr:first-child > td,
+.wp-block-freeform table tr:first-child > th,
+.wp-block-freeform table tr:first-child > td {
+    background-color: #0f2b0f;
+    color: #fff;
+}
+.mce-content-body table th,
+.mce-content-body table td,
+.wp-block-freeform table th,
+.wp-block-freeform table td {
+    padding: 6px;
 }

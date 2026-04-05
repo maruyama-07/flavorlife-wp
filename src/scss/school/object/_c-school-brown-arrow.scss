@@ -1,0 +1,40 @@
+@use '../foundation/tools' as *;
+
+/**
+ * 本文用・茶色下矢印（TinyMCE「茶色矢印」挿入）
+ * PC: brown-arronw.svg / SP: brown-arronw-sp.svg
+ */
+.c-school-brown-arrow {
+  display: block;
+  clear: both;
+  text-align: center;
+  margin: prem(40) auto;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+  }
+
+  &__pc {
+    display: inline-block;
+  }
+
+  &__sp {
+    display: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    margin: prem(16) auto;
+
+    &__pc {
+      display: none;
+    }
+
+    &__sp {
+      display: inline-block;
+    }
+  }
+}

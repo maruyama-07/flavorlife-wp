@@ -77,7 +77,7 @@
                         <li><a href="<?php echo esc_url(home_url('/school/contact/')); ?>">お問い合わせ</a></li>
                         <li><a href="<?php echo esc_url(home_url('/school/voice/')); ?>">受講生の声</a></li>
                         <li><a href="<?php echo esc_url(home_url('/school/entry/')); ?>">お申込み方法</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/lesson/')); ?>">スクール講座一覧</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/school/course/')); ?>">スクール講座一覧</a></li>
                     </ul>
                 </div>
                 <div class="l-footer-school__column l-footer-school__column--single">

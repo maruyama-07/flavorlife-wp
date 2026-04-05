@@ -5,9 +5,13 @@
  * 緑背景・白テキスト・中央寄せ
  */
 /**
- * スマホ時のみ改行（テキストに {{sp}} を入れるとその位置でSPのみ改行）
+ * 条件付き改行: {{sp}} スマホのみ / {{pc}} PC（768px以上）のみ
  */
 .u-br-sp {
+    display: none;
+}
+
+.u-br-pc {
     display: none;
 }
 
@@ -53,6 +57,12 @@
     }
 }
 
+
+@media screen and (min-width: 768px) {
+    .u-br-pc {
+        display: inline;
+    }
+}
 
 @media screen and (max-width: 767px) {
     .u-br-sp {

@@ -187,11 +187,13 @@ body.school-section .page-content {
     h2:not([class]) {
       margin-top: prem(28);
       margin-bottom: prem(10);
+      font-size: prem(22);
     }
 
     h3:not([class]) {
       margin-top: prem(24);
       margin-bottom: prem(10);
+      font-size: prem(20);
     }
 
     h4:not([class]) {
@@ -206,8 +208,12 @@ body.school-section .page-content {
   }
 }
 
-// ACFテキスト内の {sp} / {{sp}} 用（スマホ時のみ改行）
+// ACF / 本文の {sp}・{pc} 用（条件付き改行）
 .u-br-sp {
+  display: none;
+}
+
+.u-br-pc {
   display: none;
 }
 .splide {
@@ -217,5 +223,11 @@ body.school-section .page-content {
 @media screen and (max-width: 767px) {
   .u-br-sp {
     display: block;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .u-br-pc {
+    display: inline;
   }
 }

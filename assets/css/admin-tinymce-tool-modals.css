@@ -1,0 +1,68 @@
+/**
+ * 投稿・固定ページのクラシックエディタ（全画面）
+ * TinyMCE ツール用モーダル（行間など）のはみ出し・フッター位置の補正
+ */
+.mce-window.mce-tool-line-height-modal {
+  max-width: calc(100vw - 24px) !important;
+  max-height: calc(100vh - 24px) !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+.mce-window.mce-tool-line-height-modal .mce-abs-layout-item.mce-foot {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: auto !important;
+  width: 100% !important;
+  margin-top: 0 !important;
+  padding: 0.65rem 0.75rem !important;
+  border-top: 1px solid #dcdcde;
+  background: #fff;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-tool-line-height-modal .mce-window-head {
+  flex-shrink: 0;
+}
+
+.mce-window.mce-tool-line-height-modal .mce-window-body {
+  position: relative !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0.75rem 4rem !important;
+  box-sizing: border-box !important;
+}
+
+.mce-window.mce-tool-line-height-modal .mce-form {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-tool-line-height-modal .mce-formitem {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-tool-line-height-modal .mce-formitem .mce-container-body {
+  max-width: 100%;
+  min-width: 0;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+}
+
+.mce-window.mce-tool-line-height-modal .mce-textbox,
+.mce-window.mce-tool-line-height-modal input.mce-textbox,
+.mce-window.mce-tool-line-height-modal textarea.mce-textbox {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}

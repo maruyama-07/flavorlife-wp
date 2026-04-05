@@ -1,7 +1,8 @@
 @use '../foundation/tools' as *;
 
 // スクール本文：TinyMCE「横線+下線の見出し」→ h2.c-school-heading
-body.school-section .page-content {
+// 線色は color と currentColor で一致（挿入時は style="color:#…" で上書き）
+.school-section .page-content {
   .c-school-heading {
     margin-top: prem(40);
     margin-bottom: prem(40);
@@ -9,12 +10,58 @@ body.school-section .page-content {
     font-size: prem(32);
     font-weight: 600;
     line-height: 1.35;
-    color: #042C1B;
-    border-left: prem(8) solid #042C1B;
-    border-bottom: 1px solid #042C1B;
+    color: #042c1b;
+    border-left: prem(8) solid currentColor;
+    border-bottom: 1px solid currentColor;
+
+    &.c-school-heading--no-underline {
+      border-bottom: none;
+    }
   }
 
-  .l-inner > .c-school-heading:first-child {
+  /** 中央下線バー：文字は黒固定。バーは __rule の background または --c-school-heading-bar-rule（::after フォールバック） */
+  .c-school-heading-bar {
+    position: relative;
+    margin-top: prem(40);
+    margin-bottom: prem(40);
+    padding: 0 0 prem(20) 0;
+    font-size: prem(32);
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #000 !important;
+
+    .c-school-heading-bar__rule {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      display: block;
+      width: 100px;
+      height: 4px;
+      transform: translateX(-50%);
+      background-color: var(--c-school-heading-bar-rule, #cdb030);
+    }
+  }
+
+  .c-school-heading-bar:not(:has(.c-school-heading-bar__rule))::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    display: block;
+    width: 100px;
+    height: 4px;
+    transform: translateX(-50%);
+    background-color: var(--c-school-heading-bar-rule, #cdb030);
+  }
+
+  .c-school-heading-bar:has(.c-school-heading-bar__rule)::after {
+    content: none;
+  }
+
+  .l-inner > .c-school-heading:first-child,
+  .l-inner > .c-school-heading-bar:first-child {
     margin-top: 0;
   }
 
@@ -26,6 +73,23 @@ body.school-section .page-content {
       margin-top: prem(32);
       margin-bottom: prem(16);
       border-left-width: prem(6);
+    }
+
+    .c-school-heading-bar {
+      font-size: prem(22);
+      margin-top: prem(32);
+      margin-bottom: prem(24);
+      padding-bottom: prem(16);
+
+      .c-school-heading-bar__rule {
+        width: prem(80);
+        height: 3px;
+      }
+
+      &:not(:has(.c-school-heading-bar__rule))::after {
+        width: prem(80);
+        height: 3px;
+      }
     }
   }
 }
