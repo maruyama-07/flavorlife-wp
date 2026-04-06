@@ -5,6 +5,20 @@
 .school-section .page-content {
   .p-school-content-cta-wrap {
     margin: prem(24) 0;
+    text-align: left;
+
+    &.aligncenter {
+      text-align: center;
+    }
+
+    &.alignright {
+      text-align: right;
+    }
+
+    &.alignleft {
+      text-align: left;
+    }
+
     .l-header-school__cta {
       font-size: prem(16);
       padding: prem(14) prem(50);

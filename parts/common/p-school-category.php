@@ -24,17 +24,14 @@ if (is_readable($arrow_svg_path)) {
         <div class="l-inner p-school-category__list">
             <?php foreach ($category_items as $item) : ?>
                 <?php
-                if (empty($item['post']) || !$item['post'] instanceof WP_Post) {
+                $link = !empty($item['link']) ? (string) $item['link'] : '';
+                if ($link === '') {
                     continue;
                 }
-                $page = $item['post'];
-                $title = get_the_title($page->ID);
-                $link = get_permalink($page->ID);
-                $desc = !empty($item['description']) ? (string) $item['description'] : '';
-                $thumb_url = get_the_post_thumbnail_url($page->ID, 'school-card-arch');
-                if (!$thumb_url) {
-                    $thumb_url = get_the_post_thumbnail_url($page->ID, 'large');
-                }
+                $title = isset($item['title']) ? (string) $item['title'] : '';
+                $thumb_url = !empty($item['image_url']) ? (string) $item['image_url'] : '';
+                $desc = isset($item['description']) ? (string) $item['description'] : '';
+                $img_alt = $title !== '' ? $title : 'Category';
                 ?>
             <a class="p-school-category__item" href="<?php echo esc_url($link); ?>">
                 <div class="p-school-category__item-head">
@@ -48,8 +45,8 @@ if (is_readable($arrow_svg_path)) {
                     </span>
                 </div>
                 <div class="p-school-category__item-image">
-                    <?php if ($thumb_url) : ?>
-                    <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy" decoding="async">
+                    <?php if ($thumb_url !== '') : ?>
+                    <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($img_alt); ?>" loading="lazy" decoding="async">
                     <?php endif; ?>
                 </div>
                 <div class="p-school-category__item-content">

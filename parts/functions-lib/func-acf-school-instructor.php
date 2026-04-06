@@ -13,11 +13,17 @@ add_action('acf/init', function () {
         'title' => '講師・リンク',
         'fields' => array(
             array(
+                'key' => 'field_school_instructor_furigana',
+                'label' => 'フリガナ',
+                'name' => 'school_instructor_furigana',
+                'type' => 'text',
+            ),
+            array(
                 'key' => 'field_school_instructor_link',
-                'label' => 'ボタン・リンクURL',
+                'label' => 'ボタン・リンクURL（任意）',
                 'name' => 'school_instructor_link',
                 'type' => 'url',
-                'instructions' => '一覧のボタンから開くURL（未入力のときはリンクなし・見た目のみ）。',
+                'instructions' => '本文でモーダルを出す場合、モーダル下部に「外部リンク」として表示されます。本文が空のときのみ、ボタンが直接このURLへ遷移します。',
             ),
             array(
                 'key' => 'field_school_instructor_link_new_tab',

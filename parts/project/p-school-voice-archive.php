@@ -140,7 +140,7 @@ $footer_note = function_exists('school_voice_get_archive_footer_note') ? school_
 
     <nav class="p-school-voice__pagination l-inner" aria-label="受講生の声のページ送り">
         <?php
-        echo paginate_links(array(
+        $pagination_args = array(
             'total'     => $voice_q->max_num_pages,
             'current'   => $paged,
             'type'      => 'list',
@@ -150,7 +150,18 @@ $footer_note = function_exists('school_voice_get_archive_footer_note') ? school_
             'end_size'  => 1,
             'base'      => $pagination_base,
             'format'    => '',
-        ));
+        );
+        $pagination_html = paginate_links($pagination_args);
+        /** paginate_links は total が 1 のとき空を返すため、常にナビを出す */
+        if (trim((string) $pagination_html) === '' && (int) $voice_q->max_num_pages <= 1) {
+            $pagination_html =
+                '<ul class="page-numbers">' .
+                '<li><span class="page-numbers prev disabled" aria-disabled="true">&lt; Back</span></li>' .
+                '<li><span class="page-numbers current" aria-current="page">1</span></li>' .
+                '<li><span class="page-numbers next disabled" aria-disabled="true">Next &gt;</span></li>' .
+                '</ul>';
+        }
+        echo $pagination_html;
         ?>
     </nav>
     <?php else : ?>

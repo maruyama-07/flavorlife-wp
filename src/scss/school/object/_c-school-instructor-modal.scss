@@ -1,0 +1,190 @@
+@use '../foundation/tools' as *;
+
+// 講師紹介：本文モーダル（<dialog>）— 閉じた dialog に display:flex を当てない（常時表示になる）
+$modal-transition-duration: 0.32s;
+$modal-transition-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.c-school-instructor-modal[open] {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(100vw, 1100px);
+  max-height: min(90vh, prem(820));
+  margin: auto;
+  padding: 0;
+  border: 1px solid #2f3e36;
+  border-radius: prem(24);
+  background: #f9f9f9;
+  color: #000;
+  overflow: hidden;
+  font-family: 'inner', sans-serif;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition:
+    opacity $modal-transition-duration ease,
+    transform $modal-transition-duration $modal-transition-ease;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 1;
+    transition: opacity $modal-transition-duration ease;
+  }
+}
+
+// 開いた直後の開始フレーム（対応ブラウザでフェードイン）
+@starting-style {
+  .c-school-instructor-modal[open]:not(.c-school-instructor-modal--closing) {
+    opacity: 0;
+    transform: translate3d(0, prem(12), 0) scale(0.97);
+  }
+
+  .c-school-instructor-modal[open]:not(.c-school-instructor-modal--closing)::backdrop {
+    opacity: 0;
+  }
+}
+
+// 閉じるアニメーション（JS が付与 → transitionend で close）
+.c-school-instructor-modal[open].c-school-instructor-modal--closing {
+  opacity: 0;
+  transform: translate3d(0, prem(8), 0) scale(0.98);
+  pointer-events: none;
+
+  &::backdrop {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-school-instructor-modal[open],
+  .c-school-instructor-modal[open]::backdrop {
+    transition-duration: 0.01ms;
+  }
+}
+
+.c-school-instructor-modal__close {
+  position: absolute;
+  top: prem(12);
+  right: prem(12);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: prem(40);
+  height: prem(40);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: prem(28);
+  line-height: 1;
+  color: #2f3e36;
+  cursor: pointer;
+  border-radius: prem(4);
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.c-school-instructor-modal__inner {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: prem(40) prem(28) prem(32);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.c-school-instructor-modal__header {
+  margin: 0 0 prem(24);
+  padding: 0 prem(36) 0 0;
+  text-align: center;
+}
+
+.c-school-instructor-modal__furigana {
+  margin: 0 0 prem(8);
+  font-size: prem(14);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  color: #4d4d4d;
+}
+
+.c-school-instructor-modal__name {
+  margin: 0;
+  font-size: prem(28);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #042c1b;
+}
+
+.c-school-instructor-modal__body {
+  max-width: min(100%, prem(1000));
+  margin: 0 auto;
+  font-size: prem(15);
+  line-height: 2;
+  letter-spacing: 0.04em;
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 0 0 1em;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.c-school-instructor-modal__footer {
+  margin-top: prem(24);
+  padding-top: prem(20);
+  border-top: 1px solid #d9d9d9;
+  text-align: center;
+}
+
+.c-school-instructor-modal__external-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: prem(44);
+  padding: prem(10) prem(24);
+  font-size: prem(14);
+  color: #042c1b;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .c-school-instructor-modal[open] {
+    max-height: 85vh;
+    border-radius: prem(16);
+  }
+
+  .c-school-instructor-modal__inner {
+    padding: prem(36) prem(20) prem(24);
+  }
+
+  .c-school-instructor-modal__name {
+    font-size: prem(22);
+  }
+
+  .c-school-instructor-modal__body {
+    font-size: prem(14);
+  }
+}

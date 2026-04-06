@@ -33,7 +33,7 @@ function school_instructor_register_post_type()
             'map_meta_cap' => true,
             'menu_position' => 15,
             'menu_icon' => 'dashicons-groups',
-            'supports' => array('title', 'thumbnail', 'page-attributes'),
+            'supports' => array('title', 'editor', 'thumbnail', 'page-attributes'),
         )
     );
 }

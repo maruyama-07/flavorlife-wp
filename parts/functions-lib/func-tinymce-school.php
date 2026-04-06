@@ -17,6 +17,7 @@ function tool_school_tinymce_post_types_list()
             'course_school',
             'voice_school',
             'news_school',
+            'school_instructor',
         )
     );
 }
@@ -106,6 +107,12 @@ function tool_school_tinymce_register_banner_style($init_array)
                     'classes'  => 'c-school-editor-banner',
                     'wrapper'  => true,
                 ),
+                array(
+                    'title'    => '全幅背景（既定 #F9F5F2）',
+                    'block'    => 'div',
+                    'classes'  => 'c-school-editor-full-bg',
+                    'wrapper'  => true,
+                ),
             ),
         ),
     );
@@ -124,6 +131,32 @@ function tool_school_tinymce_register_banner_style($init_array)
     return $init_array;
 }
 add_filter('tiny_mce_before_init', 'tool_school_tinymce_register_banner_style', 25);
+
+/**
+ * 全幅背景（.c-school-editor-full-bg）のエディタ iframe 内プレビュー
+ *
+ * @param array<string, mixed> $init_array
+ * @return array<string, mixed>
+ */
+function tool_school_tinymce_full_bg_content_style($init_array)
+{
+    if (!tool_school_tinymce_is_target_screen()) {
+        return $init_array;
+    }
+
+    $css = <<<'CSS'
+.mce-content-body .c-school-editor-full-bg,.wp-block-freeform .c-school-editor-full-bg{display:block!important;box-sizing:border-box!important;width:100%!important;max-width:100%!important;margin:1rem 0!important;padding:2.5rem 0!important;background-color:#f9f5f2;}
+.mce-content-body .c-school-editor-full-bg>*,.wp-block-freeform .c-school-editor-full-bg>*{max-width:1240px!important;margin-left:auto!important;margin-right:auto!important;padding:0 1rem!important;box-sizing:border-box!important;}
+.mce-content-body .c-school-editor-full-bg>*+*,.wp-block-freeform .c-school-editor-full-bg>*+*{margin-top:1em!important;}
+CSS;
+
+    $css_one_line = trim(preg_replace('/ {2,}/', ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $css)));
+    $merged       = isset($init_array['content_style']) ? $init_array['content_style'] . ' ' . $css_one_line : $css_one_line;
+    $init_array['content_style'] = trim(preg_replace('/ {2,}/', ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $merged)));
+
+    return $init_array;
+}
+add_filter('tiny_mce_before_init', 'tool_school_tinymce_full_bg_content_style', 97);
 
 /**
  * スクール系ビジュアルエディタ：講座2カラム・本文CTAボタンなど、add_editor_style では負けやすい箇所を
@@ -149,11 +182,19 @@ function tool_school_tinymce_course_intro_content_style($init_array)
 .c-school-course-intro__text{margin-bottom:1.75rem!important;font-size:1rem!important;line-height:2.2!important;color:#2f2f2f!important;}
 .c-school-course-intro__text p{margin:0 0 1em!important;line-height:2.2!important;}
 .c-school-course-intro__text p:last-child{margin-bottom:0!important;}
+.c-school-course-intro__body>.c-school-course-intro__title:first-child{margin-top:0!important;}
+.c-school-course-intro__body>.c-school-course-intro__text:first-child{margin-top:0!important;}
+.c-school-course-intro__text>p:first-child{margin-top:0!important;}
+.c-school-course-intro__body>h1:first-child,.c-school-course-intro__body>h2:first-child,.c-school-course-intro__body>h3:first-child,.c-school-course-intro__body>h4:first-child,.c-school-course-intro__body>h5:first-child{margin-top:0!important;}
 .c-school-course-intro__cta{text-align:center!important;}
 .c-school-course-intro__cta .l-header-school__cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:10.75rem!important;min-height:2.5rem!important;border-radius:999px!important;font-size:0.875rem!important;letter-spacing:0.08em!important;color:#fff!important;text-decoration:none!important;background:#699!important;padding:0.875rem 1.875rem!important;box-sizing:border-box!important;}
 @media screen and (max-width:767px){.c-school-course-intro{flex-direction:column!important;flex-wrap:wrap!important;}.c-school-course-intro--media-right{flex-direction:column-reverse!important;}.c-school-course-intro__media{flex:1 1 100%!important;width:100%!important;}.c-school-course-intro__body{flex:0 1 auto!important;width:100%!important;max-width:100%!important;}}
 @media screen and (min-width:768px){.c-school-course-intro{flex-wrap:nowrap!important;align-items:stretch!important;}.c-school-course-intro__body{display:flex!important;flex-direction:column!important;min-height:0!important;}.c-school-course-intro__cta{margin-top:auto!important;}}
-.p-school-content-cta-wrap{margin:1.5rem 0!important;text-align:center!important;box-sizing:border-box!important;}
+.p-school-content-cta-wrap{margin:1.5rem 0!important;box-sizing:border-box!important;}
+.p-school-content-cta-wrap{text-align:left;}
+.p-school-content-cta-wrap.aligncenter{text-align:center!important;}
+.p-school-content-cta-wrap.alignright{text-align:right!important;}
+.p-school-content-cta-wrap.alignleft{text-align:left!important;}
 .p-school-content-cta-wrap .l-header-school__cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:10.75rem!important;min-height:2.5rem!important;border-radius:999px!important;font-size:0.875rem!important;letter-spacing:0.08em!important;color:#fff!important;text-decoration:none!important;padding:0.875rem 1.875rem!important;box-sizing:border-box!important;background-color:#699;}
 CSS;
 

@@ -11,6 +11,9 @@ $main_class = 'l-main';
 if (function_exists('school_section_is_about_page') && school_section_is_about_page()) {
     $main_class .= ' l-main--school p-school-about';
 }
+if (function_exists('school_section_is_order_page') && school_section_is_order_page()) {
+    $main_class .= ' l-main--school p-school-order-page';
+}
 ?>
 <main class="<?php echo esc_attr($main_class); ?>">
     <?php if (function_exists('school_section_is_course_page') && school_section_is_course_page()) : ?>
@@ -31,6 +34,16 @@ if (function_exists('school_section_is_about_page') && school_section_is_about_p
         rewind_posts();
         ?>
         <?php get_template_part('parts/project/p-school-voice-archive'); ?>
+    <?php elseif (function_exists('school_section_is_order_page') && school_section_is_order_page()) : ?>
+        <?php while (have_posts()) : the_post(); ?>
+            <?php get_template_part('parts/common/p-school-subpage-hero'); ?>
+            <div class="page-content">
+                <div class="l-inner">
+                    <?php the_content(); ?>
+                </div>
+            </div>
+            <?php get_template_part('parts/project/p-school-order'); ?>
+        <?php endwhile; ?>
     <?php else : ?>
         <?php while (have_posts()) : the_post(); ?>
             <?php if (function_exists('school_section_is_queried_root') && school_section_is_queried_root()) : ?>

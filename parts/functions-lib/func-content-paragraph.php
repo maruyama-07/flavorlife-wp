@@ -38,6 +38,8 @@ function tool_convert_paragraph_divs_to_p($content)
         'has-background', 'alignwide', 'alignfull', 'aligncenter', 'alignleft', 'alignright',
         // クラシックエディタの div（中に p があり p に変換すると無効ネストになる）
         'c-school-editor-banner',
+        'c-school-editor-full-bg',
+        'c-school-editor-full-bg__inner',
     );
 
     $max_iterations = 20;
@@ -57,12 +59,19 @@ function tool_convert_paragraph_divs_to_p($content)
                     if (strpos($class_m[1], 'c-school-course-intro') !== false) {
                         return $m[0];
                     }
+                    // 本文2カラム（TinyMCE・c-content-two-col）：div→p にすると wpautop 前に DOM が壊れる
+                    if (strpos($class_m[1], 'c-content-two-col') !== false) {
+                        return $m[0];
+                    }
                 }
 
                 // class属性があればレイアウト用かチェック
                 if (preg_match('/class=["\']([^"\']*)["\']/', $attrs, $class_m)) {
                     $classes = preg_split('/\s+/', trim($class_m[1]));
                     foreach ($classes as $c) {
+                        if ($c === 'l-inner') {
+                            return $m[0];
+                        }
                         foreach ($block_classes as $block) {
                             if (strpos($c, $block) !== false) {
                                 return $m[0]; // 変換しない

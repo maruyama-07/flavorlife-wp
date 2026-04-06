@@ -109,6 +109,39 @@ function school_section_is_course_page()
 }
 
 /**
+ * 申込・受講の流れ等（/school/order/）固定ページの投稿 ID
+ *
+ * @return int 0 = 該当なし
+ */
+function school_section_get_order_page_id()
+{
+    $page = get_page_by_path('school/order');
+    return $page ? (int) $page->ID : 0;
+}
+
+/**
+ * 現在の表示が /school/order/ 相当の固定ページか
+ *
+ * @return bool
+ */
+function school_section_is_order_page()
+{
+    if (! is_page()) {
+        return false;
+    }
+    $root = school_section_get_root_page_id();
+    if (! $root) {
+        return false;
+    }
+    $page = get_queried_object();
+    if (! $page instanceof WP_Post || $page->post_name !== 'order') {
+        return false;
+    }
+
+    return (int) $page->post_parent === $root;
+}
+
+/**
  * 講座一覧のカテゴリーフィルター（URL: ?course_cat=スラッグ）
  *
  * @return string 空 = 全件
@@ -484,7 +517,15 @@ function theme_enqueue_school_section_assets()
         filemtime(get_theme_file_path('assets/js/page-content-table-scroll.js')),
         true
     );
-
+    wp_enqueue_script(
+        'school-instructor-modal',
+        get_template_directory_uri() . '/assets/js/school-instructor-modal.js',
+        array(),
+        file_exists(get_theme_file_path('assets/js/school-instructor-modal.js'))
+            ? filemtime(get_theme_file_path('assets/js/school-instructor-modal.js'))
+            : '1.0',
+        true
+    );
     $school_css_path = get_theme_file_path('assets/css/school-style.css');
     wp_enqueue_style(
         'school-style',
@@ -821,6 +862,48 @@ function school_section_mce_external_plugins_add_editor_banner($plugins)
     return $plugins;
 }
 add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_editor_banner', 1000);
+
+/**
+ * スクール用 TinyMCE：全幅背景ブロック（div.c-school-editor-full-bg）
+ *
+ * @param string[] $buttons
+ * @return string[]
+ */
+function school_section_mce_buttons_add_editor_full_bg($buttons)
+{
+    if (
+        !function_exists('tool_school_tinymce_is_target_screen')
+        || !tool_school_tinymce_is_target_screen()
+        || !is_array($buttons)
+    ) {
+        return $buttons;
+    }
+    $buttons[] = 'school_editor_full_bg';
+
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'school_section_mce_buttons_add_editor_full_bg', 1000);
+
+/**
+ * @param array<string, string> $plugins
+ * @return array<string, string>
+ */
+function school_section_mce_external_plugins_add_editor_full_bg($plugins)
+{
+    if (
+        !function_exists('tool_school_tinymce_is_target_screen')
+        || !tool_school_tinymce_is_target_screen()
+        || !is_array($plugins)
+    ) {
+        return $plugins;
+    }
+    $path = get_template_directory() . '/assets/js/admin/school-editor-full-bg.js';
+    $plugins['school_editor_full_bg'] = get_template_directory_uri() . '/assets/js/admin/school-editor-full-bg.js'
+        . (file_exists($path) ? '?v=' . filemtime($path) : '');
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_editor_full_bg', 1000);
 
 /**
  * TinyMCE「茶色矢印」用 SVG URL（スクール本文編集画面）

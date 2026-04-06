@@ -6,8 +6,7 @@
 // 基本設定
 get_template_part('parts/functions-lib/func-base');
 
-// Google アナリティクス（gtag・計測IDは func-analytics-gtag 内フィルターで変更可）
-get_template_part('parts/functions-lib/func-analytics-gtag');
+// Google アナリティクス（gtag）は header.php / header-school.php に直書き
 
 // カスタムメニューWalker
 get_template_part('parts/functions-lib/func-menu-walker');
@@ -114,6 +113,8 @@ get_template_part('parts/functions-lib/func-acf-school-top');
 get_template_part('parts/functions-lib/func-acf-school-category');
 // スクールトップ（Seasonal Topics）用ACF
 get_template_part('parts/functions-lib/func-acf-school-seasonal-topics');
+// /school/order/ 用ACF
+get_template_part('parts/functions-lib/func-acf-school-order');
 
 // URLのショートカット設定
 get_template_part('parts/functions-lib/func-utility');

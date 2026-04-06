@@ -224,6 +224,9 @@ body.school-section .page-content {
   .u-br-sp {
     display: block;
   }
+  body.school-section .page-content p {
+    font-size: prem(14);
+  }
 }
 
 @media screen and (min-width: 768px) {

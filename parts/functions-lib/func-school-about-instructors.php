@@ -35,7 +35,7 @@ add_action('acf/init', function () {
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
-                'message' => '講師の追加・写真・リンクは左メニュー「スクール講師」から行ってください（人数に上限はありません）。並び順は各投稿の「公開」欄の「順序」で小さい数字が先です。<br>本文の表示したい位置にショートコード <code>[school_instructors]</code> を1行で入力してください。',
+                'message' => '講師の追加・写真・本文・フリガナ・リンクは左メニュー「スクール講師」から行ってください（人数に上限はありません）。並び順は各投稿の「順序」で小さい数字が先です。<strong>本文を入力すると</strong>一覧のボタンからモーダルで表示されます（本文が空でURLのみのときは従来どおりボタンがリンクになります）。<br>表示したい位置にショートコード <code>[school_instructors]</code> を1行で入力してください。',
                 'new_lines' => 'wpautop',
             ),
             array(
@@ -174,7 +174,7 @@ add_action('acf/init', function () {
 /**
  * CPT「school_instructor」から一覧用配列を生成
  *
- * @return array<int, array{name:string,url:string,img_url:string,img_alt:string,new_tab:bool}>
+ * @return array<int, array{post_id:int,name:string,furigana:string,url:string,img_url:string,img_alt:string,new_tab:bool,has_modal:bool,modal_html:string}>
  */
 function school_about_instructors_get_items_from_cpt()
 {
@@ -183,7 +183,7 @@ function school_about_instructors_get_items_from_cpt()
         'post_type'           => 'school_instructor',
         'post_status'         => 'publish',
         'posts_per_page'      => -1,
-        'orderby'             => 'date',
+        'orderby'             => 'menu_order',
         'order'               => 'ASC',
         'ignore_sticky_posts' => true,
         'no_found_rows'       => true,
@@ -203,11 +203,22 @@ function school_about_instructors_get_items_from_cpt()
 
         $url = '';
         $new_tab = false;
+        $furigana = '';
         if (function_exists('get_field')) {
+            $fg = get_field('school_instructor_furigana', $pid);
+            $furigana = is_string($fg) ? trim($fg) : '';
             $link = get_field('school_instructor_link', $pid);
             $url  = is_string($link) ? trim($link) : '';
             $nt = get_field('school_instructor_link_new_tab', $pid);
             $new_tab = ($nt === true || $nt === 1 || $nt === '1');
+        }
+
+        $content_raw = get_post_field('post_content', $pid);
+        $content_raw = is_string($content_raw) ? $content_raw : '';
+        $has_modal   = trim($content_raw) !== '';
+        $modal_html  = '';
+        if ($has_modal) {
+            $modal_html = apply_filters('the_content', $content_raw);
         }
 
         $img_url = get_the_post_thumbnail_url($pid, 'large');
@@ -224,16 +235,20 @@ function school_about_instructors_get_items_from_cpt()
             }
         }
 
-        if ($name === '' && $img_url === '' && $url === '') {
+        if ($name === '' && $img_url === '' && $url === '' && !$has_modal) {
             continue;
         }
 
         $out[] = array(
-            'name'    => $name,
-            'url'     => $url,
-            'img_url' => $img_url,
-            'img_alt' => $img_alt !== '' ? $img_alt : $name,
-            'new_tab' => $new_tab,
+            'post_id'    => $pid,
+            'name'       => $name,
+            'furigana'   => $furigana,
+            'url'        => $url,
+            'img_url'    => $img_url,
+            'img_alt'    => $img_alt !== '' ? $img_alt : $name,
+            'new_tab'    => $new_tab,
+            'has_modal'  => $has_modal,
+            'modal_html' => $modal_html,
         );
     }
     wp_reset_postdata();
@@ -282,11 +297,15 @@ function school_about_instructors_get_items_legacy_page($post_id)
         }
 
         $out[] = array(
-            'name'    => $name,
-            'url'     => $url,
-            'img_url' => $img_url,
-            'img_alt' => $img_alt !== '' ? $img_alt : $name,
-            'new_tab' => false,
+            'post_id'    => 0,
+            'name'       => $name,
+            'furigana'   => '',
+            'url'        => $url,
+            'img_url'    => $img_url,
+            'img_alt'    => $img_alt !== '' ? $img_alt : $name,
+            'new_tab'    => false,
+            'has_modal'  => false,
+            'modal_html' => '',
         );
     }
 
@@ -295,7 +314,7 @@ function school_about_instructors_get_items_legacy_page($post_id)
 
 /**
  * @param int $post_id 固定ページ school/about の ID（旧データフォールバック用）
- * @return array<int, array{name:string,url:string,img_url:string,img_alt:string,new_tab:bool}>
+ * @return array<int, array{post_id?:int,name:string,furigana?:string,url:string,img_url:string,img_alt:string,new_tab:bool,has_modal?:bool,modal_html?:string}>
  */
 function school_about_instructors_get_items($post_id)
 {
@@ -339,10 +358,19 @@ function school_instructors_shortcode($atts)
         return '';
     }
 
+    $has_modal = false;
+    foreach ($items as $row) {
+        if (!empty($row['has_modal'])) {
+            $has_modal = true;
+            break;
+        }
+    }
+
     ob_start();
     get_template_part('parts/project/p-school-about-instructors', null, array(
-        'school_about_instructors_title' => $title,
-        'school_about_instructors_items'   => $items,
+        'school_about_instructors_title'       => $title,
+        'school_about_instructors_items'       => $items,
+        'school_about_instructors_has_modal'   => $has_modal,
     ));
     return (string) ob_get_clean();
 }

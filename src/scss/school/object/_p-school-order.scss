@@ -1,0 +1,94 @@
+@use '../foundation/tools' as *;
+
+// /school/order/ 全幅背景 + 中央の白ボックス
+.p-school-order {
+  width: 100vw;
+  margin: prem(40) calc(50% - 50vw) prem(120);
+  background: #e5e6df;
+  padding: prem(56) prem(24) prem(72);
+  box-sizing: border-box;
+  font-family: "inner" ,sans-serif;
+}
+
+.p-school-order__inner {
+  max-width: prem(1090);
+  margin: 0 auto;
+  background: #fff;
+  padding: prem(45) prem(28) prem(65);
+  box-sizing: border-box;
+}
+
+.p-school-order__title {
+  margin: 0 0 prem(28);
+  font-size: prem(26);
+  font-weight: 700;
+  line-height: 1.55;
+  text-align: center;
+  font-family: "inner" ,sans-serif;
+}
+
+.p-school-order__intro {
+  margin-bottom: prem(32);
+  font-size: prem(16);
+  line-height: 1.85;
+  text-align: center;
+  color: #3f3f3f;
+
+  p {
+    margin: 0 0 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.p-school-order__body {
+  max-width: prem(640);
+  margin: 0 auto;
+  font-size: prem(16);
+  line-height: 1.9;
+  text-align: left;
+  color: #3f3f3f;
+
+  p {
+    margin: 0 0 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: #9f1d00;
+    text-decoration: underline;
+    word-break: break-all;
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-order {
+    margin-top: prem(24);
+    padding: prem(40) prem(16) prem(56);
+  }
+
+  .p-school-order__inner {
+    padding: prem(28) prem(20) prem(36);
+  }
+
+  .p-school-order__title {
+    font-size: prem(18);
+    margin-bottom: prem(20);
+  }
+
+  .p-school-order__intro,
+  .p-school-order__body {
+    font-size: prem(15);
+  }
+}

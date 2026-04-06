@@ -19,6 +19,15 @@ if (function_exists('is_school_section') && is_school_section()) {
     <meta property="og:site_name" content="" />
     <meta property="og:description" content="" />
 
+    <!-- Google tag (gtag.js) — 計測IDを変えるときは下記2か所の G-RX2MF5REQ7 を書き換え -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX2MF5REQ7"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RX2MF5REQ7');
+    </script>
+
     <?php wp_head(); ?>
 </head>
 

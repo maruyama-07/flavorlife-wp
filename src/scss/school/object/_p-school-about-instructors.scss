@@ -50,6 +50,15 @@ $school-about-btn: #666633;
   min-width: 0;
 }
 
+.p-school-about-instructors__item--modal {
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid $school-about-green;
+    outline-offset: prem(4);
+  }
+}
+
 .p-school-about-instructors__media {
   width: 100%;
   overflow: hidden;
@@ -113,9 +122,31 @@ $school-about-btn: #666633;
   }
 }
 
+a.p-school-about-instructors__btn {
+  color: #fff;
+
+  &:visited,
+  &:hover,
+  &:active {
+    color: #fff;
+  }
+}
+
 .p-school-about-instructors__btn--static {
   cursor: default;
-  opacity: 0.85;
+  opacity: 0.5;
+}
+
+.p-school-about-instructors__btn--modal {
+  width: 100%;
+  cursor: inherit;
+  border: none;
+  color: #fff;
+  appearance: none;
+}
+
+.p-school-about-instructors__modal-payload {
+  display: none;
 }
 
 .p-school-about-instructors__btn-label {

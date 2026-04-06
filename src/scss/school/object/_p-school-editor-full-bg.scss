@@ -1,0 +1,35 @@
+@use '../foundation/tools' as *;
+
+// クラシックエディタ「全幅背景」（.c-school-editor-full-bg）
+// 既定背景 #F9F5F2。インライン style の background-color で上書き可能。
+// 内側ラッパーなし。.school-section .page-content .c-school-editor-full-bg > p 等、
+// 直下のブロック要素に max-width を一括指定（見出し・リストも揃えるため > * を使用）。
+.school-section .page-content .c-school-editor-full-bg {
+  width: 100vw;
+  margin: prem(24) calc(50% - 50vw);
+  padding: prem(60) 0;
+  background-color: #f9f5f2;
+  box-sizing: border-box;
+
+  > * {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 prem(24);
+    box-sizing: border-box;
+  }
+
+  > * + * {
+    margin-top: prem(16);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .school-section .page-content .c-school-editor-full-bg {
+    padding: prem(40) 0;
+  }
+
+  .school-section .page-content .c-school-editor-full-bg > * {
+    padding: 0 prem(20);
+  }
+}

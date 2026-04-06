@@ -225,6 +225,32 @@
     margin-bottom: 0;
 }
 
+/* 全幅背景（ツールバー「全幅背景」・スタイル「全幅背景（既定 #F9F5F2）」） */
+.mce-content-body .c-school-editor-full-bg,
+.wp-block-freeform .c-school-editor-full-bg {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 2.5rem 0;
+    background-color: #f9f5f2;
+}
+
+.mce-content-body .c-school-editor-full-bg > *,
+.wp-block-freeform .c-school-editor-full-bg > * {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.mce-content-body .c-school-editor-full-bg > * + *,
+.wp-block-freeform .c-school-editor-full-bg > * + * {
+    margin-top: 1em;
+}
+
 /* 茶色矢印（ツールバー挿入・PC/SP 画像切替） */
 .mce-content-body .c-school-brown-arrow,
 .wp-block-freeform .c-school-brown-arrow {
@@ -274,6 +300,22 @@
 .mce-content-body .p-school-content-cta-wrap,
 .wp-block-freeform .p-school-content-cta-wrap {
     margin: 1.5rem 0;
+    text-align: left;
+}
+
+.mce-content-body .p-school-content-cta-wrap.aligncenter,
+.wp-block-freeform .p-school-content-cta-wrap.aligncenter {
+    text-align: center;
+}
+
+.mce-content-body .p-school-content-cta-wrap.alignright,
+.wp-block-freeform .p-school-content-cta-wrap.alignright {
+    text-align: right;
+}
+
+.mce-content-body .p-school-content-cta-wrap.alignleft,
+.wp-block-freeform .p-school-content-cta-wrap.alignleft {
+    text-align: left;
 }
 
 .mce-content-body .l-header-school__cta,
@@ -358,6 +400,34 @@
 .mce-content-body .c-school-course-intro__text p:last-child,
 .wp-block-freeform .c-school-course-intro__text p:last-child {
     margin-bottom: 0;
+}
+
+.mce-content-body .c-school-course-intro__body > .c-school-course-intro__title:first-child,
+.wp-block-freeform .c-school-course-intro__body > .c-school-course-intro__title:first-child {
+    margin-top: 0;
+}
+
+.mce-content-body .c-school-course-intro__body > .c-school-course-intro__text:first-child,
+.wp-block-freeform .c-school-course-intro__body > .c-school-course-intro__text:first-child {
+    margin-top: 0;
+}
+
+.mce-content-body .c-school-course-intro__text > p:first-child,
+.wp-block-freeform .c-school-course-intro__text > p:first-child {
+    margin-top: 0;
+}
+
+.mce-content-body .c-school-course-intro__body > h1:first-child,
+.wp-block-freeform .c-school-course-intro__body > h1:first-child,
+.mce-content-body .c-school-course-intro__body > h2:first-child,
+.wp-block-freeform .c-school-course-intro__body > h2:first-child,
+.mce-content-body .c-school-course-intro__body > h3:first-child,
+.wp-block-freeform .c-school-course-intro__body > h3:first-child,
+.mce-content-body .c-school-course-intro__body > h4:first-child,
+.wp-block-freeform .c-school-course-intro__body > h4:first-child,
+.mce-content-body .c-school-course-intro__body > h5:first-child,
+.wp-block-freeform .c-school-course-intro__body > h5:first-child {
+    margin-top: 0;
 }
 
 .mce-content-body .c-school-course-intro__cta,

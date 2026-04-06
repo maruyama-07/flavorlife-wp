@@ -60,6 +60,25 @@
     margin-bottom: 0;
   }
 
+  /* 本文カラム先頭の見出し・テキストブロックの上余白 */
+  .c-school-course-intro__body > h2:first-child,
+  .c-school-course-intro__body > h3:first-child,
+  .c-school-course-intro__body > h4:first-child,
+  .c-school-course-intro__body > h5:first-child {
+    margin-top: 0;
+  }
+
+  .c-school-course-intro__body > .c-school-course-intro__text:first-child h2,
+  .c-school-course-intro__body > .c-school-course-intro__text:first-child h3,
+  .c-school-course-intro__body > .c-school-course-intro__text:first-child h4,
+  .c-school-course-intro__body > .c-school-course-intro__text:first-child h5 {
+    margin-top: 0;
+  }
+
+  .c-school-course-intro__text > p:first-child {
+    margin-top: 0;
+  }
+
   .c-school-course-intro__cta {
     text-align: center;
   }
@@ -100,7 +119,8 @@
 
     .c-school-course-intro__media {
       flex: 1 1 100%;
-      width: 100%;
+      // width: 100%;
+      margin: 0 auto;
     }
 
     .c-school-course-intro__body {
@@ -113,4 +133,14 @@
       font-size: prem(22);
     }
   }
+}
+
+// foundation/_base.scss の `body.school-section .page-content h2:not([class])` 等より詳細度を上げ、
+// クラス未付与の h2 等でも __body 直下の先頭見出しの margin-top を 0 にする
+body.school-section .page-content .c-school-course-intro__body > h1:first-child,
+body.school-section .page-content .c-school-course-intro__body > h2:first-child,
+body.school-section .page-content .c-school-course-intro__body > h3:first-child,
+body.school-section .page-content .c-school-course-intro__body > h4:first-child,
+body.school-section .page-content .c-school-course-intro__body > h5:first-child {
+  margin-top: 0;
 }

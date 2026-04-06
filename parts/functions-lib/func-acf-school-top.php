@@ -1,6 +1,6 @@
 <?php
 /**
- * スクールトップ「イントロ＋4カード」用 ACF
+ * スクールトップ用 ACF（イントロ・4カード / Category / Seasonal Topics を1グループのタブで管理）
  */
 
 add_action('after_setup_theme', function () {
@@ -17,7 +17,16 @@ add_action('acf/init', function () {
         return;
     }
 
+    $paragraph_note = function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : '';
+
     $fields = array(
+        array(
+            'key' => 'field_school_top_tab_intro',
+            'label' => 'イントロ・4カード',
+            'name' => '',
+            'type' => 'tab',
+            'placement' => 'top',
+        ),
         array(
             'key' => 'field_school_top_intro_brand',
             'label' => 'イントロ見出し',
@@ -42,17 +51,17 @@ add_action('acf/init', function () {
             'required' => 0,
             'rows' => 6,
             'new_lines' => '',
-            'instructions' => '改行はフロントで反映されます。' . "\n\n" . (function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : ''),
+            'instructions' => '改行はフロントで反映されます。' . "\n\n" . $paragraph_note,
         ),
     );
-    $labels = array(
+
+    $card_labels = array(
         1 => '1列目（左）',
         2 => '2列目',
         3 => '3列目',
         4 => '4列目（右）',
     );
-
-    foreach ($labels as $num => $label) {
+    foreach ($card_labels as $num => $label) {
         $fields[] = array(
             'key' => 'field_school_top_card_' . $num,
             'label' => 'カード: ' . $label,
@@ -67,9 +76,122 @@ add_action('acf/init', function () {
         );
     }
 
+    $fields[] = array(
+        'key' => 'field_school_top_tab_category',
+        'label' => 'Categoryカード',
+        'name' => '',
+        'type' => 'tab',
+        'placement' => 'top',
+    );
+
+    $cat_labels = array(
+        1 => '1列目（左）',
+        2 => '2列目（中）',
+        3 => '3列目（右）',
+    );
+    foreach ($cat_labels as $num => $label) {
+        $fields[] = array(
+            'key' => 'field_school_category_title_' . $num,
+            'label' => 'カテゴリカード: ' . $label . '（タイトル）',
+            'name' => 'school_category_title_' . $num,
+            'type' => 'text',
+            'required' => 0,
+        );
+        $fields[] = array(
+            'key' => 'field_school_category_image_' . $num,
+            'label' => 'カテゴリカード: ' . $label . '（画像）',
+            'name' => 'school_category_image_' . $num,
+            'type' => 'image',
+            'return_format' => 'array',
+            'preview_size' => 'school-card-arch',
+            'required' => 0,
+        );
+        $fields[] = array(
+            'key' => 'field_school_category_link_' . $num,
+            'label' => 'カテゴリカード: ' . $label . '（リンク先URL）',
+            'name' => 'school_category_link_' . $num,
+            'type' => 'url',
+            'required' => 0,
+            'instructions' => '未入力の列はフロントに表示されません。',
+        );
+        $fields[] = array(
+            'key' => 'field_school_category_desc_' . $num,
+            'label' => 'カテゴリカード: ' . $label . '（説明文）',
+            'name' => 'school_category_desc_' . $num,
+            'type' => 'textarea',
+            'rows' => 4,
+            'new_lines' => 'br',
+            'required' => 0,
+            'instructions' => $paragraph_note,
+        );
+    }
+
+    $fields[] = array(
+        'key' => 'field_school_top_tab_seasonal',
+        'label' => 'Seasonal Topics',
+        'name' => '',
+        'type' => 'tab',
+        'placement' => 'top',
+    );
+
+    $fields[] = array(
+        'key' => 'field_school_seasonal_title',
+        'label' => '見出し（英語）',
+        'name' => 'school_seasonal_title',
+        'type' => 'text',
+        'default_value' => 'Seasonal Topics',
+    );
+    $fields[] = array(
+        'key' => 'field_school_seasonal_subtitle',
+        'label' => '見出し（日本語）',
+        'name' => 'school_seasonal_subtitle',
+        'type' => 'text',
+        'default_value' => '季節のおすすめ',
+    );
+    $fields[] = array(
+        'key' => 'field_school_seasonal_image',
+        'label' => '画像',
+        'name' => 'school_seasonal_image',
+        'type' => 'image',
+        'return_format' => 'array',
+        'preview_size' => 'large',
+        'instructions' => '未設定時は assets/images/school/seasonal-topics.png を表示します。',
+    );
+    $fields[] = array(
+        'key' => 'field_school_seasonal_heading',
+        'label' => 'トピックタイトル',
+        'name' => 'school_seasonal_heading',
+        'type' => 'textarea',
+        'rows' => 3,
+        'new_lines' => '',
+        'instructions' => $paragraph_note,
+    );
+    $fields[] = array(
+        'key' => 'field_school_seasonal_body',
+        'label' => '本文',
+        'name' => 'school_seasonal_body',
+        'type' => 'textarea',
+        'rows' => 8,
+        'new_lines' => '',
+        'instructions' => $paragraph_note,
+    );
+    $fields[] = array(
+        'key' => 'field_school_seasonal_button_text',
+        'label' => 'ボタンテキスト',
+        'name' => 'school_seasonal_button_text',
+        'type' => 'text',
+        'default_value' => 'more',
+    );
+    $fields[] = array(
+        'key' => 'field_school_seasonal_button_url',
+        'label' => 'ボタンURL',
+        'name' => 'school_seasonal_button_url',
+        'type' => 'url',
+    );
+
     acf_add_local_field_group(array(
-        'key' => 'group_school_top_intro_cards',
-        'title' => 'スクールトップ（イントロ・4カード）',
+        'key' => 'group_school_top_page',
+        'title' => 'スクールトップ',
         'fields' => $fields,
         'location' => array(
             array(
