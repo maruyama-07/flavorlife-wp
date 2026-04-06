@@ -1055,6 +1055,11 @@ body.is-mobile-nav-open .l-header__hamburger-bar:nth-child(2) {
 .page-content {
   padding: 5rem 0 5.625rem;
 }
+.page-content p:not([class]):empty,
+.page-content p:not([class]):has(> br:only-child) {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .page-content .wp-content-figure:first-child {
   margin-top: 0;
 }
@@ -1351,7 +1356,7 @@ a:hover .c-btn-arrow path {
   align-items: flex-start;
   width: 100%;
   box-sizing: border-box;
-  margin: 1.5rem 0;
+  margin: 0;
 }
 
 .c-content-two-col__col {
@@ -1596,6 +1601,42 @@ a:hover .c-btn-arrow path {
     max-width: 250px;
   }
 }
+/**
+ * TinyMCE「背景ハイライト」ブロック（本文 .page-content 内）
+ * 上下・左に余白、全幅の帯状背景（色はインライン style または既定の薄ベージュ）
+ */
+.c-editor-highlight-block {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 1rem 0;
+  padding: 1.25rem 1rem 1.25rem 1.5rem;
+  box-sizing: border-box;
+  background-color: #f5f2eb;
+  color: #000;
+  font-weight: 600;
+  line-height: 1.55;
+  /* インライン background-color があれば上記を上書き */
+}
+.c-editor-highlight-block p {
+  margin: 0;
+  font-weight: inherit;
+}
+.c-editor-highlight-block p + p {
+  margin-top: 0.75rem;
+}
+.c-editor-highlight-block {
+  /* 見出しをブロックごと包んだとき（段落と同様に先頭マージンを抑える） */
+}
+.c-editor-highlight-block > h1:first-child,
+.c-editor-highlight-block > h2:first-child,
+.c-editor-highlight-block > h3:first-child,
+.c-editor-highlight-block > h4:first-child,
+.c-editor-highlight-block > h5:first-child,
+.c-editor-highlight-block > h6:first-child {
+  margin-top: 0;
+}
+
 /**
  * 枠付きセクション見出し（[framed_title]）
  * オリーブ枠・中央揃え。色はデザイン指定 #666633 固定

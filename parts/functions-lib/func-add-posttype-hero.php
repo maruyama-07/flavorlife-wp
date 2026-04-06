@@ -269,7 +269,7 @@ function hero_section_shortcode($atts) {
         <div class="hero-section__inner">
             <?php if (!empty($text)) : ?>
                 <div class="hero-section__text">
-                    <?php echo function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $text) : nl2br(esc_html((string) $text)); ?>
+                    <?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $text) : (function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $text) : nl2br(esc_html((string) $text))); ?>
                 </div>
             <?php endif; ?>
         </div>

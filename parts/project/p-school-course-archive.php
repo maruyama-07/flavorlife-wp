@@ -190,7 +190,7 @@ $school_course_term_badge_tone = function ($term) {
                             <?php if ($point !== '') : ?>
                             <div class="p-school-course-card__point">
                                 <span class="p-school-course-card__point-label">POINT</span>
-                                <p class="p-school-course-card__point-text"><?php echo esc_html($point); ?></p>
+                                <p class="p-school-course-card__point-text"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($point) : esc_html($point); ?></p>
                             </div>
                             <?php endif; ?>
                             <?php if ($dates !== '') : ?>
@@ -198,12 +198,12 @@ $school_course_term_badge_tone = function ($term) {
                                 <span class="p-school-course-card__dates-icon" aria-hidden="true">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.667 2.667H3.333C2.597 2.667 2 3.264 2 4v9.333c0 .737.597 1.334 1.333 1.334h9.334c.736 0 1.333-.597 1.333-1.334V4c0-.736-.597-1.333-1.333-1.333zM10.667 1.333V4M5.333 1.333V4M2 6.667h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 </span>
-                                <span class="p-school-course-card__dates-text"><?php echo esc_html($dates); ?></span>
+                                <span class="p-school-course-card__dates-text"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($dates) : esc_html($dates); ?></span>
                             </p>
                             <?php endif; ?>
                             <div class="p-school-course-card__rule" role="presentation"></div>
                             <?php if ($detail !== '') : ?>
-                            <div class="p-school-course-card__detail"><?php echo esc_html($detail); ?></div>
+                            <div class="p-school-course-card__detail"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($detail) : esc_html($detail); ?></div>
                             <?php endif; ?>
                         </div>
                         <div class="p-school-course-card__media">

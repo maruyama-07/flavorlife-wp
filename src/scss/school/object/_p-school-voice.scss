@@ -129,10 +129,15 @@ $p-school-voice-olive: #666633;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: prem(22);
-  height: prem(22);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  width: prem(16);
+  height: auto;
+}
+
+.p-school-voice-card__btn-arrow {
+  display: block;
+  width: prem(24);
+  height: auto;
+  vertical-align: middle;
 }
 
 .p-school-voice__pagination {
@@ -235,6 +240,16 @@ $p-school-voice-olive: #666633;
 }
 
 @media screen and (max-width: 767px) {
+  .p-school-voice__pagination ul.page-numbers a.page-numbers:not(.prev):not(.next),
+  .p-school-voice__pagination ul.page-numbers span.page-numbers.current,
+  .p-school-voice__pagination ul.page-numbers span.page-numbers.dots {
+    font-size: prem(20);
+  }
+
+  .p-school-voice__pagination ul.page-numbers .page-numbers.prev,
+  .p-school-voice__pagination ul.page-numbers .page-numbers.next {
+    font-size: prem(16);
+  }
   .p-school-voice__grid-wrap {
     padding: 0 prem(16);
   }

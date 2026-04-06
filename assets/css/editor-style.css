@@ -10,6 +10,15 @@ body {
     line-height: 1.5;
 }
 
+/* 空の p / br のみの p のみ（通常の本文では連続スペースは潰す） */
+.mce-content-body p:not([class]):empty,
+.wp-block-freeform p:not([class]):empty,
+.mce-content-body p:not([class]):has(> br:only-child),
+.wp-block-freeform p:not([class]):has(> br:only-child) {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
 /* 見出しスタイル（スタイルドロップダウン用） */
 .c-head-line {
     font-size: 1.25rem !important;
@@ -65,6 +74,30 @@ body {
 }
 .c-framed-section-title__sub:first-child {
     margin-top: 0;
+}
+
+/* TinyMCE「背景ハイライト」（フロント .c-editor-highlight-block と同等のプレビュー） */
+.mce-content-body .c-editor-highlight-block,
+.wp-block-freeform .c-editor-highlight-block {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 1.25rem 1rem 1.25rem 1.5rem;
+    box-sizing: border-box;
+    background-color: #f5f2eb;
+    color: #000;
+    font-weight: 600;
+    line-height: 1.55;
+}
+.mce-content-body .c-editor-highlight-block p,
+.wp-block-freeform .c-editor-highlight-block p {
+    margin: 0;
+    font-weight: inherit;
+}
+.mce-content-body .c-editor-highlight-block p + p,
+.wp-block-freeform .c-editor-highlight-block p + p {
+    margin-top: 0.75rem;
 }
 
 /* 本文2カラム（TinyMCE・ビジュアルプレビュー） */

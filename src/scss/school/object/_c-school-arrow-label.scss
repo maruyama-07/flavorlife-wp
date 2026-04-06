@@ -1,0 +1,40 @@
+@use '../foundation/tools' as *;
+
+/**
+ * TinyMCE「矢印ラベル」挿入
+ * 右端が三角の帯（背景 #F5F3EF）
+ */
+.c-school-arrow-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  margin: 0 0 prem(20);
+  padding: prem(14) prem(32) prem(14) prem(24);
+  vertical-align: middle;
+  box-sizing: border-box;
+  background-color: #f5f3ef;
+  color: #000;
+  font-size: prem(28);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  clip-path: polygon(
+    0 0,
+    calc(100% - #{prem(30)}) 0,
+    100% 50%,
+    calc(100% - #{prem(30)}) 100%,
+    0 100%
+  );
+}
+
+.c-school-arrow-label__inner {
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .c-school-arrow-label {
+    padding: prem(10) prem(24) prem(10) prem(18);
+    font-size: prem(20);
+  }
+}

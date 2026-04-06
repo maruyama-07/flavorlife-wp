@@ -426,7 +426,7 @@ $course-text-muted: #666;
   a.p-school-course-card {
     grid-template-columns: 1fr;
     gap: prem(16);
-    padding: prem(18);
+    padding: prem(45) prem(18) prem(15);
   }
 
   .p-school-course-card__media {

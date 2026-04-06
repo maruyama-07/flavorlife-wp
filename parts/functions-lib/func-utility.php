@@ -96,16 +96,122 @@ function tool_the_content_replace_sp_break($content)
 function tool_format_text_with_sp_break($text)
 {
     $text = (string) $text;
-    // ACFの new_lines=br で混入する <br> を一旦改行へ戻す
-    $text = preg_replace('/<br\s*\/?>/i', "\n", $text);
+    // ACF format_value 済みの条件付き改行 br を先に退避（二重処理時に esc_html でタグが文字化けしないよう）
+    $text = preg_replace('/<br\b[^>]*\bu-br-sp\b[^>]*>/i', '__SP_BR__', $text);
+    $text = preg_replace('/<br\b[^>]*\bu-br-pc\b[^>]*>/i', '__PC_BR__', $text);
+    // ACF new_lines=br 等の通常 <br> を改行へ（属性付きも含む）
+    $text = preg_replace('/<br\b[^>]*>/i', "\n", $text);
     // 長いトークンを先に退避（{{sp}} 内に {sp} が含まれるため）
     $text = str_replace(array('{{sp}}', '{sp}'), '__SP_BR__', $text);
     $text = str_replace(array('{{pc}}', '{pc}'), '__PC_BR__', $text);
 
     $escaped = esc_html($text);
-    $escaped = nl2br($escaped);
+    // nl2br() は <br /> 挿入後も改行文字を残すため、<br>→\n に戻した文字列と組み合わせると \n\n になり二重 <br /> になる。改行は置換のみにする。
+    $escaped = preg_replace('/\r\n|\r|\n/', '<br />', $escaped);
     $escaped = str_replace('__SP_BR__', '<br class="u-br-sp">', $escaped);
     $escaped = str_replace('__PC_BR__', '<br class="u-br-pc">', $escaped);
 
     return wp_kses($escaped, array('br' => array('class' => true)));
+}
+
+/**
+ * ACF text / textarea の表示用エスケープ（{sp}/{pc} 変換後の br を許可）
+ * esc_html() は br を潰すため、get_field 結果の表示にはこちらを使う
+ *
+ * @param string $text
+ * @return string
+ */
+function tool_esc_acf_text_for_display($text)
+{
+    return wp_kses((string) $text, array('br' => array('class' => true)));
+}
+
+/**
+ * ACF text / textarea をフロント表示用に整形（get_field 直後を想定）
+ * - format_value で既に HTML 化されている場合に esc_html すると &lt;br&gt; になるため使い分け
+ * - トークン未処理・u-br 付き br・通常の &lt;br&gt;・プレーン改行を判別
+ *
+ * @param string $value
+ * @return string
+ */
+function tool_acf_format_field_for_echo($value)
+{
+    $value = (string) $value;
+    if ($value === '') {
+        return '';
+    }
+    if (
+        strpos($value, '{sp}') !== false || strpos($value, '{{sp}}') !== false
+        || strpos($value, '{pc}') !== false || strpos($value, '{{pc}}') !== false
+    ) {
+        return tool_format_text_with_sp_break($value);
+    }
+    if (tool_acf_text_has_sp_pc_break_html($value)) {
+        return tool_esc_acf_text_for_display($value);
+    }
+    if (preg_match('/<br\b/i', $value)) {
+        return wp_kses($value, array(
+            'br' => array('class' => true, 'style' => true),
+        ));
+    }
+
+    return nl2br(esc_html($value));
+}
+
+/**
+ * tool_format_text_with_sp_break 適用済みか（条件付き改行用 br が含まれる）
+ *
+ * @param string $html
+ * @return bool
+ */
+function tool_acf_text_has_sp_pc_break_html($html)
+{
+    return (bool) preg_match('/class=[\'"]u-br-(sp|pc)[\'"]/', (string) $html);
+}
+
+/**
+ * ACF textarea を表示（トークンありは wpautop なし・なしは従来どおり wpautop）
+ *
+ * @param string $html get_field 済みの文字列
+ */
+function tool_acf_echo_textarea_for_display($html)
+{
+    $html = (string) $html;
+    if ($html === '') {
+        return;
+    }
+    if (tool_acf_text_has_sp_pc_break_html($html)) {
+        echo tool_esc_acf_text_for_display($html);
+    } else {
+        echo wp_kses_post(wpautop($html));
+    }
+}
+
+/**
+ * ACF の text / textarea で {sp}・{pc} をフロント表示時に解釈する
+ * - 管理画面では raw のまま（編集欄に HTML が出ないよう）
+ * - the_content は通らないため get_field 単体では従来トークンが効かなかった
+ */
+add_filter('acf/format_value/type=text', 'tool_acf_format_value_sp_break_tokens', 20, 3);
+add_filter('acf/format_value/type=textarea', 'tool_acf_format_value_sp_break_tokens', 20, 3);
+
+function tool_acf_format_value_sp_break_tokens($value, $post_id, $field)
+{
+    if (!is_string($value) || $value === '') {
+        return $value;
+    }
+    if (is_admin()) {
+        return $value;
+    }
+    if (
+        strpos($value, '{sp}') === false && strpos($value, '{{sp}}') === false
+        && strpos($value, '{pc}') === false && strpos($value, '{{pc}}') === false
+    ) {
+        return $value;
+    }
+    if (!function_exists('tool_format_text_with_sp_break')) {
+        return $value;
+    }
+
+    return tool_format_text_with_sp_break($value);
 }

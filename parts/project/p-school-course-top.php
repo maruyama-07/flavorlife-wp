@@ -50,10 +50,10 @@ if (!$has_intro && !$has_section && !$has_cards) {
         <?php if ($has_intro) : ?>
         <div class="p-school-course-top__intro">
             <?php if ($lead !== '') : ?>
-            <p class="p-school-course-top__lead"><?php echo esc_html($lead); ?></p>
+            <p class="p-school-course-top__lead"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($lead) : esc_html($lead); ?></p>
             <?php endif; ?>
             <?php if ($body !== '') : ?>
-            <p class="p-school-course-top__body"><?php echo esc_html($body); ?></p>
+            <p class="p-school-course-top__body"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($body) : esc_html($body); ?></p>
             <?php endif; ?>
         </div>
         <?php endif; ?>
@@ -61,10 +61,10 @@ if (!$has_intro && !$has_section && !$has_cards) {
         <?php if ($has_section) : ?>
         <div class="p-school-course-top__section" role="group" aria-label="セクション見出し">
             <?php if ($sec_ja !== '') : ?>
-            <p class="p-school-course-top__section-ja"><?php echo esc_html($sec_ja); ?></p>
+            <p class="p-school-course-top__section-ja"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($sec_ja) : esc_html($sec_ja); ?></p>
             <?php endif; ?>
             <?php if ($sec_en !== '') : ?>
-            <p class="p-school-course-top__section-en" lang="en"><?php echo esc_html($sec_en); ?></p>
+            <p class="p-school-course-top__section-en" lang="en"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($sec_en) : esc_html($sec_en); ?></p>
             <?php endif; ?>
         </div>
         <?php endif; ?>

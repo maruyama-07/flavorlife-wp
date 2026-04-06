@@ -207,7 +207,7 @@ function render_c_image_text_block($post_id = 0) {
                 <?php if ($title) : ?><h2 class="c-image-text__title"><?php echo esc_html($title); ?></h2><?php endif; ?>
                 <?php if ($subtitle) : ?><p class="c-image-text__subtitle"><?php echo esc_html($subtitle); ?></p><?php endif; ?>
                 <?php if ($head) : ?><h3 class="c-image-text__head"><?php echo esc_html($head); ?></h3><?php endif; ?>
-                <?php if ($text) : ?><p class="c-image-text__text"><?php echo function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $text) : nl2br(esc_html((string) $text)); ?></p><?php endif; ?>
+                <?php if ($text) : ?><p class="c-image-text__text"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $text) : (function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $text) : nl2br(esc_html((string) $text))); ?></p><?php endif; ?>
                 <a href="<?php echo esc_url($button_url); ?>" class="c-custom-button c-custom-button--black">
                     <?php echo esc_html($button_text); ?>
                     <svg class="c-custom-button__arrow" width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">

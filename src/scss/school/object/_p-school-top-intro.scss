@@ -78,7 +78,7 @@ $p-school-cream: #f2f1e8;
 }
 .p-school-top-intro__body {
   margin-top: prem(20);
-  max-width: prem(900);
+  max-width: prem(1000);
   margin-left: auto;
   margin-right: auto;
   font-size: prem(12);
@@ -87,14 +87,14 @@ $p-school-cream: #f2f1e8;
 
   @include mq('md') {
     margin-top: prem(36);
-    font-size: prem(14);
+    font-size: prem(16);
   }
 
   p {
     margin: 0;
 
     + p {
-      margin-top: prem(8);
+      // margin-top: prem(8);
     }
   }
 }

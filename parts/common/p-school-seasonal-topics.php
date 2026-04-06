@@ -19,8 +19,8 @@ $button_url = $data['button_url'] ?? '';
 <section class="p-school-seasonal-topics" aria-labelledby="p-school-seasonal-topics-heading">
     <div class="p-school-seasonal-topics__inner">
         <header class="p-school-seasonal-topics__header">
-            <h2 id="p-school-seasonal-topics-heading" class="p-school-seasonal-topics__title"><?php echo esc_html($title); ?></h2>
-            <p class="p-school-seasonal-topics__subtitle"><?php echo esc_html($subtitle); ?></p>
+            <h2 id="p-school-seasonal-topics-heading" class="p-school-seasonal-topics__title"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $title) : esc_html($title); ?></h2>
+            <p class="p-school-seasonal-topics__subtitle"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $subtitle) : esc_html($subtitle); ?></p>
         </header>
 
         <div class="p-school-seasonal-topics__content">
@@ -34,18 +34,22 @@ $button_url = $data['button_url'] ?? '';
                 <?php if ($heading !== '') : ?>
                 <h3 class="p-school-seasonal-topics__heading">
                     <?php
-                    echo function_exists('tool_format_text_with_sp_break')
-                        ? tool_format_text_with_sp_break($heading)
-                        : nl2br(esc_html((string) $heading));
+                    echo function_exists('tool_acf_format_field_for_echo')
+                        ? tool_acf_format_field_for_echo((string) $heading)
+                        : (function_exists('tool_format_text_with_sp_break')
+                            ? tool_format_text_with_sp_break($heading)
+                            : nl2br(esc_html((string) $heading)));
                     ?>
                 </h3>
                 <?php endif; ?>
                 <?php if ($body !== '') : ?>
                 <p class="p-school-seasonal-topics__text">
                     <?php
-                    echo function_exists('tool_format_text_with_sp_break')
-                        ? tool_format_text_with_sp_break($body)
-                        : nl2br(esc_html((string) $body));
+                    echo function_exists('tool_acf_format_field_for_echo')
+                        ? tool_acf_format_field_for_echo((string) $body)
+                        : (function_exists('tool_format_text_with_sp_break')
+                            ? tool_format_text_with_sp_break($body)
+                            : nl2br(esc_html((string) $body)));
                     ?>
                 </p>
                 <?php endif; ?>

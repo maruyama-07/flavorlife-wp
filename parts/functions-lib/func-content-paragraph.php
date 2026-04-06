@@ -40,6 +40,7 @@ function tool_convert_paragraph_divs_to_p($content)
         'c-school-editor-banner',
         'c-school-editor-full-bg',
         'c-school-editor-full-bg__inner',
+        'c-school-arrow-label',
     );
 
     $max_iterations = 20;
@@ -90,4 +91,20 @@ function tool_convert_paragraph_divs_to_p($content)
     }
 
     return $content;
+}
+
+/**
+ * the_content：開始〜閉じの間が空白・改行のみの p を真の空に正規化する
+ * - CSS の :empty は子テキストノード（改行1文字含む）があるとマッチしないため、
+ *   data-start / data-end 付きの空行用 p などで white-space: pre-wrap が効かない問題を防ぐ
+ * - wpautop 後に実行（優先度 15）
+ */
+add_filter('the_content', 'tool_normalize_whitespace_only_empty_p', 15);
+function tool_normalize_whitespace_only_empty_p($content)
+{
+    if ($content === '' || strpos($content, '<p') === false) {
+        return $content;
+    }
+
+    return preg_replace('/<p(\s[^>]*)?>\s*<\/p>/u', '<p$1></p>', $content);
 }

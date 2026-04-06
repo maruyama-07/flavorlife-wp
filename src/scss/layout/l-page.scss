@@ -166,6 +166,12 @@
 .page-content {
     padding: prem(80) 0 prem(90);
 
+    p:not([class]):empty,
+    p:not([class]):has(> br:only-child) {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+
     .wp-content-figure:first-child {
         margin-top: 0;
     }

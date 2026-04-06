@@ -18,18 +18,30 @@ if ($heading === '' && $intro === '' && $body === '') {
 <section class="p-school-order" aria-label="お申込みのご案内">
     <div class="p-school-order__inner">
         <?php if ($heading !== '') : ?>
-        <h2 class="p-school-order__title"><?php echo esc_html($heading); ?></h2>
+        <h2 class="p-school-order__title"><?php echo function_exists('tool_esc_acf_text_for_display') ? tool_esc_acf_text_for_display($heading) : esc_html($heading); ?></h2>
         <?php endif; ?>
 
         <?php if ($intro !== '') : ?>
         <div class="p-school-order__intro">
-            <?php echo wp_kses_post(wpautop($intro)); ?>
+            <?php
+            if (function_exists('tool_acf_echo_textarea_for_display')) {
+                tool_acf_echo_textarea_for_display($intro);
+            } else {
+                echo wp_kses_post(wpautop($intro));
+            }
+            ?>
         </div>
         <?php endif; ?>
 
         <?php if ($body !== '') : ?>
         <div class="p-school-order__body">
-            <?php echo wp_kses_post(wpautop($body)); ?>
+            <?php
+            if (function_exists('tool_acf_echo_textarea_for_display')) {
+                tool_acf_echo_textarea_for_display($body);
+            } else {
+                echo wp_kses_post(wpautop($body));
+            }
+            ?>
         </div>
         <?php endif; ?>
     </div>

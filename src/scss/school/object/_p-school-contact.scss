@@ -194,7 +194,7 @@
   }
 
   .p-school-contact__label {
-    font-size: prem(20);
+    font-size: prem(16);
   }
 
   .p-school-contact__badge {
@@ -246,5 +246,9 @@
     width: min(100%, prem(240));
     height: prem(50);
     font-size: prem(24);
+  }
+  .wpcf7-spinner {
+    position: absolute;
+    right: prem(15);
   }
 }

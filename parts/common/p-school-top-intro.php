@@ -14,16 +14,16 @@ $intro = function_exists('school_top_get_intro_content') ? school_top_get_intro_
     <section class="p-school-top-intro" aria-labelledby="p-school-top-intro-heading">
         <div class="p-school-top-intro__curve" aria-hidden="true"></div>
         <div class="p-school-top-intro__inner">
-            <h1 id="p-school-top-intro-heading" class="p-school-top-intro__brand"><?php echo esc_html((string) $intro['brand']); ?></h1>
-            <p class="p-school-top-intro__lead"><?php echo esc_html((string) $intro['lead']); ?></p>
+            <h1 id="p-school-top-intro-heading" class="p-school-top-intro__brand"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $intro['brand']) : esc_html((string) $intro['brand']); ?></h1>
+            <p class="p-school-top-intro__lead"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $intro['lead']) : esc_html((string) $intro['lead']); ?></p>
             <div class="p-school-top-intro__body">
                 <p>
                     <?php
-                    if (function_exists('tool_format_text_with_sp_break')) {
-                        echo tool_format_text_with_sp_break((string) $intro['body']);
-                    } else {
-                        echo nl2br(esc_html((string) $intro['body']));
-                    }
+                    echo function_exists('tool_acf_format_field_for_echo')
+                        ? tool_acf_format_field_for_echo((string) $intro['body'])
+                        : (function_exists('tool_format_text_with_sp_break')
+                            ? tool_format_text_with_sp_break((string) $intro['body'])
+                            : nl2br(esc_html((string) $intro['body'])));
                     ?>
                 </p>
             </div>

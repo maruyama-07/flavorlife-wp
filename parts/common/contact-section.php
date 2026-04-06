@@ -35,7 +35,7 @@ $has_boxes = $show_phone || $show_form;
 
 <section class="c-cta">
     <div class="l-inner">
-        <p class="c-cta__intro"><?php echo esc_html($intro); ?></p>
+        <p class="c-cta__intro"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $intro) : esc_html($intro); ?></p>
         <?php if ($has_boxes) : ?>
         <div class="c-cta__boxes<?php echo ($show_phone && $show_form) ? '' : ' c-cta__boxes--single'; ?>">
             <?php if ($show_phone) : ?>
@@ -62,7 +62,7 @@ $has_boxes = $show_phone || $show_form;
                         </span>
                     <?php endif; ?>
                     <?php if ($form_description) : ?>
-                        <p class="c-cta__form-description"><?php echo function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $form_description) : nl2br(esc_html((string) $form_description)); ?></p>
+                        <p class="c-cta__form-description"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $form_description) : (function_exists('tool_format_text_with_sp_break') ? tool_format_text_with_sp_break((string) $form_description) : nl2br(esc_html((string) $form_description))); ?></p>
                     <?php endif; ?>
                 </div>
             </div>

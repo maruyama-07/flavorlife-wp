@@ -76,14 +76,16 @@ $footer_note = function_exists('school_voice_get_archive_footer_note') ? school_
                 : array();
             foreach ($heading_lines as $line) :
                 ?>
-            <span class="p-school-voice__intro-line"><?php echo esc_html((string) $line); ?></span>
+            <span class="p-school-voice__intro-line"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $line) : esc_html((string) $line); ?></span>
                 <?php
             endforeach;
             ?>
         </h2>
         <div class="p-school-voice__intro-body">
             <?php
-            if (function_exists('tool_format_text_with_sp_break')) {
+            if (function_exists('tool_acf_format_field_for_echo')) {
+                echo tool_acf_format_field_for_echo((string) $intro['body']);
+            } elseif (function_exists('tool_format_text_with_sp_break')) {
                 echo tool_format_text_with_sp_break((string) $intro['body']);
             } else {
                 echo nl2br(esc_html((string) $intro['body']));
@@ -126,7 +128,14 @@ $footer_note = function_exists('school_voice_get_archive_footer_note') ? school_
                     <a class="p-school-voice-card__btn" href="<?php echo esc_url(get_permalink()); ?>">
                         <span class="p-school-voice-card__btn-label">詳細を見る</span>
                         <span class="p-school-voice-card__btn-icon" aria-hidden="true">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <img
+                                class="p-school-voice-card__btn-arrow"
+                                src="<?php echo esc_url(get_theme_file_uri('assets/images/school/white-arrow.svg')); ?>"
+                                width="40"
+                                height="31"
+                                alt=""
+                                decoding="async"
+                            />
                         </span>
                     </a>
                 </article>
@@ -174,7 +183,9 @@ $footer_note = function_exists('school_voice_get_archive_footer_note') ? school_
     <div class="p-school-voice__footer-note l-inner">
         <div class="p-school-voice__footer-note-inner">
             <?php
-            if (function_exists('tool_format_text_with_sp_break')) {
+            if (function_exists('tool_acf_format_field_for_echo')) {
+                echo tool_acf_format_field_for_echo($footer_note);
+            } elseif (function_exists('tool_format_text_with_sp_break')) {
                 echo tool_format_text_with_sp_break($footer_note);
             } else {
                 echo nl2br(esc_html($footer_note));

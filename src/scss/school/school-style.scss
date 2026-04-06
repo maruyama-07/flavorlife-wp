@@ -8,6 +8,7 @@
 @use "../object/utility/wp-alignment";
 @use "../object/component/c-page-content-table";
 @use "../object/component/c-framed-section-title";
+@use "../object/component/c-editor-highlight-block";
 @use "../object/component/c-content-two-col";
 
 // layout / object 配下のパーシャルは自動で結合（新規ファイルもエントリ追記不要）

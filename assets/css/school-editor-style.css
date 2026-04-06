@@ -7,6 +7,17 @@
  * スクール固定ページ編集時のみ add_editor_style で読み込み（TinyMCE プレビュー用）
  */
 
+/* 空の p / br のみの p のみ（class 未付与・通常本文は連続スペースは潰す）
+   body.school-section .page-content と同様（クラシックエディタ iframe 用） */
+.mce-content-body p:not([class]):empty,
+.wp-block-freeform p:not([class]):empty,
+.mce-content-body p:not([class]):has(> br:only-child),
+.wp-block-freeform p:not([class]):has(> br:only-child) {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    min-height: 1rem;
+}
+
 /* {sp} / {pc} 本文トークン（the_content 置換後の br・iframe 内プレビュー） */
 .u-br-sp {
     display: none;
@@ -43,6 +54,30 @@
 .wp-block-freeform table th,
 .wp-block-freeform table td {
     padding: 6px;
+}
+
+/* TinyMCE「背景ハイライト」（フロントと同様） */
+.mce-content-body .c-editor-highlight-block,
+.wp-block-freeform .c-editor-highlight-block {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 1.25rem 1rem 1.25rem 1.5rem;
+    box-sizing: border-box;
+    background-color: #f5f2eb;
+    color: #000;
+    font-weight: 600;
+    line-height: 1.55;
+}
+.mce-content-body .c-editor-highlight-block p,
+.wp-block-freeform .c-editor-highlight-block p {
+    margin: 0;
+    font-weight: inherit;
+}
+.mce-content-body .c-editor-highlight-block p + p,
+.wp-block-freeform .c-editor-highlight-block p + p {
+    margin-top: 0.75rem;
 }
 
 /* 本文2カラム（TinyMCE・コーポレートと同仕様） */
@@ -414,6 +449,18 @@
 
 .mce-content-body .c-school-course-intro__text > p:first-child,
 .wp-block-freeform .c-school-course-intro__text > p:first-child {
+    margin-top: 0;
+}
+
+/* _p-school-course-intro.scss 63-80 行相当：本文カラム先頭の見出し・先頭テキストの上余白 */
+.mce-content-body .c-school-course-intro__body > .c-school-course-intro__text:first-child h2,
+.wp-block-freeform .c-school-course-intro__body > .c-school-course-intro__text:first-child h2,
+.mce-content-body .c-school-course-intro__body > .c-school-course-intro__text:first-child h3,
+.wp-block-freeform .c-school-course-intro__body > .c-school-course-intro__text:first-child h3,
+.mce-content-body .c-school-course-intro__body > .c-school-course-intro__text:first-child h4,
+.wp-block-freeform .c-school-course-intro__body > .c-school-course-intro__text:first-child h4,
+.mce-content-body .c-school-course-intro__body > .c-school-course-intro__text:first-child h5,
+.wp-block-freeform .c-school-course-intro__body > .c-school-course-intro__text:first-child h5 {
     margin-top: 0;
 }
 

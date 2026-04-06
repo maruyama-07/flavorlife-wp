@@ -1,0 +1,40 @@
+@use '../../foundation' as *;
+
+/**
+ * TinyMCE「背景ハイライト」ブロック（本文 .page-content 内）
+ * 上下・左に余白、全幅の帯状背景（色はインライン style または既定の薄ベージュ）
+ */
+.c-editor-highlight-block {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: prem(16) 0;
+    padding: prem(20) prem(16) prem(20) prem(24);
+    box-sizing: border-box;
+    background-color: #f5f2eb;
+    color: #000;
+    font-weight: 600;
+    line-height: 1.55;
+
+    /* インライン background-color があれば上記を上書き */
+    p {
+        margin: 0;
+        font-weight: inherit;
+    }
+
+    p + p {
+        margin-top: prem(12);
+    }
+
+    /* 見出しをブロックごと包んだとき（段落と同様に先頭マージンを抑える） */
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}

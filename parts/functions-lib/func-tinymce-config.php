@@ -214,6 +214,50 @@ function tool_line_height_mce_button($buttons)
 add_filter('mce_buttons_2', 'tool_line_height_mce_button');
 
 /**
+ * 背景ハイライト（帯状・色はモーダルで変更）コーポレート・スクール共通
+ */
+function tool_editor_highlight_mce_plugin($plugins)
+{
+    $path = get_template_directory() . '/assets/js/admin/tool-editor-highlight-bg.js';
+    if (!is_readable($path)) {
+        return $plugins;
+    }
+    $plugins['tool_editor_highlight'] = get_template_directory_uri() . '/assets/js/admin/tool-editor-highlight-bg.js?v=' . (string) filemtime($path);
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'tool_editor_highlight_mce_plugin');
+
+function tool_editor_highlight_mce_button($buttons)
+{
+    $buttons[] = 'tool_editor_highlight';
+
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'tool_editor_highlight_mce_button');
+
+/**
+ * 背景ハイライト用 div を TinyMCE に明示（環境によっては div が落ちるのを防ぐ）
+ */
+function tool_tinymce_allow_editor_highlight_div($init)
+{
+    if (!is_array($init)) {
+        return $init;
+    }
+    $chunk = 'div[id|class|style|title]';
+    if (!empty($init['extended_valid_elements'])) {
+        if (stripos($init['extended_valid_elements'], 'div[') === false) {
+            $init['extended_valid_elements'] .= ',' . $chunk;
+        }
+    } else {
+        $init['extended_valid_elements'] = $chunk;
+    }
+
+    return $init;
+}
+add_filter('tiny_mce_before_init', 'tool_tinymce_allow_editor_highlight_div', 5);
+
+/**
  * ツール用モーダル（行間など）の管理画面スタイル
  */
 function tool_tinymce_tool_modal_admin_assets($hook)

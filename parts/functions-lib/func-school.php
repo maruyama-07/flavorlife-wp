@@ -966,6 +966,48 @@ function school_section_mce_external_plugins_add_brown_arrow($plugins)
 add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_brown_arrow', 1000);
 
 /**
+ * スクール用 TinyMCE：右向き矢印ラベル（#F5F3EF）
+ *
+ * @param string[] $buttons
+ * @return string[]
+ */
+function school_section_mce_buttons_add_arrow_label($buttons)
+{
+    if (
+        ! function_exists('tool_school_tinymce_is_target_screen')
+        || ! tool_school_tinymce_is_target_screen()
+        || ! is_array($buttons)
+    ) {
+        return $buttons;
+    }
+    $buttons[] = 'school_arrow_label';
+
+    return $buttons;
+}
+add_filter('mce_buttons_2', 'school_section_mce_buttons_add_arrow_label', 1000);
+
+/**
+ * @param array<string, string> $plugins
+ * @return array<string, string>
+ */
+function school_section_mce_external_plugins_add_arrow_label($plugins)
+{
+    if (
+        ! function_exists('tool_school_tinymce_is_target_screen')
+        || ! tool_school_tinymce_is_target_screen()
+        || ! is_array($plugins)
+    ) {
+        return $plugins;
+    }
+    $path = get_template_directory() . '/assets/js/admin/school-arrow-label.js';
+    $plugins['school_arrow_label'] = get_template_directory_uri() . '/assets/js/admin/school-arrow-label.js'
+        . (is_readable($path) ? '?v=' . (string) filemtime($path) : '');
+
+    return $plugins;
+}
+add_filter('mce_external_plugins', 'school_section_mce_external_plugins_add_arrow_label', 1000);
+
+/**
  * スクール用 TinyMCE：講座紹介2カラム（画像幅 % 可変）
  *
  * @param string[] $buttons

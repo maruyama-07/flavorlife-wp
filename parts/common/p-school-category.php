@@ -35,7 +35,7 @@ if (is_readable($arrow_svg_path)) {
                 ?>
             <a class="p-school-category__item" href="<?php echo esc_url($link); ?>">
                 <div class="p-school-category__item-head">
-                    <p class="p-school-category__item-title"><?php echo esc_html($title); ?></p>
+                    <p class="p-school-category__item-title"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($title) : esc_html($title); ?></p>
                     <span class="p-school-category__item-arrow" aria-hidden="true">
                         <?php if ($arrow_svg !== '') : ?>
                             <?php echo $arrow_svg; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -53,9 +53,11 @@ if (is_readable($arrow_svg_path)) {
                     <?php if ($desc !== '') : ?>
                     <p class="p-school-category__item-desc">
                         <?php
-                        echo function_exists('tool_format_text_with_sp_break')
-                            ? tool_format_text_with_sp_break($desc)
-                            : nl2br(esc_html((string) $desc));
+                        echo function_exists('tool_acf_format_field_for_echo')
+                            ? tool_acf_format_field_for_echo((string) $desc)
+                            : (function_exists('tool_format_text_with_sp_break')
+                                ? tool_format_text_with_sp_break($desc)
+                                : nl2br(esc_html((string) $desc)));
                         ?>
                     </p>
                     <?php endif; ?>

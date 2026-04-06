@@ -22,9 +22,11 @@ if (empty($text_1) && empty($logo)) {
 }
 
 $logo_url = is_array($logo) ? ($logo['url'] ?? '') : $logo;
-$text_1_escaped = function_exists('tool_format_text_with_sp_break')
-    ? tool_format_text_with_sp_break($text_1)
-    : nl2br(esc_html((string) $text_1));
+$text_1_escaped = function_exists('tool_acf_format_field_for_echo')
+    ? tool_acf_format_field_for_echo((string) $text_1)
+    : (function_exists('tool_format_text_with_sp_break')
+        ? tool_format_text_with_sp_break($text_1)
+        : nl2br(esc_html((string) $text_1)));
 ?>
 
 <section class="p-evidence-banner">

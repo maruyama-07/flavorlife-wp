@@ -33,7 +33,7 @@ if ($text === '' && $img_url === '' && $caption === '') {
                 <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($img_alt !== '' ? $img_alt : ''); ?>" loading="lazy" decoding="async">
                 <?php endif; ?>
                 <?php if ($caption !== '') : ?>
-                <figcaption class="p-school-about-intro__caption"><?php echo nl2br(esc_html($caption)); ?></figcaption>
+                <figcaption class="p-school-about-intro__caption"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($caption) : nl2br(esc_html($caption)); ?></figcaption>
                 <?php endif; ?>
             </figure>
             <?php endif; ?>

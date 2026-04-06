@@ -37,7 +37,7 @@ if (empty($items)) {
                 </div>
                 <?php endif; ?>
                 <?php if ($text !== '') : ?>
-                <p class="p-school-about-bottom-links__text"><?php echo esc_html($text); ?></p>
+                <p class="p-school-about-bottom-links__text"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo($text) : esc_html($text); ?></p>
                 <?php endif; ?>
             </<?php echo $tag; ?>>
             <?php endforeach; ?>

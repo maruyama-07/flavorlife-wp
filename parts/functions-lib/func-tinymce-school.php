@@ -186,6 +186,7 @@ function tool_school_tinymce_course_intro_content_style($init_array)
 .c-school-course-intro__body>.c-school-course-intro__text:first-child{margin-top:0!important;}
 .c-school-course-intro__text>p:first-child{margin-top:0!important;}
 .c-school-course-intro__body>h1:first-child,.c-school-course-intro__body>h2:first-child,.c-school-course-intro__body>h3:first-child,.c-school-course-intro__body>h4:first-child,.c-school-course-intro__body>h5:first-child{margin-top:0!important;}
+.c-school-course-intro__body>.c-school-course-intro__text:first-child h2,.c-school-course-intro__body>.c-school-course-intro__text:first-child h3,.c-school-course-intro__body>.c-school-course-intro__text:first-child h4,.c-school-course-intro__body>.c-school-course-intro__text:first-child h5{margin-top:0!important;}
 .c-school-course-intro__cta{text-align:center!important;}
 .c-school-course-intro__cta .l-header-school__cta{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:10.75rem!important;min-height:2.5rem!important;border-radius:999px!important;font-size:0.875rem!important;letter-spacing:0.08em!important;color:#fff!important;text-decoration:none!important;background:#699!important;padding:0.875rem 1.875rem!important;box-sizing:border-box!important;}
 @media screen and (max-width:767px){.c-school-course-intro{flex-direction:column!important;flex-wrap:wrap!important;}.c-school-course-intro--media-right{flex-direction:column-reverse!important;}.c-school-course-intro__media{flex:1 1 100%!important;width:100%!important;}.c-school-course-intro__body{flex:0 1 auto!important;width:100%!important;max-width:100%!important;}}
@@ -238,6 +239,32 @@ CSS;
     return $init_array;
 }
 add_filter('tiny_mce_before_init', 'tool_school_tinymce_brown_arrow_content_style', 98);
+
+/**
+ * 矢印ラベル（.c-school-arrow-label）のエディタ iframe 内プレビュー
+ *
+ * @param array<string, mixed> $init_array
+ * @return array<string, mixed>
+ */
+function tool_school_tinymce_arrow_label_content_style($init_array)
+{
+    if (! tool_school_tinymce_is_target_screen()) {
+        return $init_array;
+    }
+
+    $css = <<<'CSS'
+.mce-content-body .c-school-arrow-label,.wp-block-freeform .c-school-arrow-label{display:flex!important;align-items:center!important;justify-content:center!important;max-width:100%!important;margin:0 0 1.25rem!important;padding:0.875rem 2rem 0.875rem 1.5rem!important;vertical-align:middle!important;box-sizing:border-box!important;background-color:#f5f3ef!important;color:#000!important;font-size:1.75rem!important;font-weight:500!important;line-height:1.5!important;letter-spacing:0.02em!important;clip-path:polygon(0 0,calc(100% - 1.875rem) 0,100% 50%,calc(100% - 1.875rem) 100%,0 100%)!important;}
+.mce-content-body .c-school-arrow-label__inner,.wp-block-freeform .c-school-arrow-label__inner{display:block!important;}
+@media screen and (max-width:767px){.mce-content-body .c-school-arrow-label,.wp-block-freeform .c-school-arrow-label{padding:0.625rem 1.5rem 0.625rem 1.125rem!important;font-size:1rem!important;}}
+CSS;
+
+    $css_one_line = trim(preg_replace('/ {2,}/', ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $css)));
+    $merged       = isset($init_array['content_style']) ? $init_array['content_style'] . ' ' . $css_one_line : $css_one_line;
+    $init_array['content_style'] = trim(preg_replace('/ {2,}/', ' ', str_replace(array("\r\n", "\r", "\n"), ' ', $merged)));
+
+    return $init_array;
+}
+add_filter('tiny_mce_before_init', 'tool_school_tinymce_arrow_label_content_style', 97);
 
 /**
  * 横線見出し（h2.c-school-heading）のビジュアルエディタ iframe 内プレビュー
