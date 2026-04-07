@@ -4,6 +4,8 @@
  * ヘッダー・フッター・CSS・テンプレート切り替え
  */
 
+require_once get_theme_file_path('parts/functions-lib/class-school-footer-nav-walker.php');
+
 /**
  * スクールのルート固定ページID。
  * 固定運用: スラッグ school のページを起点として扱う。
@@ -44,6 +46,39 @@ function school_section_is_voice_page()
     }
     $page = get_queried_object();
     if (!$page instanceof WP_Post || $page->post_name !== 'voice') {
+        return false;
+    }
+
+    return (int) $page->post_parent === $root;
+}
+
+/**
+ * スクール直下の「お知らせ」固定ページ（/school/news/）の投稿 ID
+ *
+ * @return int 0 = 該当なし
+ */
+function school_section_get_news_page_id()
+{
+    $page = get_page_by_path('school/news');
+    return $page ? (int) $page->ID : 0;
+}
+
+/**
+ * 現在の表示が /school/news/ 相当の固定ページか
+ *
+ * @return bool
+ */
+function school_section_is_news_page()
+{
+    if (!is_page()) {
+        return false;
+    }
+    $root = school_section_get_root_page_id();
+    if (!$root) {
+        return false;
+    }
+    $page = get_queried_object();
+    if (!$page instanceof WP_Post || $page->post_name !== 'news') {
         return false;
     }
 
@@ -106,6 +141,20 @@ function school_section_is_course_page()
     }
 
     return (int) $page->post_parent === $root;
+}
+
+/**
+ * 講座一覧固定ページの URL（一覧グリッド #school-course-layout へジャンプ）
+ * ヘッダー・フッター等「一覧を見せる」導線用。イントロのみ見たい場合は get_permalink( course_page_id ) を使う。
+ *
+ * @return string
+ */
+function school_section_get_course_page_url_with_list_anchor()
+{
+    $id = school_section_get_course_page_id();
+    $base = $id ? get_permalink($id) : home_url('/school/course/');
+
+    return $base . '#school-course-layout';
 }
 
 /**
@@ -177,6 +226,12 @@ function is_school_brand_layout()
     if (is_singular('voice_school')) {
         return true;
     }
+    if (is_singular('news_school')) {
+        return true;
+    }
+    if (!empty($GLOBALS['school_news_archive_fallback'])) {
+        return true;
+    }
     /** 講座 CPT（/school/course/スラッグ/）。固定ページ is_school_section には含まれない */
     if (is_singular('course_school')) {
         return true;
@@ -185,10 +240,76 @@ function is_school_brand_layout()
     return false;
 }
 
+/**
+ * スクールフッター3列・メニュー未割り当て時の既定リンク
+ *
+ * @param array<int, array{0: string, 1: string, 2?: bool}> $items URL, ラベル, 省略時は同一タブ・true で target="_blank"
+ */
+function school_footer_nav_echo_ul(array $items)
+{
+    echo '<ul>';
+    foreach ($items as $row) {
+        $url   = $row[0];
+        $label = $row[1];
+        $blank = !empty($row[2]);
+        $rel   = $blank ? ' rel="noreferrer noopener"' : '';
+        $tgt   = $blank ? ' target="_blank"' : '';
+        printf(
+            '<li><a href="%s"%s%s>%s</a></li>',
+            esc_url($url),
+            $tgt,
+            $rel,
+            esc_html($label)
+        );
+    }
+    echo '</ul>';
+}
+
+/**
+ * スクールフッター1メニュー未割り当て時: 既定の3列HTML
+ */
+function school_footer_nav_fallback_all()
+{
+    $course_url = function_exists('school_section_get_course_page_url_with_list_anchor')
+        ? school_section_get_course_page_url_with_list_anchor()
+        : home_url('/school/course/#school-course-layout');
+
+    echo '<div class="l-footer-school__column">';
+    echo '<p class="l-footer-school__heading">講座を学ぶ</p>';
+    school_footer_nav_echo_ul(array(
+        array($course_url, 'コース一覧'),
+        array(home_url('/school/aroma/'), 'アロマを学ぶ'),
+        array(home_url('/school/herb/'), 'ハーブを学ぶ'),
+        array(home_url('/school/oneday/'), '1Dayレッスン'),
+        array(home_url('/school/topics/'), 'シーズナルトピックス'),
+    ));
+    echo '</div>';
+
+    echo '<div class="l-footer-school__column">';
+    echo '<p class="l-footer-school__heading">はじめての方へ</p>';
+    school_footer_nav_echo_ul(array(
+        array(home_url('/school/access/'), 'アクセス'),
+        array(home_url('/school/contact/'), 'お問い合わせ'),
+        array(home_url('/school/voice/'), '受講生の声'),
+        array(home_url('/school/entry/'), 'お申込み方法'),
+        array($course_url, 'スクール講座一覧'),
+    ));
+    echo '</div>';
+
+    echo '<div class="l-footer-school__column l-footer-school__column--single">';
+    school_footer_nav_echo_ul(array(
+        array(home_url('/company/'), '会社概要'),
+        array(home_url('/privacy-policy/'), 'プライバシーポリシー'),
+        array('https://www.flavorlife.co.jp/', 'コーポレートサイト', true),
+        array('https://www.flavorlife.com/', '総合ショッピングサイト', true),
+    ));
+    echo '</div>';
+}
+
 add_action('customize_register', function ($wp_customize) {
     $wp_customize->add_section('school_section_settings', array(
         'title' => 'スクールページ',
-        'description' => 'スクールページ全体の設定です。',
+        'description' => 'スクールページ全体の設定です。フッターは「外観」→「メニュー」で1本のメニューを作成し、表示位置「スクールフッターメニュー」に割り当てます。親項目3つ＝3列（親のラベルが見出し）、その下の子項目が各列のリンクです。親に「CSSクラス」で footer-col--no-heading（見出しなし）や footer-col--single（右列のスタイル）を付与できます（画面オプションでCSSクラスを表示）。メニュー未設定時は既定の3列を表示します。リストの「・」はCSSで付与されます。',
         'priority' => 35,
     ));
 
@@ -409,7 +530,7 @@ function school_nav_menu_get_default_items($context = 'header')
 {
     $common = array(
         array('label' => 'スクール紹介', 'url' => home_url('/school/')),
-        array('label' => '講座のご案内', 'url' => home_url('/school/course/')),
+        array('label' => '講座のご案内', 'url' => school_section_get_course_page_url_with_list_anchor()),
         array('label' => 'はじめての方へ', 'url' => home_url('/school/first/')),
         array('label' => '講座スケジュール', 'url' => home_url('/school/schedule/')),
         array('label' => '受講生の声', 'url' => home_url('/school/voice/')),

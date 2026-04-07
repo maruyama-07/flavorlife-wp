@@ -20,6 +20,12 @@ $course-text-muted: #666;
   align-items: start;
   max-width: prem(1240);
   padding: prem(40) prem(20) 0;
+  // カテゴリ切替・ページ送りの #school-course-layout ジャンプ時（ヘッダー分オフセットは foundation/_base の html と揃える）
+  scroll-margin-top: prem(60);
+
+  @include mq('md') {
+    scroll-margin-top: prem(100);
+  }
 }
 
 .p-school-course__aside-title {
@@ -302,7 +308,7 @@ $course-text-muted: #666;
   word-break: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   overflow: hidden;
 }
 
@@ -405,6 +411,7 @@ $course-text-muted: #666;
   .p-school-course__layout {
     grid-template-columns: prem(200) minmax(0, 1fr);
     gap: prem(28);
+    padding-top: prem(20);
   }
 
   a.p-school-course-card {
@@ -416,11 +423,97 @@ $course-text-muted: #666;
 @media screen and (max-width: 767px) {
   .p-school-course {
     padding-bottom: prem(48);
+    // カテゴリナビの 100vw 全幅化で生じうる横スクロールのみ抑止（子の縦スクロールは維持）
+    overflow-x: hidden;
   }
 
   .p-school-course__layout {
     grid-template-columns: 1fr;
     gap: prem(28);
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .p-school-course__aside {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: visible;
+  }
+
+  // 講座カテゴリー: 縦並びだと項目が多く見づらいため、横スクロールのチップ型に（PC は上記のまま）
+  .p-school-course__aside-title {
+    margin-bottom: prem(10);
+    font-size: prem(20);
+  }
+
+  // チップ行をビューポート全幅で表示（右端まで横スクロール可能に。内側に余白）
+  .p-school-course__nav {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    margin-left: calc(50% - 50vw);
+    padding-left: prem(16);
+    padding-right: prem(16);
+    padding-bottom: prem(4);
+    box-sizing: border-box;
+  }
+
+  .p-school-course__nav-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: prem(8);
+    width: 100vw;
+    max-width: none;
+    min-width: 0;
+    padding: prem(2) 0 prem(10);
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    scrollbar-width: thin;
+  }
+
+  .p-school-course__nav-item {
+    flex: 0 0 auto;
+    max-width: prem(260);
+    scroll-snap-align: start;
+    border-bottom: none;
+  }
+
+  .p-school-course__nav-link {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: prem(44);
+    padding: prem(10) prem(13);
+    border: 1px solid $course-border;
+    border-radius: prem(8);
+    background: #fafafa;
+    font-size: prem(12);
+    line-height: 1.35;
+    box-sizing: border-box;
+  }
+
+  .p-school-course__nav-item.is-current .p-school-course__nav-link {
+    border-color: $course-teal;
+    background: color.change($course-teal, $alpha: 0.08);
+    color: $course-teal;
+    font-weight: 600;
+  }
+
+  .p-school-course__nav-arrow {
+    display: none;
+  }
+
+  .p-school-course__nav-label-sub {
+    font-size: prem(11);
+    opacity: 0.95;
+  }
+  .p-school-course__nav-label {
+    justify-content: center;
   }
 
   a.p-school-course-card {

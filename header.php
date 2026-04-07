@@ -33,6 +33,7 @@ if (function_exists('is_school_section') && is_school_section()) {
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
+    <?php get_template_part('parts/common/scroll-anim-fouc-head'); ?>
     <div id="page" class="l-site">
         <header class="l-header" id="header">
             <div class="l-header__inner">

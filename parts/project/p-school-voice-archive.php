@@ -67,7 +67,7 @@ if (!$is_fallback && function_exists('school_section_is_voice_page') && school_s
 $voice_thumb_placeholder = get_theme_file_uri('assets/images/school/voice-nonImage.jpg');
 $footer_note = function_exists('school_voice_get_archive_footer_note') ? school_voice_get_archive_footer_note() : '';
 ?>
-<section class="p-school-voice">
+<section class="p-school-voice js-animate-content">
     <div class="p-school-voice__intro l-inner">
         <h2 class="p-school-voice__intro-title">
             <?php

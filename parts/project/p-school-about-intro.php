@@ -17,7 +17,7 @@ if ($text === '' && $img_url === '' && $caption === '') {
     return;
 }
 ?>
-<section class="p-school-about-intro">
+<section class="p-school-about-intro js-animate-content">
     <div class="p-school-about-intro__inner l-inner">
         <div class="p-school-about-intro__grid">
             <div class="p-school-about-intro__text">

@@ -5,6 +5,9 @@
 $course_page_id = function_exists('school_section_get_course_page_id') ? school_section_get_course_page_id() : 0;
 $permalink      = $course_page_id ? get_permalink($course_page_id) : home_url('/school/course/');
 
+/** カテゴリ切替・ページ送り後も一覧ブロック位置にスクロール（フラグメント） */
+$school_course_layout_id = 'school-course-layout';
+
 $cat_slug = function_exists('school_course_get_filter_category_slug') ? school_course_get_filter_category_slug() : '';
 
 $paged = 1;
@@ -86,13 +89,13 @@ $school_course_term_badge_tone = function ($term) {
 ?>
 <section class="p-school-course">
     <?php get_template_part('parts/project/p-school-course-top', null, array('post_id' => (int) $course_page_id)); ?>
-    <div class="p-school-course__layout l-inner">
+    <div id="<?php echo esc_attr($school_course_layout_id); ?>" class="p-school-course__layout l-inner js-animate-content">
         <aside class="p-school-course__aside" aria-label="講座カテゴリー">
             <h2 class="p-school-course__aside-title">講座カテゴリー</h2>
             <nav class="p-school-course__nav">
                 <ul class="p-school-course__nav-list">
                     <li class="p-school-course__nav-item<?php echo $cat_slug === '' ? ' is-current' : ''; ?>">
-                        <a class="p-school-course__nav-link" href="<?php echo esc_url($permalink); ?>">
+                        <a class="p-school-course__nav-link" href="<?php echo esc_url($permalink . '#' . $school_course_layout_id); ?>">
                             <span class="p-school-course__nav-label">すべて</span>
                             <span class="p-school-course__nav-arrow" aria-hidden="true">
                                 <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L6 6L2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -103,7 +106,7 @@ $school_course_term_badge_tone = function ($term) {
                         <?php
                         $t_slug = isset($term->slug) ? (string) $term->slug : '';
                         $is_current = ($cat_slug !== '' && $cat_slug === $t_slug);
-                        $term_url = add_query_arg('course_cat', $t_slug, $permalink);
+                        $term_url = add_query_arg('course_cat', $t_slug, $permalink) . '#' . $school_course_layout_id;
                         ?>
                     <li class="p-school-course__nav-item<?php echo $is_current ? ' is-current' : ''; ?>">
                         <a class="p-school-course__nav-link" href="<?php echo esc_url($term_url); ?>">
@@ -235,6 +238,7 @@ $school_course_term_badge_tone = function ($term) {
                     'base'      => $pagination_base,
                     'format'    => '',
                     'add_args'  => $pagination_add,
+                    'add_fragment' => $school_course_layout_id,
                 ));
                 ?>
             </nav>

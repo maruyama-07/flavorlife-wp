@@ -27,6 +27,7 @@
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
+    <?php get_template_part('parts/common/scroll-anim-fouc-head'); ?>
     <?php
     $school_aeaj_url = (string) get_theme_mod('school_aeaj_url', '');
     $school_jamha_url = (string) get_theme_mod('school_jamha_url', '');

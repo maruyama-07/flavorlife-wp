@@ -11,7 +11,7 @@ $intro = function_exists('school_top_get_intro_content') ? school_top_get_intro_
 );
 ?>
 <div class="p-school-top-block">
-    <section class="p-school-top-intro" aria-labelledby="p-school-top-intro-heading">
+    <section class="p-school-top-intro js-animate-content" aria-labelledby="p-school-top-intro-heading">
         <div class="p-school-top-intro__curve" aria-hidden="true"></div>
         <div class="p-school-top-intro__inner">
             <h1 id="p-school-top-intro-heading" class="p-school-top-intro__brand"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $intro['brand']) : esc_html((string) $intro['brand']); ?></h1>
@@ -31,7 +31,7 @@ $intro = function_exists('school_top_get_intro_content') ? school_top_get_intro_
     </section>
 
     <?php if (!empty($card_pages)) : ?>
-    <section class="p-school-top-cards" aria-label="スクールのご案内">
+    <section class="p-school-top-cards js-animate-content" aria-label="スクールのご案内">
         <div class="p-school-top-cards__inner">
             <?php foreach ($card_pages as $idx => $card) : ?>
                 <?php

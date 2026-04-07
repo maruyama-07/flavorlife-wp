@@ -58,6 +58,12 @@
 
 }
 
+// 本文（the_content）の見出し：受講生の声詳細のみ h2 をやや大きく（_base の .page-content h2 より詳細度高）
+body.school-section .p-school-voice-single-detail .page-content h2:not([class]) {
+  font-size: prem(30);
+  margin-bottom: prem(40);
+}
+
 .p-school-voice-single-media--thumb-only {
   .p-school-voice-single-media__single {
     max-width: prem(260);
@@ -106,5 +112,10 @@
 
   .p-school-voice-single-media--thumb-only .p-school-voice-single-media__single {
     max-width: prem(400);
+  }
+
+  body.school-section .p-school-voice-single-detail .page-content h2:not([class]) {
+    font-size: prem(23);
+    margin-bottom: prem(24);
   }
 }

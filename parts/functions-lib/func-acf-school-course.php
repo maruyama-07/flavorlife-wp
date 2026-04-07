@@ -33,8 +33,10 @@ add_action('acf/init', function () {
                 'key' => 'field_course_school_dates',
                 'label' => '開催日・日程テキスト',
                 'name' => 'course_school_dates',
-                'type' => 'text',
-                'instructions' => '例: 2/17 (火) ・ 3/17 (火) ・ 3/26 (木)',
+                'type' => 'textarea',
+                'rows' => 4,
+                'new_lines' => '',
+                'instructions' => '例: 2/17 (火) ・ 3/17 (火) ・ 3/26 (木)。曜日や日程を複数行に分けて入力できます。一覧カードの日程欄に表示されます。',
             ),
             array(
                 'key' => 'field_course_school_detail',

@@ -4,7 +4,7 @@
  */
 get_header('school');
 ?>
-<main class="l-main l-main--school p-school-voice-single">
+<main class="l-main l-main--school p-school-voice-single p-school-voice-single-detail">
     <?php
     while (have_posts()) :
         the_post();

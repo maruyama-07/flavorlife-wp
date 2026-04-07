@@ -45,7 +45,7 @@ if (!$has_intro && !$has_section && !$has_cards) {
     return;
 }
 ?>
-<div class="p-school-course-top">
+<div class="p-school-course-top js-animate-content">
     <div class="l-inner p-school-course-top__inner">
         <?php if ($has_intro) : ?>
         <div class="p-school-course-top__intro">

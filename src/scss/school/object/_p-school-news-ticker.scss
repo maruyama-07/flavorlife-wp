@@ -28,6 +28,7 @@
   flex: 1;
   min-width: 0;
   overflow: hidden;
+  margin-top: prem(7);
 }
 
 .p-school-news-ticker__list {
@@ -75,6 +76,9 @@
 }
 
 @media screen and (max-width: 767px) {
+  .p-school-news-ticker__track {
+    margin-top: prem(4);
+  }
   .p-school-news-ticker {
     padding: prem(15) prem(20);
   }

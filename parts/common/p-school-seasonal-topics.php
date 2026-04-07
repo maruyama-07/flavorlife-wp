@@ -16,7 +16,7 @@ $body = $data['body'] ?? '';
 $button_text = $data['button_text'] !== '' ? $data['button_text'] : 'more';
 $button_url = $data['button_url'] ?? '';
 ?>
-<section class="p-school-seasonal-topics" aria-labelledby="p-school-seasonal-topics-heading">
+<section class="p-school-seasonal-topics js-animate-content" aria-labelledby="p-school-seasonal-topics-heading">
     <div class="p-school-seasonal-topics__inner">
         <header class="p-school-seasonal-topics__header">
             <h2 id="p-school-seasonal-topics-heading" class="p-school-seasonal-topics__title"><?php echo function_exists('tool_acf_format_field_for_echo') ? tool_acf_format_field_for_echo((string) $title) : esc_html($title); ?></h2>

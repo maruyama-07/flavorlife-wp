@@ -1,0 +1,62 @@
+@use '../foundation/tools' as *;
+
+// ヒーローは .p-school-subpage-hero.is-no-thumb（p-school-news-single-hero.php）
+
+.p-school-news-single__hero .p-school-subpage-hero__title {
+  font-size: prem(24);
+  padding-top: prem(10);
+}
+
+.p-school-news-single__hero-date {
+  display: block;
+  margin: prem(12) 0 0;
+  font-size: prem(12);
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: #707345;
+}
+
+.p-school-news-single__hero.p-school-subpage-hero.is-no-thumb .p-school-subpage-hero__inner {
+  min-height: prem(280);
+}
+
+.p-school-news-single .page-content {
+  padding-top: prem(45);
+}
+
+// ヘッダー CTA と同系統・やや大きめ
+.p-school-news-single__back {
+  margin: prem(48) 0 prem(8);
+  text-align: center;
+
+  .l-header-school__cta {
+    min-width: prem(220);
+    min-height: prem(48);
+    height: auto;
+    padding: prem(14) prem(36);
+    font-size: prem(14);
+    line-height: 1.4;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-news-single__hero .p-school-subpage-hero__title {
+    font-size: 4.5vw;
+  }
+
+  .p-school-news-single__hero.p-school-subpage-hero.is-no-thumb .p-school-subpage-hero__inner {
+    min-height: prem(200);
+  }
+
+  .p-school-news-single__back {
+    margin: prem(36) 0 prem(4);
+
+    .l-header-school__cta {
+      min-width: prem(200);
+      width: 100%;
+      max-width: prem(320);
+      padding: prem(12) prem(28);
+      font-size: prem(13);
+    }
+  }
+}

@@ -14,7 +14,7 @@ if (is_readable($arrow_svg_path)) {
     $arrow_svg = (string) file_get_contents($arrow_svg_path);
 }
 ?>
-<section class="p-school-category" aria-labelledby="p-school-category-heading">
+<section class="p-school-category js-animate-content" aria-labelledby="p-school-category-heading">
     <div class="p-school-category__inner ">
         <header class="p-school-category__header">
             <h2 id="p-school-category-heading" class="p-school-category__title">Category</h2>

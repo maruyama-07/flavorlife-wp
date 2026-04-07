@@ -15,7 +15,7 @@
                     </span>
                     <span class="l-footer-school-contact__subitem">
                         <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/school/mail.png'); ?>" alt="">
-                        <span>お問合せ</span>
+                        <span>お問い合わせ</span>
                     </span>
                 </a>
             </div>
@@ -60,34 +60,17 @@
                 <?php endif; ?>
             </div>
             <div class="l-footer-school__links">
-                <div class="l-footer-school__column">
-                    <p class="l-footer-school__heading">講座を学ぶ</p>
-                    <ul>
-                        <li><a href="<?php echo esc_url(home_url('/school/course/')); ?>">コース一覧</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/aroma/')); ?>">アロマを学ぶ</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/herb/')); ?>">ハーブを学ぶ</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/oneday/')); ?>">1Dayレッスン</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/topics/')); ?>">シーズナルトピックス</a></li>
-                    </ul>
-                </div>
-                <div class="l-footer-school__column">
-                    <p class="l-footer-school__heading">はじめての方へ</p>
-                    <ul>
-                        <li><a href="<?php echo esc_url(home_url('/school/access/')); ?>">アクセス</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/contact/')); ?>">お問い合わせ</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/voice/')); ?>">受講生の声</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/entry/')); ?>">お申込み方法</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/school/course/')); ?>">スクール講座一覧</a></li>
-                    </ul>
-                </div>
-                <div class="l-footer-school__column l-footer-school__column--single">
-                    <ul>
-                        <li><a href="<?php echo esc_url(home_url('/company/')); ?>">会社概要</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">プライバシーポリシー</a></li>
-                        <li><a href="https://www.flavorlife.co.jp/" target="_blank" rel="noreferrer noopener">コーポレートサイト</a></li>
-                        <li><a href="https://www.flavorlife.com/" target="_blank" rel="noreferrer noopener">総合ショッピングサイト</a></li>
-                    </ul>
-                </div>
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'school_footer',
+                    'container'      => false,
+                    'menu_class'     => '',
+                    'depth'          => 2,
+                    'fallback_cb'    => 'school_footer_nav_fallback_all',
+                    'items_wrap'     => '%3$s',
+                    'walker'         => new School_Footer_Nav_Walker(),
+                ));
+                ?>
             </div>
         </div>
     </div>

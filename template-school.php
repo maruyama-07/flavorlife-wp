@@ -14,6 +14,9 @@ if (function_exists('school_section_is_about_page') && school_section_is_about_p
 if (function_exists('school_section_is_order_page') && school_section_is_order_page()) {
     $main_class .= ' l-main--school p-school-order-page';
 }
+if (function_exists('school_section_is_news_page') && school_section_is_news_page()) {
+    $main_class .= ' l-main--school p-school-news-archive';
+}
 ?>
 <main class="<?php echo esc_attr($main_class); ?>">
     <?php if (function_exists('school_section_is_course_page') && school_section_is_course_page()) : ?>
@@ -34,6 +37,17 @@ if (function_exists('school_section_is_order_page') && school_section_is_order_p
         rewind_posts();
         ?>
         <?php get_template_part('parts/project/p-school-voice-archive'); ?>
+    <?php elseif (function_exists('school_section_is_news_page') && school_section_is_news_page()) : ?>
+        <?php
+        while (have_posts()) :
+            the_post();
+            get_template_part('parts/common/p-school-subpage-hero', null, array(
+                'title_override' => 'シーズナルトピックス',
+            ));
+        endwhile;
+        rewind_posts();
+        ?>
+        <?php get_template_part('parts/project/p-school-news-archive'); ?>
     <?php elseif (function_exists('school_section_is_order_page') && school_section_is_order_page()) : ?>
         <?php while (have_posts()) : the_post(); ?>
             <?php get_template_part('parts/common/p-school-subpage-hero'); ?>

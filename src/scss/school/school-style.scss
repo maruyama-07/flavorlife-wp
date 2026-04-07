@@ -10,6 +10,8 @@
 @use "../object/component/c-framed-section-title";
 @use "../object/component/c-editor-highlight-block";
 @use "../object/component/c-content-two-col";
+@use "../object/component/c-google-maps-button";
+@use "../object/utility/scroll-anim-fouc";
 
 // layout / object 配下のパーシャルは自動で結合（新規ファイルもエントリ追記不要）
 // ※ gulp の sassGlob() が展開する（メインの style.scss と同じ方式）

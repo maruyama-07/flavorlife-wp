@@ -11,7 +11,7 @@ if (empty($items)) {
     return;
 }
 ?>
-<section class="p-school-about-bottom-links">
+<section class="p-school-about-bottom-links js-animate-content">
     <div class="p-school-about-bottom-links__inner l-inner">
         <div class="p-school-about-bottom-links__grid">
             <?php foreach ($items as $item) : ?>

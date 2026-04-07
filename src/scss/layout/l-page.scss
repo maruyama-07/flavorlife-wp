@@ -168,7 +168,7 @@
 
     p:not([class]):empty,
     p:not([class]):has(> br:only-child) {
-        white-space: pre-wrap;
+        // white-space: pre-wrap;
         overflow-wrap: anywhere;
     }
 

@@ -171,16 +171,16 @@ $course-top-brown: #4a4038;
 
 @media screen and (max-width: 1023px) {
   .p-school-course-top__cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    // grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media screen and (max-width: 767px) {
   .p-school-course-top__inner {
-    padding: prem(40) prem(20) prem(60);
+    padding: prem(40) prem(20) prem(40);
   }
   .p-school-course-top {
-    padding-bottom: prem(36);
+    padding-bottom: prem(16);
   }
 
   .p-school-course-top__lead {

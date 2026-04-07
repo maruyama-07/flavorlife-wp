@@ -47,6 +47,9 @@ get_template_part('parts/functions-lib/func-news-section');
 // カスタムボタン（ショートコード）
 get_template_part('parts/functions-lib/func-custom-button');
 
+// Google Map リンクボタン（ショートコード）
+get_template_part('parts/functions-lib/func-google-maps-button');
+
 // TinyMCEエディタの設定
 get_template_part('parts/functions-lib/func-tinymce-config');
 // スクール系クラシックエディタ専用 TinyMCE（茶色バナー等）

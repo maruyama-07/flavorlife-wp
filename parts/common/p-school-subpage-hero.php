@@ -5,6 +5,14 @@
  * - サムネイルなし: タイトルを全幅中央
  */
 $title = get_the_title();
+if (isset($title_override) && is_string($title_override) && $title_override !== '') {
+    $title = $title_override;
+} elseif (function_exists('school_section_get_news_page_id') && is_page()) {
+    $news_page_id = school_section_get_news_page_id();
+    if ($news_page_id && (int) get_queried_object_id() === $news_page_id) {
+        $title = 'シーズナルトピックス';
+    }
+}
 $thumb_pc = get_the_post_thumbnail_url(get_the_ID(), 'full');
 $thumb_sp = '';
 if (function_exists('get_field')) {

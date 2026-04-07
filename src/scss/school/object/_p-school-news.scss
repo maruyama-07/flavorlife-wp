@@ -1,0 +1,118 @@
+@use '../foundation/tools' as *;
+
+$p-school-news-teal: #669999;
+$p-school-news-olive: #666633;
+
+.p-school-news-list {
+  padding-bottom: prem(48);
+}
+.p-school-news-list__inner {
+  padding: prem(45) prem(20);
+}
+
+.p-school-news-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.p-school-news-list__item {
+  border-bottom: 1px solid rgba(0, 51, 51, 0.12);
+}
+
+.p-school-news-list__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: prem(12) prem(24);
+  padding: prem(18) 0;
+  text-decoration: none;
+  color: #222;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.p-school-news-list__date {
+  flex-shrink: 0;
+  min-width: prem(88);
+  font-size: prem(12);
+  letter-spacing: 0.06em;
+}
+
+.p-school-news-list__title {
+  flex: 1 1;
+  font-size: prem(14);
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+}
+
+.p-school-news-list__pagination {
+  margin-top: prem(32);
+
+  ul.page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: prem(8);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: prem(36);
+    padding: prem(6) prem(10);
+    font-size: prem(13);
+    text-decoration: none;
+    color: #222;
+    border-radius: prem(2);
+
+    &.current {
+      background: $p-school-news-olive;
+      border-color: $p-school-news-olive;
+      color: #fff;
+    }
+
+    &.prev,
+    &.next {
+      min-width: prem(72);
+    }
+
+    &.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+
+  a.page-numbers:not(.prev):not(.next):hover {
+    border-color: $p-school-news-olive;
+    color: $p-school-news-olive;
+  }
+}
+
+.p-school-news-list__empty {
+  padding: prem(24) 0 prem(48);
+  font-size: prem(14);
+  text-align: center;
+  color: #444;
+}
+
+@media screen and (max-width: 767px) {
+  .p-school-news-list__link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: prem(6);
+    padding: prem(14) 0;
+  }
+
+  .p-school-news-list__pagination {
+    margin-top: prem(24);
+  }
+}

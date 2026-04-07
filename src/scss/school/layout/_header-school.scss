@@ -21,13 +21,14 @@
   align-items: center;
   justify-content: space-between;
   gap: prem(20);
+  max-width: 1000px;
 }
 
 .l-header-school__branding {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
-  width: 40%;
+  width: 45%;
   gap: prem(20);
 }
 
@@ -42,7 +43,7 @@
 .l-header-school__logo {
   display: inline-block;
   width: 57%;
-  max-width: 250px;
+  max-width: 200px;
 }
 
 .l-header-school__logo img {

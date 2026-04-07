@@ -13,8 +13,44 @@ add_action('acf/init', function () {
     }
 
     $school_page_id = function_exists('school_section_get_root_page_id') ? school_section_get_root_page_id() : 0;
-    if (!$school_page_id) {
-        return;
+
+    /**
+     * 表示場所ルール（OR）
+     * 1) スラッグ school の固定ページIDが取れるときはそのページに紐づけ
+     * 2) 取れない本番など: 親なし（最上位）かつテンプレート「スクール用」の固定ページ
+     *    ※早期 return しない。ID=0 だと従来はグループ自体が登録されず ACF が一切出なかった。
+     */
+    $location = array();
+    if ($school_page_id > 0) {
+        $location[] = array(
+            array(
+                'param' => 'page',
+                'operator' => '==',
+                'value' => (string) $school_page_id,
+            ),
+        );
+    }
+    $location[] = array(
+        array(
+            'param' => 'page_template',
+            'operator' => '==',
+            'value' => 'template-school.php',
+        ),
+        array(
+            'param' => 'page_type',
+            'operator' => '==',
+            'value' => 'top_level',
+        ),
+    );
+
+    if (is_admin() && $school_page_id < 1 && current_user_can('manage_options')) {
+        add_action('admin_notices', function () {
+            echo '<div class="notice notice-warning is-dismissible"><p>';
+            echo esc_html('スクールトップ用ACF: スラッグ「school」の固定ページが見つかりません。');
+            echo ' ';
+            echo esc_html('フィールドは「テンプレート: スクール用」かつ「最上位の固定ページ」に表示されます。フロントの取得は school スラッグに依存するため、該当ページのスラッグを school にしてください。');
+            echo '</p></div>';
+        });
     }
 
     $paragraph_note = function_exists('tool_acf_paragraph_field_instructions') ? tool_acf_paragraph_field_instructions() : '';
@@ -193,15 +229,7 @@ add_action('acf/init', function () {
         'key' => 'group_school_top_page',
         'title' => 'スクールトップ',
         'fields' => $fields,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'page',
-                    'operator' => '==',
-                    'value' => (string) $school_page_id,
-                ),
-            ),
-        ),
+        'location' => $location,
         'position' => 'acf_after_title',
         'style' => 'default',
     ));

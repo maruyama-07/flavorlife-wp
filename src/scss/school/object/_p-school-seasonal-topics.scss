@@ -6,7 +6,7 @@ $p-school-olive: #707345;
   padding: prem(44) 0 prem(58);
 
   @include mq('md') {
-    padding: prem(70) 0 prem(88);
+    padding: prem(40) 0 prem(88);
   }
 }
 
@@ -101,6 +101,7 @@ $p-school-olive: #707345;
   @include mq('md') {
     font-size: prem(14);
     margin-top: prem(30);
+    max-width: 490px;
   }
 }
 

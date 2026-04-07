@@ -1057,7 +1057,6 @@ body.is-mobile-nav-open .l-header__hamburger-bar:nth-child(2) {
 }
 .page-content p:not([class]):empty,
 .page-content p:not([class]):has(> br:only-child) {
-  white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 .page-content .wp-content-figure:first-child {
@@ -1682,6 +1681,60 @@ a:hover .c-btn-arrow path {
   }
   .c-framed-section-title__sub {
     font-size: 1rem;
+  }
+}
+.c-google-maps-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9375rem;
+  box-sizing: border-box;
+  padding: 0.5rem 2.1875rem;
+  margin: 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #000;
+  text-decoration: none !important;
+  background: #fff;
+  border: 2px solid #4B8DF4;
+  border-radius: 3.125rem;
+  transition: background 0.2s ease, opacity 0.2s ease;
+  font-family: "Inter", sans-serif;
+}
+.c-google-maps-button:hover {
+  background: #f8f9ff;
+  opacity: 1;
+}
+.c-google-maps-button:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+.c-google-maps-button__icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+.c-google-maps-button__icon img {
+  display: block;
+  width: 1.375rem;
+  height: auto;
+  vertical-align: middle;
+}
+
+.c-google-maps-button__text {
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 767px) {
+  .c-google-maps-button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  .c-google-maps-button__text {
+    white-space: normal;
   }
 }
 .c-head-line {
@@ -5257,6 +5310,47 @@ body.is-mobile-nav-open {
   .p-two-column-cards__text {
     margin: 0.75rem 0 1.25rem;
     font-size: 0.875rem;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js-scroll-anim-pending .js-animate-content .p-school-top-intro__brand,
+  html.js-scroll-anim-pending .js-animate-content .p-school-top-intro__lead,
+  html.js-scroll-anim-pending .js-animate-content .p-school-top-intro__body,
+  html.js-scroll-anim-pending .js-animate-content .p-school-top-cards__item,
+  html.js-scroll-anim-pending .js-animate-content .p-school-category__header > *,
+  html.js-scroll-anim-pending .js-animate-content .p-school-category__item,
+  html.js-scroll-anim-pending .js-animate-content .p-school-seasonal-topics__header > *,
+  html.js-scroll-anim-pending .js-animate-content .p-school-seasonal-topics__media,
+  html.js-scroll-anim-pending .js-animate-content .p-school-seasonal-topics__body > *,
+  html.js-scroll-anim-pending .js-animate-content h1,
+  html.js-scroll-anim-pending .js-animate-content h2,
+  html.js-scroll-anim-pending .js-animate-content h3,
+  html.js-scroll-anim-pending .js-animate-content p,
+  html.js-scroll-anim-pending .js-animate-content li,
+  html.js-scroll-anim-pending .js-animate-content figure,
+  html.js-scroll-anim-pending .js-animate-content img,
+  html.js-scroll-anim-pending .js-animate-content .c-custom-button,
+  html.js-scroll-anim-pending .js-animate-content .p-top-mv-topics,
+  html.js-scroll-anim-pending .js-animate-content .p-school-course-top__intro,
+  html.js-scroll-anim-pending .js-animate-content .p-school-course-top__section,
+  html.js-scroll-anim-pending .js-animate-content .p-school-course-top__card-item,
+  html.js-scroll-anim-pending .js-animate-content .p-school-course__aside,
+  html.js-scroll-anim-pending .js-animate-content .p-school-course__item,
+  html.js-scroll-anim-pending .js-animate-content .p-school-course__pagination,
+  html.js-scroll-anim-pending .js-animate-content .p-school-course__empty,
+  html.js-scroll-anim-pending .js-animate-content .p-school-voice__intro,
+  html.js-scroll-anim-pending .js-animate-content .p-school-voice-card,
+  html.js-scroll-anim-pending .js-animate-content .p-school-voice__pagination,
+  html.js-scroll-anim-pending .js-animate-content .p-school-voice__empty,
+  html.js-scroll-anim-pending .js-animate-content .p-school-voice__footer-note,
+  html.js-scroll-anim-pending .js-animate-content .p-school-about-intro__text,
+  html.js-scroll-anim-pending .js-animate-content .p-school-about-intro__media,
+  html.js-scroll-anim-pending .js-animate-content .p-school-about-bottom-links__card,
+  html.js-scroll-anim-pending body.school-section .page-content .l-inner > *,
+  html.js-scroll-anim-pending body.school-section .page-content .p-index > * {
+    opacity: 0;
+    transform: translateY(16px);
+    visibility: hidden;
   }
 }
 /**

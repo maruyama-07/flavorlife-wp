@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+// GSAP ScrollTrigger 適用前の FOUC 防止（anim.js が body より後に実行されるため）
+// html に js-scroll-anim-pending を付与（header 直後のインラインスクリプト）
+// anim.js 初期化後に js-scroll-anim-pending を削除
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js-scroll-anim-pending {
+    .js-animate-content .p-school-top-intro__brand,
+    .js-animate-content .p-school-top-intro__lead,
+    .js-animate-content .p-school-top-intro__body,
+    .js-animate-content .p-school-top-cards__item,
+    .js-animate-content .p-school-category__header > *,
+    .js-animate-content .p-school-category__item,
+    .js-animate-content .p-school-seasonal-topics__header > *,
+    .js-animate-content .p-school-seasonal-topics__media,
+    .js-animate-content .p-school-seasonal-topics__body > *,
+    .js-animate-content h1,
+    .js-animate-content h2,
+    .js-animate-content h3,
+    .js-animate-content p,
+    .js-animate-content li,
+    .js-animate-content figure,
+    .js-animate-content img,
+    .js-animate-content .c-custom-button,
+    .js-animate-content .p-top-mv-topics,
+    .js-animate-content .p-school-course-top__intro,
+    .js-animate-content .p-school-course-top__section,
+    .js-animate-content .p-school-course-top__card-item,
+    .js-animate-content .p-school-course__aside,
+    .js-animate-content .p-school-course__item,
+    .js-animate-content .p-school-course__pagination,
+    .js-animate-content .p-school-course__empty,
+    .js-animate-content .p-school-voice__intro,
+    .js-animate-content .p-school-voice-card,
+    .js-animate-content .p-school-voice__pagination,
+    .js-animate-content .p-school-voice__empty,
+    .js-animate-content .p-school-voice__footer-note,
+    .js-animate-content .p-school-about-intro__text,
+    .js-animate-content .p-school-about-intro__media,
+    .js-animate-content .p-school-about-bottom-links__card,
+    body.school-section .page-content .l-inner > *,
+    body.school-section .page-content .p-index > * {
+      opacity: 0;
+      transform: translateY(16px);
+      visibility: hidden;
+    }
+  }
+}

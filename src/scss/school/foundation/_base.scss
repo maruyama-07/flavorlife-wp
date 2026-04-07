@@ -98,7 +98,7 @@ body.school-section .page-content {
   // 中身が空の段落のみ（:empty / br のみ）。通常の本文 p では連続スペースは従来どおり潰す
   p:not([class]):empty,
   p:not([class]):has(> br:only-child) {
-    white-space: pre-wrap;
+    // white-space: pre-wrap;
     overflow-wrap: anywhere;
     min-height: 1rem;
   }

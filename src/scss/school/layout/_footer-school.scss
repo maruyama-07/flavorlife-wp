@@ -28,7 +28,7 @@
 }
 
 .l-footer-school-contact__title {
-  margin: 0;
+  margin: 0 0 prem(18);
   font-size: prem(80);
   line-height: 1;
   font-weight: 400;
@@ -37,7 +37,7 @@
 
 .l-footer-school-contact__subtitle {
   margin-top: prem(12);
-  font-size: prem(28);
+  font-size: prem(18);
   letter-spacing: 0.08em;
 }
 
@@ -83,7 +83,7 @@
 
 .l-footer-school__main {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
   gap: prem(40);
 }
 
@@ -144,6 +144,11 @@
   font-size: prem(14);
   line-height: 1.6;
   letter-spacing: 0.2rem;
+}
+
+// 最終列のみ見出しなしのとき、他列と同じ高さでリストが始まるよう補正
+.l-footer-school__column:last-child:not(:has(.l-footer-school__heading)) {
+  margin-top: calc(#{prem(14)} * 1.6 + #{prem(2)});
 }
 
 .l-footer-school__column ul {
@@ -208,6 +213,7 @@
 
   .l-footer-school-contact__title {
     font-size: prem(40);
+    margin-bottom: 0;
   }
 
   .l-footer-school-contact__subtitle {
