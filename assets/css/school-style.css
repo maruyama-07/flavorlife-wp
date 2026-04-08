@@ -579,6 +579,37 @@ p:not([class]) {
   display: none;
 }
 
+/** スクール：ScrollHint ライブラリの影と重複しないよう inset 影はオフ */
+@media screen and (max-width: 767px) {
+  body.school-section .page-content .u-table-scroll-wrap--overflow:not(.u-table-scroll-wrap--end) .u-table-scroll-wrap__inner {
+    box-shadow: none;
+  }
+}
+
+/**
+ * スクール：ScrollHint をビューポート中央に固定（高い表のみ。.is-scroll-hint-viewport-fixed-eligible 参照）
+ * 非表示はアイコン本体に直接指定（fixed 子が親の visibility に従わないケースへの対策）
+ */
+body.school-section .page-content .u-table-scroll-wrap.is-scroll-hint-viewport-fixed-eligible .scroll-hint-icon-wrap:not(.is-scroll-hint-in-viewport) .scroll-hint-icon {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.school-section .page-content .u-table-scroll-wrap.is-scroll-hint-viewport-fixed-eligible .scroll-hint-icon-wrap.is-scroll-hint-in-viewport .scroll-hint-icon {
+  display: block !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  visibility: visible !important;
+  /** opacity は ScrollHint 側の演出に任せる */
+  /** ヘッダー(100)より上・モバイルメニュー(300)より下 */
+  z-index: 220;
+}
+
 /**
  * 枠付きセクション見出し（[framed_title]）
  * オリーブ枠・中央揃え。色はデザイン指定 #666633 固定
@@ -895,6 +926,14 @@ p:not([class]) {
   font-size: 0.75rem;
   line-height: 1.75;
   letter-spacing: 0.2rem;
+}
+.l-footer-school__info a {
+  color: inherit;
+}
+@media (hover: hover) {
+  .l-footer-school__info a:hover {
+    text-decoration: underline;
+  }
 }
 
 .l-footer-school__sns {
@@ -4019,8 +4058,16 @@ body.school-section .page-content .c-school-course-intro__body > h5:first-child 
 .p-school-order__body p:last-child {
   margin-bottom: 0;
 }
+.p-school-order__body ul,
+.p-school-order__body ol {
+  margin: 0 0 1em;
+  padding-left: 1.35em;
+}
+.p-school-order__body li {
+  margin: 0.35em 0;
+}
 .p-school-order__body a {
-  color: #9f1d00;
+  color: #699;
   text-decoration: underline;
   word-break: break-all;
 }
@@ -4229,7 +4276,7 @@ body.school-section .page-content ul > li {
 }
 
 .p-school-subpage-hero__title-wrap {
-  width: 50%;
+  width: 56%;
   background: #f8f6f1;
   display: flex;
   align-items: center;
@@ -4619,7 +4666,7 @@ body.school-section .p-school-voice-single-detail .page-content h2:not([class]) 
 
 @media screen and (max-width: 767px) {
   .p-school-voice-single__hero-label {
-    font-size: 5.3vw;
+    font-size: 5vw;
   }
   .p-school-voice-single__hero .p-school-subpage-hero__title {
     font-size: 4.5vw;

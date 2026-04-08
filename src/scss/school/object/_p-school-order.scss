@@ -59,8 +59,18 @@
     }
   }
 
+  ul,
+  ol {
+    margin: 0 0 1em;
+    padding-left: 1.35em;
+  }
+
+  li {
+    margin: 0.35em 0;
+  }
+
   a {
-    color: #9f1d00;
+    color: #699;
     text-decoration: underline;
     word-break: break-all;
 

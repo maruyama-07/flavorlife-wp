@@ -15,6 +15,11 @@
         return window.matchMedia('(max-width: 767px)').matches;
     }
 
+    /** スクールでは ScrollHint（school-scroll-hint-init.js）にヒント表示を任せる */
+    function isSchoolSection() {
+        return document.body && document.body.classList.contains('school-section');
+    }
+
     function wrapTable(table) {
         if (!table || table.closest('.' + WRAP)) {
             return null;
@@ -57,6 +62,9 @@
     }
 
     function ensureHint(wrap) {
+        if (isSchoolSection()) {
+            return;
+        }
         if (wrap.querySelector('.' + HINT)) {
             return;
         }

@@ -64,6 +64,9 @@ get_template_part('parts/functions-lib/func-content-figure');
 // セキュリティー対応
 get_template_part('parts/functions-lib/func-security');
 
+// SEO SIMPLE PACK：固定ページをフロント表示にしたとき、ページ個別ディスクリプションを head に反映
+get_template_part('parts/functions-lib/func-seo-ssp-front-page');
+
 // ショートコードの設定
 get_template_part('parts/functions-lib/func-shortcode');
 

@@ -1254,6 +1254,37 @@ body.is-mobile-nav-open .l-header__hamburger-bar:nth-child(2) {
   display: none;
 }
 
+/** スクール：ScrollHint ライブラリの影と重複しないよう inset 影はオフ */
+@media screen and (max-width: 767px) {
+  body.school-section .page-content .u-table-scroll-wrap--overflow:not(.u-table-scroll-wrap--end) .u-table-scroll-wrap__inner {
+    box-shadow: none;
+  }
+}
+
+/**
+ * スクール：ScrollHint をビューポート中央に固定（高い表のみ。.is-scroll-hint-viewport-fixed-eligible 参照）
+ * 非表示はアイコン本体に直接指定（fixed 子が親の visibility に従わないケースへの対策）
+ */
+body.school-section .page-content .u-table-scroll-wrap.is-scroll-hint-viewport-fixed-eligible .scroll-hint-icon-wrap:not(.is-scroll-hint-in-viewport) .scroll-hint-icon {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.school-section .page-content .u-table-scroll-wrap.is-scroll-hint-viewport-fixed-eligible .scroll-hint-icon-wrap.is-scroll-hint-in-viewport .scroll-hint-icon {
+  display: block !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+  visibility: visible !important;
+  /** opacity は ScrollHint 側の演出に任せる */
+  /** ヘッダー(100)より上・モバイルメニュー(300)より下 */
+  z-index: 220;
+}
+
 .c-blog-category-badge {
   display: inline-block;
   padding: 0.25rem 0.625rem;

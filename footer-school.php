@@ -30,11 +30,28 @@
                     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/common/logo-green.svg'); ?>" alt="Flavor Life">
                 </a>
                 <p class="l-footer-school__sub">フレーバーライフ アロマテラピースクール</p>
+                <?php
+                $school_footer_address = get_theme_mod('school_footer_address', '〒185-0012 東京都国分寺市本町4-1-12 4F');
+                $school_footer_tel     = get_theme_mod('school_footer_tel', '042-329-8565');
+                $school_footer_email   = get_theme_mod('school_footer_email', 'school@flavorlife.co.jp');
+                $school_footer_tel_href = function_exists('school_footer_tel_to_href') ? school_footer_tel_to_href($school_footer_tel) : '';
+                $school_footer_has_info = ($school_footer_address !== '') || ($school_footer_tel !== '') || ($school_footer_email !== '');
+                ?>
+                <?php if ($school_footer_has_info) : ?>
                 <p class="l-footer-school__info">
-                    〒185-0012 東京都国分寺市本町4-1-12 4F<br>
-                    TEL：042-329-8565<br>
-                    E-mail：school@flavorlife.co.jp
+                    <?php if ($school_footer_address !== '') : ?>
+                    <span class="l-footer-school__info-line"><?php echo nl2br(esc_html($school_footer_address)); ?></span><br>
+                    <?php endif; ?>
+                    <?php if ($school_footer_tel !== '' && $school_footer_tel_href !== '') : ?>
+                    <span class="l-footer-school__info-line">TEL：<a href="<?php echo esc_url($school_footer_tel_href); ?>"><?php echo esc_html($school_footer_tel); ?></a></span><br>
+                    <?php elseif ($school_footer_tel !== '') : ?>
+                    <span class="l-footer-school__info-line">TEL：<?php echo esc_html($school_footer_tel); ?></span><br>
+                    <?php endif; ?>
+                    <?php if ($school_footer_email !== '') : ?>
+                    <span class="l-footer-school__info-line">E-mail：<a href="<?php echo esc_url('mailto:' . $school_footer_email); ?>"><?php echo esc_html($school_footer_email); ?></a></span>
+                    <?php endif; ?>
                 </p>
+                <?php endif; ?>
                 <?php
                 $school_sns_items = function_exists('school_mobile_nav_sns_items') ? school_mobile_nav_sns_items() : array();
                 $school_sns_icon_base = get_template_directory_uri() . '/assets/images/school/';

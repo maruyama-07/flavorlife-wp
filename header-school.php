@@ -7,12 +7,6 @@
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <meta property="og:title" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:description" content="" />
-
     <!-- Google tag (gtag.js) — 計測IDを変えるときは下記2か所の G-RX2MF5REQ7 を書き換え -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX2MF5REQ7"></script>
     <script>

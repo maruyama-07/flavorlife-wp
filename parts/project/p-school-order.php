@@ -36,11 +36,8 @@ if ($heading === '' && $intro === '' && $body === '') {
         <?php if ($body !== '') : ?>
         <div class="p-school-order__body">
             <?php
-            if (function_exists('tool_acf_echo_textarea_for_display')) {
-                tool_acf_echo_textarea_for_display($body);
-            } else {
-                echo wp_kses_post(wpautop($body));
-            }
+            // WYSIWYG（リンク・リスト等）は the_content と同じフィルタで整形
+            echo apply_filters('the_content', $body);
             ?>
         </div>
         <?php endif; ?>

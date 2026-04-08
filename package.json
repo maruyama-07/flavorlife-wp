@@ -5,5 +5,8 @@
     "sass:school": "cd gulp && npx gulp stylesSchool",
     "sass:main": "cd gulp && npx gulp styles",
     "build:css": "cd gulp && npx gulp styles stylesSchool"
+  },
+  "devDependencies": {
+    "scroll-hint": "^1.2.9"
   }
 }

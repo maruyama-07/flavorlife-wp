@@ -109,6 +109,14 @@
   font-size: prem(12);
   line-height: 1.75;
   letter-spacing: 0.2rem;
+  a {
+    color: inherit;
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 .l-footer-school__sns {

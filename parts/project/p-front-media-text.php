@@ -36,7 +36,7 @@ if (!$left_media && !$section_text) {
             <?php if ($is_video) : ?>
             <div class="p-front-media-text__media js-front-video-media">
 
-                <video loop muted playsinline preload="metadata" class="p-front-media-text__video js-front-video"
+                <video loop playsinline preload="metadata" class="p-front-media-text__video js-front-video"
                     <?php echo $thumb_url ? 'style="display:none;"' : ''; ?>>
                     <source src="<?php echo esc_url($left_media['url']); ?>"
                         type="<?php echo esc_attr($file_type['type']); ?>">
@@ -108,37 +108,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!video) return;
 
-        const start = async () => {
+        const isPlaying = () => !video.paused && !video.ended;
+
+        const pauseVideo = () => {
+            video.pause();
+            if (btn) {
+                btn.classList.remove("is-hidden");
+                btn.setAttribute("aria-label", "動画を再生");
+            }
+        };
+
+        const playVideo = async () => {
             try {
                 if (thumb) {
                     thumb.classList.add("is-hidden");
                     video.style.display = "";
                 }
 
-                video.muted = true;
+                /** ユーザー操作後の再生のため音声あり（ブラウザの自動再生制限は回避済み） */
+                video.muted = false;
+                video.removeAttribute("muted");
                 video.setAttribute("playsinline", "");
                 video.playsInline = true;
 
                 await video.play();
-                if (btn) btn.classList.add("is-hidden");
+                if (btn) {
+                    btn.classList.add("is-hidden");
+                    btn.setAttribute("aria-label", "動画を一時停止するには動画をタップ");
+                }
             } catch (e) {
                 console.warn("Video play failed:", e);
+            }
+        };
+
+        const toggle = async () => {
+            if (isPlaying()) {
+                pauseVideo();
+            } else {
+                await playVideo();
             }
         };
 
         if (btn) {
             btn.addEventListener("click", (ev) => {
                 ev.preventDefault();
-                start();
+                ev.stopPropagation();
+                if (isPlaying()) {
+                    pauseVideo();
+                } else {
+                    playVideo();
+                }
             });
         }
 
         if (thumb) {
             thumb.addEventListener("click", (ev) => {
                 ev.preventDefault();
-                start();
+                ev.stopPropagation();
+                playVideo();
             });
         }
+
+        video.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            toggle();
+        });
     });
 });
 // document.addEventListener("DOMContentLoaded", () => {

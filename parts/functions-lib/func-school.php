@@ -19,6 +19,26 @@ function school_section_get_root_page_id()
 }
 
 /**
+ * スクールフッター電話番号を tel: 用の URL に変換する
+ *
+ * @param string $tel 表示用の番号（ハイフン可）
+ * @return string 空でないとき tel:… 形式
+ */
+function school_footer_tel_to_href($tel)
+{
+    $tel = trim((string) $tel);
+    if ($tel === '') {
+        return '';
+    }
+    $digits = preg_replace('/[^\d+]/', '', $tel);
+    if ($digits === '') {
+        return '';
+    }
+
+    return 'tel:' . $digits;
+}
+
+/**
  * 現在のクエリがスクールのルート（トップ）固定ページか
  */
 function school_section_is_queried_root()
@@ -309,7 +329,7 @@ function school_footer_nav_fallback_all()
 add_action('customize_register', function ($wp_customize) {
     $wp_customize->add_section('school_section_settings', array(
         'title' => 'スクールページ',
-        'description' => 'スクールページ全体の設定です。フッターは「外観」→「メニュー」で1本のメニューを作成し、表示位置「スクールフッターメニュー」に割り当てます。親項目3つ＝3列（親のラベルが見出し）、その下の子項目が各列のリンクです。親に「CSSクラス」で footer-col--no-heading（見出しなし）や footer-col--single（右列のスタイル）を付与できます（画面オプションでCSSクラスを表示）。メニュー未設定時は既定の3列を表示します。リストの「・」はCSSで付与されます。',
+        'description' => 'スクールページ全体の設定です。',
         'priority' => 35,
     ));
 
@@ -332,6 +352,40 @@ add_action('customize_register', function ($wp_customize) {
         'label' => 'JAMHAリンクURL',
         'section' => 'school_section_settings',
         'type' => 'url',
+    ));
+
+    // スクールフッター（.l-footer-school__info）
+    $wp_customize->add_setting('school_footer_address', array(
+        'default' => '〒185-0012 東京都国分寺市本町4-1-12 4F',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('school_footer_address', array(
+        'label' => 'フッター：住所',
+        'description' => 'スクールフッター左側の連絡先ブロックに表示されます。改行可。',
+        'section' => 'school_section_settings',
+        'type' => 'textarea',
+    ));
+
+    $wp_customize->add_setting('school_footer_tel', array(
+        'default' => '042-329-8565',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('school_footer_tel', array(
+        'label' => 'フッター：電話番号',
+        'description' => '表示は「TEL：」のあとに出力。タップで発信（tel:）リンクになります。',
+        'section' => 'school_section_settings',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_setting('school_footer_email', array(
+        'default' => 'school@flavorlife.co.jp',
+        'sanitize_callback' => 'sanitize_email',
+    ));
+    $wp_customize->add_control('school_footer_email', array(
+        'label' => 'フッター：メールアドレス',
+        'description' => '表示は「E-mail：」のあとに出力。タップでメール（mailto:）リンクになります。',
+        'section' => 'school_section_settings',
+        'type' => 'email',
     ));
 });
 
@@ -636,6 +690,28 @@ function theme_enqueue_school_section_assets()
         get_template_directory_uri() . '/assets/js/page-content-table-scroll.js',
         array(),
         filemtime(get_theme_file_path('assets/js/page-content-table-scroll.js')),
+        true
+    );
+    wp_enqueue_style(
+        'scroll-hint',
+        get_template_directory_uri() . '/assets/vendor/scroll-hint/css/scroll-hint.css',
+        array(),
+        '1.2.9',
+        'all'
+    );
+    wp_enqueue_script(
+        'scroll-hint',
+        get_template_directory_uri() . '/assets/vendor/scroll-hint/js/scroll-hint.min.js',
+        array(),
+        '1.2.9',
+        true
+    );
+    $school_scroll_hint_path = get_theme_file_path('assets/js/school-scroll-hint-init.js');
+    wp_enqueue_script(
+        'school-scroll-hint-init',
+        get_template_directory_uri() . '/assets/js/school-scroll-hint-init.js',
+        array('page-content-table-scroll', 'scroll-hint'),
+        file_exists($school_scroll_hint_path) ? filemtime($school_scroll_hint_path) : '1.0',
         true
     );
     wp_enqueue_script(

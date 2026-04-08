@@ -6,7 +6,7 @@
 <div class="p-mobile-nav p-mobile-nav--school" id="mobile-nav" aria-hidden="true">
     <div class="p-mobile-nav--school__inner">
         <div class="p-mobile-nav--school__cta">
-            <a href="<?php echo esc_url(home_url('/school/entry/')); ?>" class="p-mobile-nav--school__cta-item">
+            <a href="<?php echo esc_url(home_url('/school/course/')); ?>" class="p-mobile-nav--school__cta-item">
                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/school/document.png'); ?>" alt="">
                 <span>お申し込み</span>
             </a>

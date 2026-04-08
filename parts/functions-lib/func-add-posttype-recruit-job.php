@@ -49,6 +49,48 @@ add_action('init', function () {
 }, 999);
 
 /**
+ * /recruit/{slug}/ の競合回避:
+ * recruit_job の rewrite( slug=recruit ) が先にマッチして 404 になる場合、
+ * 同じパスの固定ページ（例: /recruit/interview/）が存在すればそちらへ解決する。
+ *
+ * @param array<string,mixed> $vars
+ * @return array<string,mixed>
+ */
+add_filter('request', 'recruit_job_resolve_child_page_on_conflict', 20);
+function recruit_job_resolve_child_page_on_conflict($vars)
+{
+    if (is_admin()) {
+        return $vars;
+    }
+    if (!isset($vars['post_type']) || $vars['post_type'] !== 'recruit_job') {
+        return $vars;
+    }
+    if (empty($vars['name']) || !is_string($vars['name'])) {
+        return $vars;
+    }
+
+    $hub_id = recruit_job_get_hub_page_id();
+    if ($hub_id <= 0) {
+        return $vars;
+    }
+    $hub_slug = (string) get_post_field('post_name', $hub_id);
+    if ($hub_slug === '') {
+        return $vars;
+    }
+
+    $pagename = $hub_slug . '/' . sanitize_title($vars['name']);
+    $child    = get_page_by_path($pagename);
+    if (!$child instanceof WP_Post || $child->post_status !== 'publish') {
+        return $vars;
+    }
+
+    unset($vars['post_type'], $vars['name']);
+    $vars['pagename'] = $pagename;
+
+    return $vars;
+}
+
+/**
  * 求人詳細テンプレート（親）の固定ページID（一覧の見出し・お問い合わせ等に利用）
  *
  * @return int 0 = 未検出
